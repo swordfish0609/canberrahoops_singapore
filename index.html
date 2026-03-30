@@ -1205,24 +1205,25 @@ function renderAnalysisCharts(){
 // Games: each entry has id, game number, home team, away team, home score, away score, date, status
 // status: "done" = played, "upcoming" = not yet played
 const GAME_DATA = [
-  { id:1,  game:1,  home:"Titans",        away:"Phantoms",      homeScore:23, awayScore:25, date:"Jan 11, 2026", status:"done" },
-  { id:2,  game:1,  home:"The Guardians", away:"Panthers",      homeScore:35, awayScore:39, date:"Jan 11, 2026", status:"done" },
-  { id:3,  game:2,  home:"Titans",        away:"The Guardians", homeScore:25, awayScore:26, date:"Jan 18, 2026", status:"done" },
-  { id:4,  game:2,  home:"Phantoms",      away:"Panthers",      homeScore:43, awayScore:40, date:"Jan 18, 2026", status:"done" },
-  { id:5,  game:3,  home:"Titans",        away:"Panthers",      homeScore:42, awayScore:22, date:"Jan 25, 2026", status:"done" },
-  { id:6,  game:3,  home:"Phantoms",      away:"The Guardians", homeScore:43, awayScore:43, date:"Jan 25, 2026", status:"done" },
-  { id:7,  game:4,  home:"Titans",        away:"Phantoms",      homeScore:36, awayScore:31, date:"Feb 1, 2026",  status:"done" },
-  { id:8,  game:4,  home:"The Guardians", away:"Panthers",      homeScore:40, awayScore:23, date:"Feb 1, 2026",  status:"done" },
-  { id:9,  game:5,  home:"Titans",        away:"The Guardians", homeScore:36, awayScore:19, date:"Feb 8, 2026",  status:"done" },
-  { id:10, game:5,  home:"Phantoms",      away:"Panthers",      homeScore:21, awayScore:35, date:"Feb 8, 2026",  status:"done" },
-  { id:11, game:6,  home:"Titans",        away:"Panthers",      homeScore:42, awayScore:22, date:"Feb 15, 2026", status:"done" },
-  { id:12, game:6,  home:"Phantoms",      away:"The Guardians", homeScore:26, awayScore:33, date:"Feb 15, 2026", status:"done" },
-  { id:13, game:7,  home:"Titans",        away:"Phantoms",      homeScore:0,  awayScore:0,  date:"Feb 22, 2026", status:"upcoming" },
-  { id:14, game:7,  home:"The Guardians", away:"Panthers",      homeScore:0,  awayScore:0,  date:"Feb 22, 2026", status:"upcoming" },
-  { id:15, game:8,  home:"Titans",        away:"The Guardians", homeScore:0,  awayScore:0,  date:"Mar 1, 2026",  status:"upcoming" },
-  { id:16, game:8,  home:"Phantoms",      away:"Panthers",      homeScore:0,  awayScore:0,  date:"Mar 1, 2026",  status:"upcoming" },
-  { id:17, game:9,  home:"Titans",        away:"Panthers",      homeScore:0,  awayScore:0,  date:"Mar 8, 2026",  status:"upcoming" },
-  { id:18, game:9,  home:"Phantoms",      away:"The Guardians", homeScore:0,  awayScore:0,  date:"Mar 8, 2026",  status:"upcoming" },
+  { id:1,  game:1,  home:"Titans",        away:"Phantoms",      homeScore:23, awayScore:21, date:"Jan 31, 2026", status:"done" },
+  { id:2,  game:2,  home:"The Guardians", away:"Panthers",      homeScore:35, awayScore:39, date:"Jan 31, 2026", status:"done" },
+  { id:3,  game:3,  home:"Titans",        away:"The Guardians", homeScore:25, awayScore:19, date:"Jan 31, 2026", status:"done" },
+  { id:4,  game:4,  home:"Phantoms",      away:"Panthers",      homeScore:26, awayScore:33, date:"Jan 31, 2026", status:"done" },
+  { id:5,  game:5,  home:"Titans",        away:"Panthers",      homeScore:42, awayScore:22, date:"Feb 07, 2026", status:"done" },
+  { id:6,  game:6,  home:"Titans",        away:"Phantoms",      homeScore:36, awayScore:31, date:"Feb 28, 2026", status:"done" },
+  { id:7,  game:7,  home:"The Guardians", away:"Panthers",      homeScore:40, awayScore:23, date:"Feb 28, 2026", status:"done" },
+  { id:8,  game:8,  home:"Titans",        away:"The Guardians", homeScore:36, awayScore:29, date:"Feb 28, 2026", status:"done" },
+  { id:9,  game:9,  home:"Phantoms",      away:"Panthers",      homeScore:42, awayScore:29, date:"Feb 28, 2026", status:"done" },
+  { id:10, game:10, home:"Phantoms",      away:"The Guardians", homeScore:43, awayScore:40, date:"Mar 07, 2026", status:"done" },
+  { id:11, game:11, home:"Phantoms",      away:"The Guardians", homeScore:35, awayScore:22, date:"Mar 14, 2026", status:"done" },
+  { id:12, game:12, home:"The Guardians", away:"Panthers",      homeScore:32, awayScore:42, date:"Mar 14, 2026", status:"done" },
+  { id:13, game:13, home:"Phantoms",      away:"Panthers",      homeScore:36, awayScore:39, date:"Mar 14, 2026", status:"done" },
+  { id:14, game:14, home:"Titans",        away:"Panthers",      homeScore:42, awayScore:38, date:"Mar 28, 2026", status:"done" }, 
+  { id:15, game:15, home:"Phantoms",      away:"The Guardians", homeScore:42, awayScore:25, date:"Mar 28, 2026", status:"done" },
+  { id:16, game:16, home:"Titans",        away:"The Guardians", homeScore:0,  awayScore:0,  date:"TBD",  status:"upcoming" },
+  { id:17, game:17, home:"Titans",        away:"Phantoms",      homeScore:0,  awayScore:0,  date:"TBD",  status:"upcoming" },
+  { id:18, game:18,  home:"Titans",       away:"Panthers",      homeScore:0,  awayScore:0,  date:"TBD",  status:"upcoming" },
+ 
 ];
 
 // Highlights: add/remove entries here, or via the Add Highlight form in the UI
