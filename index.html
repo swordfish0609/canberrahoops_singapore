@@ -2554,7 +2554,7 @@ function renderPlayoffs() {
   // Finals slot
   const finalsBox = () => {
     if (gf.winner) return `<div class="bt-finals">
-      <div class="bt-finals-label">🏆 GRAND FINAL</div>
+      <div class="bt-finals-label">🏆 FINALS</div>
       <div class="bt-champion">
         <span class="bt-champion-trophy">🥇</span>
         <div class="bt-champion-name" style="color:${tc(gf.winner)}">${gf.winner}</div>
@@ -2562,13 +2562,13 @@ function renderPlayoffs() {
       </div>
     </div>`;
     const dg = gf.games.find(g=>g.status==='done');
-    if (dg) return btBox(gf, "Grand Final");
+    if (dg) return btBox(gf, "Finals");
     if (gf.t1 && gf.t2) return `<div class="bt-finals">
-      <div class="bt-finals-label">🏆 GRAND FINAL — 1 GAME</div>
+      <div class="bt-finals-label">🏆 FINALS — 1 GAME</div>
       <div class="bt-team bt-tbd" style="--tc:${tc(gf.t1)}">${logo(gf.t1,38,24)}<span class="bt-t-name" style="color:${tc(gf.t1)}">${gf.t1}</span></div>
       <div class="bt-team bt-tbd" style="--tc:${tc(gf.t2)}">${logo(gf.t2,38,24)}<span class="bt-t-name" style="color:${tc(gf.t2)}">${gf.t2}</span></div>
     </div>`;
-    return `<div class="bt-finals"><div class="bt-finals-label">🏆 GRAND FINAL</div>
+    return `<div class="bt-finals"><div class="bt-finals-label">🏆 FINALS</div>
       <div class="bt-champion"><span class="bt-champion-trophy">🏀</span><div class="bt-champion-sub">Awaiting Finalists</div></div>
     </div>`;
   };
@@ -2622,7 +2622,7 @@ function renderPlayoffs() {
     // Banner
     `<div class="po-banner">
       <div class="po-banner-title">🏀 Summer Cup 2026 SEASON 3 Playoffs</div>
-      <div class="po-banner-sub">Semi-Finals (Cross-Over, Twice to Beat Advantage for #1 amd #2) · Grand Final (Winner take All)</div>
+      <div class="po-banner-sub">Semi-Finals (Cross-Over, Twice to Beat Advantage for #1 and #2) · Finals (Winner Take All)</div>
       <div class="po-rule">★ <b>#1 &amp; #2 seeds are TWICE TO BEAT</b> — Seeds #3 and #4 must win 2 games; top seeds #1 and #2 need only 1 win to advance</div>
     </div>` +
 
