@@ -1134,6 +1134,7 @@ footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,1
         <button class="nav-btn" onclick="showView('standings')">Standings</button>
         <button class="nav-btn" onclick="showView('gallery')">Gallery</button>
         <button class="nav-btn" onclick="showView('profiles')">Players Profile</button>
+        <button class="nav-btn" onclick="showView('playoffs')">Playoffs</button>
       </nav>
     </header>
 
@@ -1326,6 +1327,7 @@ function showView(name){
   if(name==='standings') renderStandings();
   if(name==='gallery') renderGallery();
   if(name==='profiles') renderProfilesView();
+  if(name==='playoffs') renderPlayoffs();
 }
 
 // ===========================
