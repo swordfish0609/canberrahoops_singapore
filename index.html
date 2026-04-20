@@ -418,6 +418,202 @@ tr:nth-child(3) .rk { color:var(--bronze); }
 /* FOOTER */
 footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,170,0,0.1); margin-top:10px; color:var(--muted); font-size:15px; letter-spacing:2px; font-family:'Barlow Condensed',sans-serif; }
 
+/* GAME RESULTS — side-by-side layout */
+.gr-row {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:13px; margin-bottom:16px; align-items:stretch;
+}
+@media(max-width:760px){ .gr-row { grid-template-columns:1fr; } }
+
+.gr-score-card {
+  background:var(--card); border:1px solid var(--card-b);
+  border-radius:14px; padding:18px; backdrop-filter:blur(8px);
+  display:flex; flex-direction:column; gap:14px;
+}
+.gr-header {
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+}
+.gr-game-num {
+  font-family:'Bebas Neue',sans-serif; font-size:19px;
+  letter-spacing:2px; color:var(--accent);
+}
+.gr-date {
+  font-family:'Barlow Condensed',sans-serif; font-size:13px;
+  color:var(--muted); letter-spacing:1px; margin-right:auto;
+}
+.gr-winner-pill {
+  font-family:'Barlow Condensed',sans-serif; font-size:11px;
+  font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  padding:3px 10px; border-radius:20px; border:1px solid transparent;
+  flex-shrink:0;
+}
+.gr-matchup {
+  display:flex; align-items:center; justify-content:space-between; gap:6px;
+  flex:1;
+}
+.gr-team {
+  display:flex; align-items:center; gap:7px; flex:1;
+  transition:opacity 0.25s;
+}
+.gr-team-right { flex-direction:row-reverse; }
+.gr-loss { opacity:0.42; }
+.gr-logo {
+  width:52px; height:32px; object-fit:contain; flex-shrink:0;
+}
+.gr-tname {
+  font-family:'Barlow Condensed',sans-serif; font-size:14px;
+  font-weight:800; line-height:1.2;
+}
+.gr-scores {
+  display:flex; align-items:center; gap:6px; flex-shrink:0; padding:0 4px;
+}
+.gr-score {
+  font-family:'Bebas Neue',sans-serif; font-size:36px; line-height:1;
+  color:var(--muted); min-width:32px; text-align:center;
+}
+.gr-score-win { text-shadow:0 0 14px currentColor; }
+.gr-dash { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--muted); }
+
+.gr-summary-card {
+  background:var(--card); border:1px solid var(--card-b);
+  border-radius:14px; padding:18px; backdrop-filter:blur(8px);
+  display:flex; flex-direction:column; gap:12px;
+}
+.gr-sum-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:13px;
+  font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  color:var(--accent); flex-shrink:0;
+}
+.gr-sum-note {
+  font-size:14px; color:var(--muted); line-height:1.75; margin:0;
+  font-style:italic; flex:1;
+}
+.gr-sum-scorers {
+  display:flex; flex-direction:column; gap:6px; flex-shrink:0;
+}
+.gr-scorer {
+  display:flex; align-items:center; gap:8px; padding:6px 9px;
+  background:rgba(255,255,255,0.03); border-radius:7px;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.gr-medal { font-size:14px; flex-shrink:0; }
+.gr-scorer-img {
+  width:27px; height:27px; border-radius:50%;
+  object-fit:cover; object-position:top;
+  border:1.5px solid; flex-shrink:0; background:#1a0e00;
+}
+.gr-scorer-name {
+  font-family:'Barlow Condensed',sans-serif; font-size:15px;
+  font-weight:700; flex:1; cursor:pointer; transition:opacity 0.2s;
+}
+.gr-scorer-name:hover { opacity:0.7; }
+.gr-scorer-pts {
+  font-family:'Bebas Neue',sans-serif; font-size:17px; flex-shrink:0;
+}
+
+/* ─── PLAYOFFS ─────────────────────────────────── */
+.po-page { display:flex; flex-direction:column; gap:22px; }
+
+.po-banner {
+  background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,140,0,0.04));
+  border:1px solid rgba(255,215,0,0.24); border-radius:16px;
+  padding:24px 28px; text-align:center; backdrop-filter:blur(8px);
+}
+.po-banner-title {
+  font-family:'Bebas Neue',sans-serif; font-size:clamp(26px,4vw,44px);
+  letter-spacing:4px;
+  background:linear-gradient(135deg,#ffd700 0%,#ff8c00 60%,#ffaa00 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 0 20px rgba(255,200,0,0.3)); margin-bottom:6px;
+}
+.po-banner-sub {
+  font-family:'Barlow Condensed',sans-serif; font-size:15px;
+  letter-spacing:3px; color:var(--muted); text-transform:uppercase;
+}
+.po-rule {
+  font-family:'Barlow Condensed',sans-serif; font-size:13px;
+  color:var(--muted); margin-top:10px; letter-spacing:1px;
+}
+.po-rule b { color:var(--accent); }
+
+.po-seeds {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px;
+}
+.po-seed-card {
+  background:var(--card); border-radius:10px; padding:12px 14px;
+  border-left:4px solid var(--tc); border-top:1px solid var(--card-b);
+  border-right:1px solid var(--card-b); border-bottom:1px solid var(--card-b);
+  backdrop-filter:blur(6px); display:flex; align-items:center; gap:10px;
+}
+.po-seed-num { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--tc); min-width:28px; text-align:center; flex-shrink:0; }
+.po-seed-logo { width:52px; height:30px; object-fit:contain; flex-shrink:0; }
+.po-seed-info { flex:1; min-width:0; }
+.po-seed-name { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:800; color:var(--tc); }
+.po-seed-record { font-family:'Barlow Condensed',sans-serif; font-size:12px; color:var(--muted); letter-spacing:1px; }
+.po-seed-adv { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:2px 7px; border-radius:10px; background:rgba(255,170,0,0.14); color:var(--accent); border:1px solid rgba(255,170,0,0.3); white-space:nowrap; }
+
+.bracket-tree { background:var(--card); border:1px solid var(--card-b); border-radius:16px; padding:28px 20px; backdrop-filter:blur(8px); overflow-x:auto; }
+.bracket-tree-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--accent); text-align:center; margin-bottom:28px; }
+.bt-grid { display:grid; grid-template-columns:1fr 80px 1fr; gap:0; align-items:center; min-width:580px; max-width:820px; margin:0 auto; }
+
+.bt-col { display:flex; flex-direction:column; gap:36px; }
+
+.bt-box { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; overflow:hidden; }
+.bt-box-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); padding:7px 12px 5px; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; justify-content:space-between; align-items:center; }
+.bt-adv-badge { font-size:9px; letter-spacing:1px; background:rgba(255,170,0,0.12); color:var(--accent); border:1px solid rgba(255,170,0,0.25); border-radius:10px; padding:1px 6px; }
+.bt-team { display:flex; align-items:center; gap:7px; padding:9px 12px; border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s; cursor:pointer; }
+.bt-team:last-of-type { border-bottom:none; }
+.bt-team:hover { background:rgba(255,255,255,0.03); }
+.bt-team.bt-winner { background:rgba(57,255,20,0.05); }
+.bt-team.bt-loser  { opacity:0.38; }
+.bt-team.bt-tbd    { opacity:0.6; }
+.bt-seed-lbl { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--muted); min-width:16px; flex-shrink:0; text-align:center; }
+.bt-t-logo { width:38px; height:24px; object-fit:contain; flex-shrink:0; }
+.bt-t-name { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:800; flex:1; color:var(--text); white-space:nowrap; }
+.bt-team.bt-winner .bt-t-name { color:var(--tc); }
+.bt-t-score { font-family:'Bebas Neue',sans-serif; font-size:18px; min-width:22px; text-align:right; flex-shrink:0; color:var(--muted); }
+.bt-team.bt-winner .bt-t-score { color:#39ff14; }
+
+.bt-conn-col { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; }
+.bt-conn { display:flex; flex-direction:column; align-items:center; flex:1; }
+.bt-conn-line { width:2px; flex:1; background:rgba(255,170,0,0.18); border-radius:1px; }
+.bt-conn-arrow { font-size:16px; color:rgba(255,170,0,0.45); margin:2px 0; animation:arrowP 2.2s ease-in-out infinite; }
+@keyframes arrowP { 0%,100%{opacity:0.35} 50%{opacity:1} }
+
+.bt-finals { background:linear-gradient(160deg,rgba(255,215,0,0.1),rgba(255,140,0,0.05)); border:2px solid rgba(255,215,0,0.35); border-radius:12px; overflow:hidden; box-shadow:0 0 28px rgba(255,215,0,0.1); }
+.bt-finals-label { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:2.5px; color:var(--gold); padding:7px 12px 4px; border-bottom:1px solid rgba(255,215,0,0.14); text-align:center; }
+.bt-champion { text-align:center; padding:14px 12px; }
+.bt-champion-trophy { font-size:30px; display:block; margin-bottom:5px; }
+.bt-champion-name { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:2px; line-height:1.1; text-shadow:0 0 12px rgba(255,215,0,0.5); }
+.bt-champion-sub { font-family:'Barlow Condensed',sans-serif; font-size:11px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-top:3px; }
+
+.po-series-wrap { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:700px){ .po-series-wrap { grid-template-columns:1fr; } }
+.po-series-card { background:var(--card); border:1px solid var(--card-b); border-radius:14px; overflow:hidden; backdrop-filter:blur(8px); }
+.po-gf-card { background:linear-gradient(135deg,rgba(255,215,0,0.07),rgba(255,140,0,0.04)); border:2px solid rgba(255,215,0,0.3); border-radius:16px; overflow:hidden; backdrop-filter:blur(8px); box-shadow:0 0 28px rgba(255,215,0,0.08); }
+.po-series-hdr { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.05); gap:8px; flex-wrap:wrap; }
+.po-series-hdr-title { font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:2px; color:var(--text); }
+.po-status-badge { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:3px 10px; border-radius:20px; }
+.po-status-tbd    { background:rgba(255,255,255,0.05); color:var(--muted); }
+.po-status-active { background:rgba(57,255,20,0.1); color:#39ff14; border:1px solid rgba(57,255,20,0.25); }
+.po-status-done   { background:rgba(255,215,0,0.1); color:var(--gold); border:1px solid rgba(255,215,0,0.25); }
+.po-series-scoreboard { display:grid; grid-template-columns:1fr 50px 1fr; align-items:center; gap:6px; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.po-s-team { display:flex; flex-direction:column; align-items:center; gap:5px; }
+.po-s-logo { width:54px; height:32px; object-fit:contain; }
+.po-s-name { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800; text-align:center; line-height:1.2; }
+.po-s-wins { font-family:'Bebas Neue',sans-serif; font-size:38px; text-align:center; line-height:1; }
+.po-s-wins.lead  { color:#39ff14; text-shadow:0 0 12px rgba(57,255,20,0.4); }
+.po-s-wins.trail { color:var(--muted); }
+.po-s-dash { font-family:'Bebas Neue',sans-serif; font-size:18px; color:var(--muted); text-align:center; }
+.po-adv-note { padding:6px 16px 8px; font-family:'Barlow Condensed',sans-serif; font-size:12px; color:var(--accent); letter-spacing:1px; text-align:center; }
+.po-games-list { display:flex; flex-direction:column; gap:4px; padding:10px 14px 14px; }
+.po-game-row { display:flex; align-items:center; gap:8px; padding:6px 10px; background:rgba(255,255,255,0.025); border-radius:6px; border:1px solid rgba(255,255,255,0.05); }
+.po-game-row.upcoming { border-color:rgba(255,170,0,0.22); }
+.po-game-row.needed   { opacity:0.42; }
+.po-game-num  { font-family:'Bebas Neue',sans-serif; font-size:15px; color:var(--muted); min-width:58px; flex-shrink:0; }
+.po-game-result { font-family:'Bebas Neue',sans-serif; font-size:17px; flex:1; text-align:center; }
+.po-game-date { font-family:'Barlow Condensed',sans-serif; font-size:12px; color:var(--muted); text-align:right; flex-shrink:0; letter-spacing:1px; }
+
 /* GAME RESULTS */
 .results-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:14px; margin-bottom:22px; }
 .result-card {
@@ -1508,52 +1704,148 @@ const GAME_DATA = [
 function renderResults() {
   const played = GAME_DATA.filter(g => g.status === 'done');
   const el = document.getElementById('results-content');
-  if (!played.length) { el.innerHTML = '<div class="hl-empty">No results yet.</div>'; return; }
+  if (!played.length) {
+    el.innerHTML = '<div style="padding:40px;text-align:center;color:var(--muted);font-family:\'Barlow Condensed\';font-size:17px;letter-spacing:2px">No results yet.</div>';
+    return;
+  }
 
-  // Group by game number
-  const byGame = {};
-  played.forEach(g => { if(!byGame[g.game]) byGame[g.game]=[]; byGame[g.game].push(g); });
+  // ── LONG GAME SUMMARIES (6–7 sentences each) ──
+  const SUMMARIES = {
+    1:  {
+      note: "The Titans and Phantoms served up a tense season opener that came down to the final possessions. Jaime led all scorers with 9 points, providing the spark Titans needed from the perimeter early in the contest. Christian added 7 and controlled the tempo in the back court, dictating the pace and limiting Phantoms' transition opportunities throughout. Fred was the standout for the Phantoms with 8 points, fighting hard to keep his side in the game when it mattered most. The Titans' defensive intensity proved to be the decisive factor, forcing key turnovers in the final quarter. Phantoms were unable to convert their chances in the clutch moments despite a spirited second-half push. Titans held their nerve to secure a hard-fought 2-point win and set the tone for their season.",
+      top:[{n:"Jaime",t:"Titans",p:9},{n:"Fred",t:"Phantoms",p:8},{n:"Christian",t:"Titans",p:7}]
+    },
+    2:  {
+      note: "Panthers registered a statement victory over The Guardians in a game full of momentum swings and high-intensity defence. Alvin was the standout performer for Guardians, exploding for 13 points and refusing to let his team capitulate without a fight. Nelson responded brilliantly for Panthers with 9 points of his own, combining energy and efficiency to keep the scoreboard ticking. Medel controlled the point guard duties superbly, adding 8 while orchestrating the Panthers' offence with precision and vision. The Guardians found it difficult to contain Panthers' three-pronged attacking threat across all four quarters. Panthers' superior physicality in the paint and relentless second-chance scoring ultimately proved the difference. The final margin of 4 points belied just how fiercely contested this match was from tip-off to buzzer.",
+      top:[{n:"Alvin",t:"The Guardians",p:13},{n:"Nelson",t:"Panthers",p:9},{n:"Medel",t:"Panthers",p:8}]
+    },
+    3:  {
+      note: "Titans delivered a composed and authoritative performance to take down The Guardians by 6 points. Christian was the architect of the win, posting 10 points and distributing the ball with exceptional court vision across all four quarters. Rowell provided reliable support with 6 points, fulfilling his role as a two-way forward who impacted the game on both ends of the floor. Carlo kept The Guardians in contention with 9 points, showing his ability to create offence from the centre position against disciplined Titans defence. The Titans' ability to limit Guardians' transition opportunities was a key tactical win for their coaching staff. Guardians battled hard and maintained competitiveness, but Titans proved too consistent across the full game. It was another demonstration of Titans' growing chemistry and depth as a cohesive unit.",
+      top:[{n:"Christian",t:"Titans",p:10},{n:"Carlo",t:"The Guardians",p:9},{n:"Rowell",t:"Titans",p:6}]
+    },
+    4:  {
+      note: "Panthers' backcourt was simply too hot to handle as they overwhelmed Phantoms by 7 points in a dominant display. EdG set the tone early with 11 points, using his athleticism and court awareness to find gaps in the Phantoms' defensive structure. Medel was equally impressive with 10 points, showing his lethal efficiency from mid-range and operating as a constant threat in pick-and-roll actions. Nelson rounded out Panthers' triple threat with 8 points, providing energy, rebounding, and crucial baskets when the game demanded them. Phantoms struggled to respond, unable to match Panthers' hunger and sharpness in a one-sided encounter. Sherwin tried to lift Phantoms offensively but found little support from his teammates on a difficult night. It was a clinical Panthers performance that signalled real intent for the rest of the season.",
+      top:[{n:"EdG",t:"Panthers",p:11},{n:"Medel",t:"Panthers",p:10},{n:"Nelson",t:"Panthers",p:8}]
+    },
+    5:  {
+      note: "Titans put together their most complete performance of the season, blowing Panthers away by 20 points in a statement game. Arvin was utterly dominant in the paint, finishing with 15 points and controlling both backboards with physicality and timing that Panthers simply couldn't match. Ninoy complemented him brilliantly with 12 points of his own, proving Titans' frontcourt is as dangerous as any in the competition. Medel scored 12 in a losing effort to provide some respectability for Panthers who were otherwise outclassed in virtually every aspect of the game. Titans' ball movement was fluid and purposeful, consistently finding open looks through patient offence and smart decision-making. Panthers were unable to establish any rhythm defensively or offensively as Titans pressed the accelerator from the opening tip. The 20-point margin told the full story of a Titans team operating at a completely different level on the night.",
+      top:[{n:"Arvin",t:"Titans",p:15},{n:"Ninoy",t:"Titans",p:12},{n:"Medel",t:"Panthers",p:12}]
+    },
+    6:  {
+      note: "Titans survived a fierce Phantoms challenge to edge out a gripping 5-point victory in what was the game of the night. Leo was exceptional for Phantoms with 13 points, constantly probing the Titans' defence and creating problems that few players in the competition can replicate. Arvin delivered a powerful 11-point response for Titans, doing the tough work inside and providing the physical edge his team needed in the fourth quarter. Sherwin added 10 in a high-quality Phantoms offensive display that had Titans scrambling for answers at multiple points. Titans' composure under pressure was the defining quality that separated the two sides when the game was on the line. Phantoms had plenty of opportunities to level proceedings but failed to capitalise during a critical stretch in the second half. Titans' resilience and character ultimately prevailed in a match that genuinely could have gone either way.",
+      top:[{n:"Leo",t:"Phantoms",p:13},{n:"Arvin",t:"Titans",p:11},{n:"Sherwin",t:"Phantoms",p:10}]
+    },
+    7:  {
+      note: "The Guardians delivered one of the most impressive team performances of the season, dismantling Panthers by a convincing 17-point margin. Fletcher was in career-best form, posting 13 points in a display that showcased his full offensive arsenal from the power forward position. Carlo matched him stride for stride with 13 of his own, the pair combining for an incredible 26-point haul that Panthers had no answer for. Nelson fought gamely for Panthers with 9 points but received insufficient support from his teammates on what was a thoroughly tough afternoon. The Guardians' inside-outside balance was exceptional, stretching Panthers' defence in ways they had not been tested previously in the season. Panthers' lack of cohesion defensively was brutally exposed as Guardians found seams and mismatches at will. It was a landmark win for The Guardians who announced themselves as a genuine threat to anyone in the competition.",
+      top:[{n:"Fletcher",t:"The Guardians",p:13},{n:"Carlo",t:"The Guardians",p:13},{n:"Nelson",t:"Panthers",p:9}]
+    },
+    8:  {
+      note: "Titans claimed a steady 7-point victory over The Guardians in a game that was far more competitive than the final margin suggests. Anton was the standout performer for Guardians, posting 10 points and pulling down crucial rebounds that kept his side alive in the contest well into the second half. Fletcher added 9 points and provided the kind of forward presence that makes Guardians dangerous, threatening to turn the game with every possession. Noel delivered 7 important points off the bench for Titans, injecting energy and providing the scoring impetus needed to open up a gap. Titans' experience in tight games proved decisive as they managed the game intelligently in the second half. Guardians showed genuine quality and threatened multiple times to swing the momentum, but Titans' defensive organisation held firm. The result keeps Titans on track at the top of the table with a valuable 7-point road win.",
+      top:[{n:"Anton",t:"The Guardians",p:10},{n:"Fletcher",t:"The Guardians",p:9},{n:"Noel",t:"Titans",p:7}]
+    },
+    9:  {
+      note: "Phantoms delivered a dominant 13-point victory over Panthers in a polished, professional performance from start to finish. Medel was the star in a losing effort, top-scoring with 17 points as he refused to let Panthers go quietly despite the mounting scoreboard pressure. Fred was Phantoms' standout operator, contributing 14 points and providing relentless two-way effort that set the standard for his teammates. Leo added 12 points in another clinical contribution, reinforcing his status as one of the most consistent scorers in the competition. Phantoms' defence was equally impressive, successfully limiting Panthers' transition game and forcing difficult shots throughout. Panthers never found the rhythm needed to threaten seriously despite Medel's heroics at the top of the key. It was a complete Phantoms performance that left no doubt as to who was the superior team on the day.",
+      top:[{n:"Medel",t:"Panthers",p:17},{n:"Fred",t:"Phantoms",p:14},{n:"Leo",t:"Phantoms",p:12}]
+    },
+    10: {
+      note: "Phantoms survived one of the great individual performances of the season to edge The Guardians in a breathtaking 3-point contest. Fletcher was in sensational touch, exploding for 20 points in a display that had the opposition shaking their heads in disbelief and teammates rallying around him. Leo matched the occasion magnificently for Phantoms with 17 points, producing the defining plays when his team needed them most to hold off a relentless Guardians charge. Fred added 12 points and never allowed Phantoms' intensity to drop even when Guardians threatened to overhaul the deficit. The match twisted and turned through four electrifying quarters with multiple lead changes and a pulsating atmosphere. Guardians gave absolutely everything and deserved far more from their efforts but ultimately came up 3 points short. It will be remembered as one of the finest contests of the season and a testament to both teams' competitive spirit.",
+      top:[{n:"Fletcher",t:"The Guardians",p:20},{n:"Leo",t:"Phantoms",p:17},{n:"Fred",t:"Phantoms",p:12}]
+    },
+    11: {
+      note: "Phantoms were methodical and authoritative as they put The Guardians to the sword by 13 points in a composed team performance. Leo continued his remarkable scoring run with 14 points, moving the ball beautifully and creating high-percentage opportunities for himself and teammates throughout. Anton was The Guardians' best with 10 points, battling courageously against a Phantoms side that seemed to have an answer for everything thrown at them. Richard contributed 8 points for Phantoms, controlling the interior and providing a reliable outlet in the half-court offence. Phantoms' ball movement and spacing were exemplary, creating open looks through patient offence and punishing any defensive lapses without mercy. Guardians showed fighting spirit but lacked the firepower to mount a sustained challenge against Phantoms' well-structured defensive scheme. The 13-point winning margin was a fair reflection of Phantoms' superiority on a day when they executed their game plan to near perfection.",
+      top:[{n:"Leo",t:"Phantoms",p:14},{n:"Anton",t:"The Guardians",p:10},{n:"Richard",t:"Phantoms",p:8}]
+    },
+    12: {
+      note: "Panthers produced a gritty comeback performance to overpower The Guardians by 10 points in an entertaining and physical encounter. Nelson was the catalyst for Panthers' win with 9 points and an impressive defensive display that swung the momentum decisively in Panthers' favour. Medel added 8 points and controlled the game's tempo expertly, ensuring Panthers maintained their advantage once they wrestled control from Guardians. Anton battled tirelessly for The Guardians with 7 points and refused to yield despite the mounting pressure from an in-form Panthers side. Panthers' second-half intensity was a significant step up from the first, clearly a product of half-time tactical adjustments and renewed defensive commitment. Guardians struggled to handle Panthers' physicality in the paint, giving up too many second-chance opportunities that eventually proved costly. A solid Panthers win that keeps their playoff ambitions firmly alive heading into the business end of the regular season.",
+      top:[{n:"Nelson",t:"Panthers",p:9},{n:"Medel",t:"Panthers",p:8},{n:"Anton",t:"The Guardians",p:7}]
+    },
+    13: {
+      note: "Panthers pulled off a remarkable upset victory over Phantoms, winning by 3 points in one of the most dramatic finishes of the season. Medel was exceptional throughout for Phantoms with 18 points, producing one of his finest individual performances only to end up on the losing side in heartbreaking fashion. Nelson responded with a big game for Panthers, providing scoring and defensive intensity to ensure his team never relinquished their belief when Phantoms pushed hard. Leo scored 8 for Phantoms and was influential at key stretches but couldn't quite replicate his usual scoring dominance against a Panthers side playing above themselves. Panthers' defensive effort in the final minutes was nothing short of heroic, refusing to allow Phantoms back into the contest despite enormous pressure. Phantoms will rue a series of missed opportunities in the second half that ultimately cost them a winnable game. Panthers' victory was fully deserved as they demonstrated both resilience and tactical discipline in equal measure.",
+      top:[{n:"Medel",t:"Phantoms",p:18},{n:"Nelson",t:"Panthers",p:10},{n:"Leo",t:"Phantoms",p:8}]
+    },
+    14: {
+      note: "Titans and Panthers produced an absolutely riveting encounter with Titans ultimately claiming victory by just 4 points in a pulsating finish. Medel was in unstoppable form for Panthers with 18 points, single-handedly keeping his side in the contest and pushing Titans to their absolute limits. Noel responded heroically for Titans with 16 points off the bench, delivering his best performance of the season at the most critical moment. Arvin added 15 crucial points and provided the physical presence that ultimately tipped the balance in Titans' favour when the game was at its most intense. The match was a genuine heavyweight contest that neither team deserved to lose, played at an incredible tempo with both defences giving everything. Panthers' inability to stop Titans' interior game despite multiple tactical adjustments proved to be the decisive factor in the closing stages. Titans' experience and mental fortitude came to the fore again as they closed out another fiercely contested win against high-quality opposition.",
+      top:[{n:"Medel",t:"Panthers",p:18},{n:"Noel",t:"Titans",p:16},{n:"Arvin",t:"Titans",p:15}]
+    },
+    15: {
+      note: "Phantoms were brilliantly efficient in dismantling The Guardians by 17 points, delivering one of their most polished performances of the season. Leo was the standout with 20 points, playing with a fluency and confidence that made him virtually impossible to stop over four quarters. JuliusA contributed a vital 11 points in a supporting role, his scoring from the perimeter providing additional dimensions to the Phantoms' attack that stretched Guardians to the limit. Alvin fought admirably for Guardians with 12 points, providing the kind of spirited resistance that at least gave his teammates something to rally around. Phantoms' execution on offence was near flawless, converting a high percentage of their attempts and consistently finding the right man in the right place. The Guardians struggled to build any scoring momentum against a Phantoms defence that was sharp, well-organised and utterly committed throughout. Phantoms' dominant display further cemented their position as serious contenders for the championship.",
+      top:[{n:"Leo",t:"Phantoms",p:20},{n:"JuliusA",t:"Phantoms",p:11},{n:"Alvin",t:"The Guardians",p:12}]
+    },
+    16: {
+      note: "The Guardians produced one of the biggest upsets of the regular season, defeating the table-topping Titans by 6 points in a memorable performance. Alvin was outstanding in leading the charge with 9 points, playing with a fearlessness and sharpness that repeatedly troubled the Titans' defensive setup. Anton was equally effective with 8 points, combining relentless energy with smart decision-making to ensure Guardians maintained their advantage through the tense closing stages. Noel scored 8 for Titans in a spirited but ultimately unsuccessful attempt to drag his team back into a game they looked to be losing control of. The Guardians' defensive organisation was remarkably disciplined, successfully disrupting Titans' usual flow and forcing them into lower-percentage scoring options throughout. Titans' uncharacteristic sloppiness in the third quarter gave Guardians the foothold they needed and they never looked back from that point. A historic win for The Guardians that demonstrated exactly why on any given night, any team in this competition can claim victory.",
+      top:[{n:"Alvin",t:"The Guardians",p:9},{n:"Anton",t:"The Guardians",p:8},{n:"Noel",t:"Titans",p:8}]
+    },
+    17: {
+      note: "Phantoms delivered their most emphatic win of the season, crushing Titans by 16 points in a commanding display that left no doubts about their quality. Leo was sensational, dropping 16 points and producing a masterclass in how to control a game as a forward, reading the defence superbly at every turn. JuliusA was equally lethal with 15 points, his perimeter scoring opening up driving lanes and creating chaos in a Titans defence that had no answer for the dual threat. Noel scored 9 for Titans in a game that must have been deeply frustrating, as his team's usual composure and structure simply failed to materialise. Phantoms' defensive pressure was relentless from the opening tip, forcing Titans into rushed decisions and uncharacteristic turnovers that allowed Phantoms to build an unassailable lead. Titans looked disjointed and out of sorts, their usual confidence visibly shaken by a Phantoms team playing with tremendous freedom and collective belief. It was a significant statement from Phantoms as the regular season entered its final stages and playoff places came into sharp focus.",
+      top:[{n:"Leo",t:"Phantoms",p:16},{n:"JuliusA",t:"Phantoms",p:15},{n:"Noel",t:"Titans",p:9}]
+    },
+    18: {
+      note: "Panthers closed the regular season in emphatic fashion, defeating Titans by 12 points in a dominant final-round display that sent a powerful message ahead of the playoffs. Medel was at his brilliant best with 16 points, driving the Panthers' offence with a precision and confidence that Titans simply could not contain no matter what defensive scheme they deployed. Nelson contributed significantly with 6 points and a relentless defensive performance that set the physical tone for Panthers throughout the contest. Noel top-scored for Titans with 13 points in a fighting individual display, showing why he remains one of the most dangerous scoring threats in the competition. Titans appeared to lack the intensity and urgency that has defined their best performances, seemingly affected by the weight of recent results and a heavy schedule. Panthers were the polar opposite — sharp, motivated and tactically excellent — producing exactly the performance needed to carry momentum into the post-season. The result confirmed the final playoff standings and set up a fascinating bracket that promises spectacular basketball in the weeks ahead.",
+      top:[{n:"Medel",t:"Panthers",p:16},{n:"Nelson",t:"Panthers",p:6},{n:"Noel",t:"Titans",p:13}]
+    },
+  };
 
-  el.innerHTML = Object.entries(byGame).map(([gNum, games]) => `
-    <div class="sl">Game ${gNum} — ${games[0].date}</div>
-    <div class="results-grid">
-      ${games.map(g => {
-        const homeWin = g.homeScore > g.awayScore;
-        const awayWin = g.awayScore > g.homeScore;
-        const tie = g.homeScore === g.awayScore;
-        const winner = tie ? 'Draw' : (homeWin ? g.home : g.away);
-        const wc = TEAMS[winner]?.color || '#39ff14';
-        return `<div class="result-card">
-          <div class="result-game-label">
-            <span>Game ${g.game}</span>
-            <span style="color:var(--muted)">${g.date}</span>
+  const medals = ['🥇','🥈','🥉'];
+
+  el.innerHTML = played.map(g => {
+    const homeWin = g.homeScore > g.awayScore;
+    const awayWin = g.awayScore > g.homeScore;
+    const tie     = g.homeScore === g.awayScore;
+    const winner  = tie ? null : (homeWin ? g.home : g.away);
+    const wc      = winner ? (TEAMS[winner]?.color || '#39ff14') : '#888';
+    const hc      = TEAMS[g.home]?.color || '#fff';
+    const ac      = TEAMS[g.away]?.color || '#fff';
+    const sum     = SUMMARIES[g.id] || {};
+
+    return `<div class="gr-row">
+      <!-- SCOREBOARD -->
+      <div class="gr-score-card">
+        <div class="gr-header">
+          <span class="gr-game-num">GAME ${g.game}</span>
+          <span class="gr-date">${g.date}</span>
+          ${winner
+            ? `<span class="gr-winner-pill" style="background:${ha(wc,0.15)};color:${wc};border-color:${ha(wc,0.35)}">🏆 ${winner}</span>`
+            : '<span class="gr-winner-pill" style="color:#888">DRAW</span>'}
+        </div>
+        <div class="gr-matchup">
+          <div class="gr-team ${homeWin?'gr-win':awayWin?'gr-loss':''}">
+            <img src="./team_logo/${g.home}.jpeg" class="gr-logo"
+              onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.home}.png';}else{this.style.display='none';}" alt="">
+            <span class="gr-tname" style="color:${hc}">${g.home}</span>
           </div>
-          <div class="result-matchup">
-            <div class="result-team">
-              <img src="./team_logo/${g.home}.jpeg" class="result-team-logo"
-                onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.home}.png';}else{this.style.display='none';}" alt="${g.home}">
-              <span class="result-team-name" style="color:${TEAMS[g.home]?.color||'#fff'}">${g.home}</span>
-            </div>
-            <div class="result-score-box">
-              <div style="display:flex;align-items:center;gap:12px">
-                <span class="result-score ${homeWin?'win':'loss'}">${g.homeScore}</span>
-                <span class="result-vs">VS</span>
-                <span class="result-score ${awayWin?'win':'loss'}">${g.awayScore}</span>
-              </div>
-            </div>
-            <div class="result-team">
-              <img src="./team_logo/${g.away}.jpeg" class="result-team-logo"
-                onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.away}.png';}else{this.style.display='none';}" alt="${g.away}">
-              <span class="result-team-name" style="color:${TEAMS[g.away]?.color||'#fff'}">${g.away}</span>
-            </div>
+          <div class="gr-scores">
+            <span class="gr-score ${homeWin?'gr-score-win':''}" style="${homeWin?'color:'+hc:''}">${g.homeScore}</span>
+            <span class="gr-dash">—</span>
+            <span class="gr-score ${awayWin?'gr-score-win':''}" style="${awayWin?'color:'+ac:''}">${g.awayScore}</span>
           </div>
-          <div class="result-winner-banner" style="background:${ha(wc,0.08)};border-color:${ha(wc,0.25)};color:${wc}">
-            ${tie ? '🤝 DRAW' : `🏆 ${winner} WIN`}
+          <div class="gr-team gr-team-right ${awayWin?'gr-win':homeWin?'gr-loss':''}">
+            <span class="gr-tname" style="color:${ac}">${g.away}</span>
+            <img src="./team_logo/${g.away}.jpeg" class="gr-logo"
+              onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.away}.png';}else{this.style.display='none';}" alt="">
           </div>
-        </div>`;
-      }).join('')}
-    </div>`).join('');
+        </div>
+      </div>
+      <!-- SUMMARY -->
+      <div class="gr-summary-card">
+        <div class="gr-sum-title">📋 Game Summary</div>
+        <p class="gr-sum-note">${sum.note || 'Summary coming soon.'}</p>
+        ${sum.top ? `<div class="gr-sum-scorers">
+          ${sum.top.map((s,i) => {
+            const sc = TEAMS[s.t]?.color || '#ffaa00';
+            return `<div class="gr-scorer">
+              <span class="gr-medal">${medals[i]}</span>
+              <img src="${playerImgSrc(s.n)}" class="gr-scorer-img" style="border-color:${sc}"
+                onerror="this.style.display='none'" alt="">
+              <span class="gr-scorer-name" style="color:${sc}" onclick="openProfile('${s.n}')">${s.n}</span>
+              <span class="gr-scorer-pts" style="color:${sc}">${s.p} PTS</span>
+            </div>`;
+          }).join('')}
+        </div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
 }
+
 
 // ===========================
 // SCHEDULE VIEW
@@ -2140,6 +2432,239 @@ function deletePlayerHL(profName, id) {
   if (grid) grid.innerHTML = renderPlayerHLCards(profName);
 }
 
+
+// ===========================
+// PLAYOFFS
+// ===========================
+const PO_SEEDS = [
+  { seed:1, team:"Titans",         w:6, l:3, d:0, pts:12, adv:true  },
+  { seed:2, team:"Phantoms",       w:5, l:4, d:0, pts:10, adv:true  },
+  { seed:3, team:"Panthers",       w:5, l:4, d:0, pts:10, adv:false },
+  { seed:4, team:"The Guardians",  w:2, l:7, d:0, pts:4,  adv:false },
+];
+
+// Edit scores & status here as games are played
+// SF: best of 3 (twice-to-beat: adv team wins series with 1 win vs 0)
+// GF: single game (1 game final, no advantage)
+const PO_SERIES = [
+  {
+    id:"sf1", round:"Semi-Final 1",
+    t1:"Titans", s1:1, wins1:0,
+    t2:"The Guardians", s2:4, wins2:0,
+    adv:"Titans", bestOf:3, winner:null,
+    games:[
+      { n:1, date:"TBD", h:0, a:0, status:"upcoming" },
+      { n:2, date:"TBD", h:0, a:0, status:"if necessary" },
+     ],
+  },
+  {
+    id:"sf2", round:"Semi-Final 2",
+    t1:"Phantoms", s1:2, wins1:0,
+    t2:"Panthers", s2:3, wins2:0,
+    adv:"Phantoms", bestOf:3, winner:null,
+    games:[
+      { n:1, date:"TBD", h:0, a:0, status:"upcoming" },
+      { n:2, date:"TBD", h:0, a:0, status:"if necessary" },
+      ],
+  },
+  {
+    id:"gf", round:"Grand Final 🏆",
+    t1:null, s1:null, wins1:0,
+    t2:null, s2:null, wins2:0,
+    adv:null, bestOf:1, winner:null,
+    games:[
+      { n:1, date:"TBD", h:0, a:0, status:"tbd" },
+    ],
+  },
+];
+
+function renderPlayoffs() {
+  const el = document.getElementById('playoffs-content');
+  if (!el) return;
+
+  // Recompute wins
+  PO_SERIES.forEach(s => {
+    s.wins1 = s.games.filter(g=>g.status==='done' && g.h>g.a).length;
+    s.wins2 = s.games.filter(g=>g.status==='done' && g.a>g.h).length;
+    if (!s.winner) {
+      if (s.bestOf===1) {
+        const dg = s.games.find(g=>g.status==='done');
+        if (dg) s.winner = dg.h>dg.a ? s.t1 : s.t2;
+      } else {
+        // Twice to beat: adv needs 1 win (opponent needs 2)
+        const adv    = s.adv;
+        const nonAdv = adv===s.t1 ? s.t2 : s.t1;
+        const advW   = adv===s.t1 ? s.wins1 : s.wins2;
+        const nonW   = adv===s.t1 ? s.wins2 : s.wins1;
+        if (advW>=1 && nonW===0) s.winner = adv;
+        if (nonW>=2) s.winner = nonAdv;
+        if (advW>=2) s.winner = adv;
+      }
+    }
+  });
+
+  // Propagate SF winners into GF
+  const sf1=PO_SERIES[0], sf2=PO_SERIES[1], gf=PO_SERIES[2];
+  if (sf1.winner) { gf.t1=sf1.winner; gf.s1=sf1.winner===sf1.t1?sf1.s1:sf1.s2; }
+  if (sf2.winner) { gf.t2=sf2.winner; gf.s2=sf2.winner===sf2.t1?sf2.s1:sf2.s2; }
+
+  const tc  = t => t ? (TEAMS[t]?.color||'#ffaa00') : '#888';
+  const logo = (t,w=40,h=24) => t
+    ? `<img src="./team_logo/${t}.jpeg" style="width:${w}px;height:${h}px;object-fit:contain;filter:drop-shadow(0 0 5px ${tc(t)})" onerror="if(!this._t){this._t=1;this.src='./team_logo/${t}.png';}else{this.style.display='none';}" alt="">`
+    : `<div style="width:${w}px;height:${h}px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--muted)">?</div>`;
+
+  // Build a bracket matchup box
+  const btBox = (s, label) => {
+    const lbl = label||s.round;
+    const inProg = s.games.some(g=>g.status==='done') && !s.winner;
+    const t1w=s.winner===s.t1, t2w=s.winner===s.t2;
+    const t1=s.t1||'TBD', t2=s.t2||'TBD';
+    const tbd1=!s.t1, tbd2=!s.t2;
+    return `<div class="bt-box">
+      <div class="bt-box-label">
+        <span>${lbl}</span>
+        ${s.adv ? `<span class="bt-adv-badge">★ ${s.adv}</span>` : ''}
+      </div>
+      <div class="bt-team ${s.winner?(t1w?'bt-winner':'bt-loser'):(tbd1?'bt-tbd':'')}" style="--tc:${tc(s.t1)}">
+        <span class="bt-seed-lbl">${s.s1||'?'}</span>
+        ${logo(s.t1,38,24)}
+        <span class="bt-t-name">${t1}</span>
+        <span class="bt-t-score">${(inProg||s.winner)&&!tbd1?s.wins1:''}</span>
+        ${t1w?'<span style="color:#39ff14;font-size:13px">✓</span>':''}
+      </div>
+      <div class="bt-team ${s.winner?(t2w?'bt-winner':'bt-loser'):(tbd2?'bt-tbd':'')}" style="--tc:${tc(s.t2)}">
+        <span class="bt-seed-lbl">${s.s2||'?'}</span>
+        ${logo(s.t2,38,24)}
+        <span class="bt-t-name">${t2}</span>
+        <span class="bt-t-score">${(inProg||s.winner)&&!tbd2?s.wins2:''}</span>
+        ${t2w?'<span style="color:#39ff14;font-size:13px">✓</span>':''}
+      </div>
+    </div>`;
+  };
+
+  // Finals slot
+  const finalsBox = () => {
+    if (gf.winner) return `<div class="bt-finals">
+      <div class="bt-finals-label">🏆 GRAND FINAL</div>
+      <div class="bt-champion">
+        <span class="bt-champion-trophy">🥇</span>
+        <div class="bt-champion-name" style="color:${tc(gf.winner)}">${gf.winner}</div>
+        <div class="bt-champion-sub">Champions 2026</div>
+      </div>
+    </div>`;
+    const dg = gf.games.find(g=>g.status==='done');
+    if (dg) return btBox(gf, "Grand Final");
+    if (gf.t1 && gf.t2) return `<div class="bt-finals">
+      <div class="bt-finals-label">🏆 GRAND FINAL — 1 GAME</div>
+      <div class="bt-team bt-tbd" style="--tc:${tc(gf.t1)}">${logo(gf.t1,38,24)}<span class="bt-t-name" style="color:${tc(gf.t1)}">${gf.t1}</span></div>
+      <div class="bt-team bt-tbd" style="--tc:${tc(gf.t2)}">${logo(gf.t2,38,24)}<span class="bt-t-name" style="color:${tc(gf.t2)}">${gf.t2}</span></div>
+    </div>`;
+    return `<div class="bt-finals"><div class="bt-finals-label">🏆 GRAND FINAL</div>
+      <div class="bt-champion"><span class="bt-champion-trophy">🏀</span><div class="bt-champion-sub">Awaiting Finalists</div></div>
+    </div>`;
+  };
+
+  // Series detail card
+  const seriesCard = (s, isGF=false) => {
+    const anyPlayed = s.games.some(g=>g.status==='done');
+    const statusText = s.winner ? `${s.winner} advances` : anyPlayed ? 'In Progress' : 'Not Started';
+    const statusCls  = s.winner ? 'po-status-done' : anyPlayed ? 'po-status-active' : 'po-status-tbd';
+    const t1=s.t1||'TBD', t2=s.t2||'TBD';
+    const w1lead=s.wins1>s.wins2, w2lead=s.wins2>s.wins1;
+    return `<div class="${isGF?'po-gf-card':'po-series-card'}">
+      <div class="po-series-hdr">
+        <span class="po-series-hdr-title">${s.round}</span>
+        <span class="po-status-badge ${statusCls}">${statusText}</span>
+      </div>
+      <div class="po-series-scoreboard">
+        <div class="po-s-team">
+          ${logo(s.t1,54,32)}
+          <div class="po-s-name" style="color:${tc(s.t1)}">${t1}</div>
+          ${s.adv===s.t1?'<div style="font-family:\'Barlow Condensed\';font-size:10px;color:var(--accent);letter-spacing:1px">★ TWICE TO BEAT</div>':''}
+        </div>
+        <div class="po-s-wins ${w1lead?'lead':w2lead?'trail':''}">${s.wins1}</div>
+        <div class="po-s-dash">–</div>
+        <div class="po-s-wins ${w2lead?'lead':w1lead?'trail':''}">${s.wins2}</div>
+        <div class="po-s-team">
+          ${logo(s.t2,54,32)}
+          <div class="po-s-name" style="color:${tc(s.t2)}">${t2}</div>
+          ${s.adv===s.t2?'<div style="font-family:\'Barlow Condensed\';font-size:10px;color:var(--accent);letter-spacing:1px">★ TWICE TO BEAT</div>':''}
+        </div>
+      </div>
+      ${s.adv&&!isGF?`<div class="po-adv-note">★ ${s.adv} holds the twice-to-beat advantage</div>`
+        : isGF?'<div class="po-adv-note" style="color:var(--gold)">Winner Take All Finals — Win or Go Home</div>':''}
+      <div class="po-games-list">
+        ${s.games.map(g=>{
+          const played=g.status==='done', upcoming=g.status==='upcoming';
+          const wTeam=played?(g.h>g.a?t1:t2):'';
+          return `<div class="po-game-row ${played?'':'upcoming'===g.status?'upcoming':'needed'}">
+            <span class="po-game-num">Game ${g.n}</span>
+            <span class="po-game-result" style="color:${played?(g.h>g.a?tc(s.t1):tc(s.t2)):'var(--muted)'}">
+              ${played?`${g.h} – ${g.a}`:upcoming?'⏰ Upcoming':'If needed'}
+            </span>
+            <span class="po-game-date">${played&&wTeam?wTeam+' W':g.date}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  };
+
+  el.innerHTML =
+    // Banner
+    `<div class="po-banner">
+      <div class="po-banner-title">🏀 Summer Cup 2026 SEASON 3 Playoffs</div>
+      <div class="po-banner-sub">Semi-Finals (Cross-Over, Twice to Beat Advantage for #1 amd #2) · Grand Final (Winner take All)</div>
+      <div class="po-rule">★ <b>#1 &amp; #2 seeds are TWICE TO BEAT</b> — Seeds #3 and #4 must win 2 games; top seeds #1 and #2 need only 1 win to advance</div>
+    </div>` +
+
+    // Seedings
+    `<div class="sl">Regular Season Final Standings</div>
+    <div class="po-seeds">
+      ${PO_SEEDS.map(r=>`<div class="po-seed-card" style="--tc:${tc(r.team)}">
+        <div class="po-seed-num">#${r.seed}</div>
+        ${logo(r.team,52,30)}
+        <div class="po-seed-info">
+          <div class="po-seed-name">${r.team}</div>
+          <div class="po-seed-record">${r.w}W – ${r.l}L &nbsp;|&nbsp; ${r.pts}pts</div>
+        </div>
+        ${r.adv?'<span class="po-seed-adv">★ TWICE TO BEAT</span>':''}
+      </div>`).join('')}
+    </div>` +
+
+    // Visual bracket
+    `<div class="sl">Bracket</div>
+    <div class="bracket-tree">
+      <div class="bracket-tree-title">SUMMER CUP 2026 SEASON 3 PLAYOFFS BRACKET</div>
+      <div class="bt-grid">
+        <!-- SFs column -->
+        <div class="bt-col">
+          ${btBox(sf1)}
+          ${btBox(sf2)}
+        </div>
+        <!-- Connectors -->
+        <div class="bt-conn-col">
+          <div class="bt-conn"><div class="bt-conn-line"></div><div class="bt-conn-arrow">→</div><div class="bt-conn-line"></div></div>
+          <div style="height:36px"></div>
+          <div class="bt-conn"><div class="bt-conn-line"></div><div class="bt-conn-arrow">→</div><div class="bt-conn-line"></div></div>
+        </div>
+        <!-- Finals -->
+        <div style="display:flex;align-items:center;justify-content:center">
+          ${finalsBox()}
+        </div>
+      </div>
+    </div>` +
+
+    // Series detail cards
+    `<div class="sl">Series Details</div>
+    <div class="po-series-wrap">
+      ${seriesCard(sf1)}
+      ${seriesCard(sf2)}
+    </div>
+    <div class="sl">Grand Final</div>
+    ${seriesCard(gf, true)}`;
+}
+
+  
 // Auto-render on page load (data is baked in)
 document.addEventListener('DOMContentLoaded', renderAll);
 
