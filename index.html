@@ -1037,10 +1037,246 @@ footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,1
 ::-webkit-scrollbar { width:6px; height:6px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:rgba(255,170,0,0.22); border-radius:3px; }
+
+
+/* ═══════════════════════════════════════════════════════
+   READABILITY OVERRIDES — larger fonts, higher contrast
+═══════════════════════════════════════════════════════ */
+
+/* Body base */
+body { font-size:16px; }
+
+/* Nav buttons — already 18px, bump slightly */
+.nav-btn { font-size:17px !important; }
+
+/* Section labels (.sl) — was 14px */
+.sl { font-size:15px !important; color:#c8a96e !important; }
+
+/* Team cards */
+.tc-name { font-size:20px !important; }
+.tc-stat-val { font-size:22px !important; color:#f0ddb8 !important; }
+.tc-stat-lbl { font-size:13px !important; color:#c8a96e !important; }
+
+/* Roster table */
+.roster-no  { font-size:18px !important; }
+.roster-name { font-size:16px !important; color:#f0ddb8 !important; }
+.roster-pos { font-size:14px !important; color:#c8a96e !important; }
+
+/* Player leaderboard table */
+.rk  { font-size:20px !important; color:#c8a96e !important; }
+.tdn { font-size:19px !important; color:#f0ddb8 !important; }
+.tdpos { font-size:15px !important; }
+table th { font-size:14px !important; color:#c8a96e !important; }
+table td { font-size:15px !important; }
+
+/* Game Results — side-by-side cards */
+.gr-game-num  { font-size:20px !important; }
+.gr-date      { font-size:14px !important; color:#c8a96e !important; }
+.gr-tname     { font-size:16px !important; color:#f0ddb8 !important; }
+.gr-score     { font-size:38px !important; }
+.gr-sum-title { font-size:14px !important; letter-spacing:2px; }
+.gr-sum-note  { font-size:15px !important; color:#c8a96e !important; line-height:1.8 !important; }
+.gr-scorer-name { font-size:16px !important; color:#f0ddb8 !important; }
+.gr-scorer-pts  { font-size:19px !important; }
+
+/* Schedule */
+.sched-game  { font-size:17px !important; color:#c8a96e !important; }
+.sched-teams { font-size:16px !important; color:#f0ddb8 !important; }
+.sched-date  { font-size:14px !important; color:#c8a96e !important; }
+.schedule-row td { font-size:15px !important; }
+
+/* Standings */
+.st-team-name { font-size:18px !important; color:#f0ddb8 !important; }
+.st-val       { font-size:18px !important; color:#f0ddb8 !important; }
+.st-lbl       { font-size:13px !important; color:#c8a96e !important; }
+
+/* Analysis section */
+.anbody { font-size:16px !important; color:#c8a96e !important; line-height:1.75 !important; }
+.an-val { font-size:24px !important; color:#f0ddb8 !important; }
+.an-lbl { font-size:14px !important; color:#c8a96e !important; }
+.ct     { font-size:18px !important; color:#c8a96e !important; }
+
+/* Player profile list */
+.prof-card-name { font-size:18px !important; color:#f0ddb8 !important; }
+.prof-card-meta { font-size:14px !important; color:#c8a96e !important; }
+
+/* Player profile detail */
+.pd-hero-name   { font-size:clamp(30px,4vw,48px) !important; color:#f0ddb8 !important; }
+.pd-hero-sub    { font-size:18px !important; color:#c8a96e !important; }
+.pd-stat-v      { font-size:26px !important; color:#f0ddb8 !important; }
+.pd-stat-l      { font-size:13px !important; color:#c8a96e !important; }
+.pd-section-title { font-size:18px !important; color:#f0ddb8 !important; }
+.pd-scouting    { font-size:16px !important; color:#c8a96e !important; line-height:1.9 !important; }
+.pd-game-log th { font-size:14px !important; color:#c8a96e !important; }
+.pd-game-log td { font-size:15px !important; color:#f0ddb8 !important; }
+.pd-game-log td.gl-opp { font-size:15px !important; color:#c8a96e !important; }
+.pd-back        { font-size:15px !important; }
+
+/* Overview stat leaders */
+.lc-name  { font-size:16px !important; color:#f0ddb8 !important; }
+.lc-val   { font-size:22px !important; color:#f0ddb8 !important; }
+.lc-lbl   { font-size:13px !important; color:#c8a96e !important; }
+.lc-tag   { font-size:12px !important; color:#c8a96e !important; }
+
+/* Team detail */
+.team-detail-stat-val { font-size:24px !important; color:#f0ddb8 !important; }
+.team-detail-stat-lbl { font-size:13px !important; color:#c8a96e !important; }
+
+/* Filter / pill buttons */
+.pill-l { font-size:13px !important; color:#c8a96e !important; }
+.filter-btn { font-size:14px !important; }
+
+/* Gallery caption */
+.gallery-num   { font-size:17px !important; }
+.lb-caption    { font-size:17px !important; color:#c8a96e !important; }
+.lb-counter    { font-size:20px !important; color:#c8a96e !important; }
+
+/* Playoffs bracket */
+.po-series-hdr-title { font-size:20px !important; color:#f0ddb8 !important; }
+.po-series-tname     { font-size:15px !important; color:#f0ddb8 !important; }
+.po-adv-note         { font-size:14px !important; }
+.po-game-num         { font-size:16px !important; color:#c8a96e !important; }
+.po-game-result      { font-size:18px !important; }
+.po-game-date        { font-size:13px !important; color:#c8a96e !important; }
+.bt-t-name           { font-size:15px !important; color:#f0ddb8 !important; }
+.po-seed-name        { font-size:17px !important; color:#f0ddb8 !important; }
+.po-seed-record      { font-size:14px !important; color:#c8a96e !important; }
+.playoffs-banner-sub { font-size:16px !important; color:#c8a96e !important; }
+.playoffs-seed-rule  { font-size:14px !important; color:#c8a96e !important; }
+
+/* Home page */
+.hp-ti       { font-size:15px !important; color:#f0ddb8 !important; }
+.hp-chl      { font-size:clamp(22px,2.8vw,32px) !important; color:#f0ddb8 !important; }
+.hp-csnip    { font-size:15px !important; color:#c8a96e !important; line-height:1.8 !important; }
+.hp-ctag     { font-size:12px !important; }
+.hp-full p   { font-size:15px !important; color:#c8a96e !important; line-height:1.85 !important; }
+.hp-smhl     { font-size:16px !important; color:#f0ddb8 !important; }
+.hp-smtag    { font-size:12px !important; }
+.hp-smdate   { font-size:13px !important; color:#c8a96e !important; }
+.hp-smfull p { font-size:14px !important; color:#c8a96e !important; }
+.hp-stnm     { font-size:17px !important; color:#f0ddb8 !important; }
+.hp-strec    { font-size:14px !important; color:#c8a96e !important; }
+.hp-stpts    { font-size:22px !important; }
+.hp-tscnm    { font-size:13px !important; color:#f0ddb8 !important; }
+.hp-tsctm    { font-size:12px !important; }
+.hp-nchl     { font-size:17px !important; color:#f0ddb8 !important; }
+.hp-ncsnip   { font-size:14px !important; color:#c8a96e !important; line-height:1.7 !important; }
+.hp-nctag    { font-size:11px !important; }
+.hp-ncbody p { font-size:14px !important; color:#c8a96e !important; line-height:1.8 !important; }
+.hp-date     { font-size:13px !important; color:#c8a96e !important; }
+.hp-rmbtn    { font-size:14px !important; }
+.hp-potitle  { font-size:26px !important; color:#ffd700 !important; }
+.hp-podesc   { font-size:15px !important; color:#c8a96e !important; line-height:1.75 !important; }
+.hp-potn     { font-size:15px !important; color:#f0ddb8 !important; }
+.hp-sl       { font-size:13px !important; color:#c8a96e !important; }
+.hp-feat-tn  { font-size:14px !important; }
+.hp-quote    { font-size:15px !important; color:#c8a96e !important; line-height:1.75 !important; }
+
+/* Inline JS-rendered text that uses var(--muted) — boost via body inherit */
+.result-winner-banner { font-size:15px !important; letter-spacing:2px; }
+.gr-winner-pill       { font-size:12px !important; }
+.series-game-chip     { font-size:14px !important; }
+
+/* General table improvements */
+th, td { font-size:15px; }
+
+/* Footer */
+footer { font-size:14px !important; color:#c8a96e !important; }
+
+/* ═══ HOME PAGE STYLES ═══════════════════════════════════ */
+.hp-ticker{overflow:hidden;height:36px;display:flex;align-items:center;background:rgba(255,170,0,0.07);border:1px solid rgba(255,170,0,0.18);border-radius:8px;margin-bottom:20px}
+.hp-tlbl{background:var(--accent);color:#000;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;padding:0 14px;height:100%;display:flex;align-items:center;flex-shrink:0}
+.hp-ttrack{overflow:hidden;flex:1}
+.hp-tinner{display:flex;white-space:nowrap;animation:hpTick 40s linear infinite}
+.hp-tinner:hover{animation-play-state:paused}
+@keyframes hpTick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hp-ti{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;padding:0 20px;color:#f0ddb8;border-right:1px solid rgba(255,170,0,0.13);flex-shrink:0}
+.hp-ti b{color:var(--accent)}
+.hp-hero{display:grid;grid-template-columns:1fr 300px;gap:14px;margin-bottom:20px}
+@media(max-width:780px){.hp-hero{grid-template-columns:1fr}}
+.hp-card{background:var(--card);border:1px solid var(--card-b);border-radius:13px;overflow:hidden;backdrop-filter:blur(8px)}
+.hp-feat-img{width:100%;aspect-ratio:16/7;background:#120900;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:64px;color:rgba(255,170,0,0.12)}
+.hp-feat-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hp-feat-sbar{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.88),transparent);display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 18px}
+.hp-feat-sc{font-family:'Bebas Neue',sans-serif;font-size:54px;line-height:1;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.5);min-width:50px;text-align:center}
+.hp-feat-sc.win{text-shadow:0 0 18px currentColor}
+.hp-feat-dash{font-family:'Bebas Neue',sans-serif;font-size:24px;color:rgba(255,255,255,0.38)}
+.hp-feat-team{display:flex;flex-direction:column;align-items:center;gap:5px}
+.hp-feat-logo{width:52px;height:32px;object-fit:contain}
+.hp-feat-tn{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:rgba(255,255,255,0.9);text-shadow:0 1px 5px rgba(0,0,0,0.8)}
+.hp-cbody{padding:18px 20px}
+.hp-ctag{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:7px}
+.hp-chl{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.8vw,34px);letter-spacing:2px;color:#f0ddb8;line-height:1.2;margin-bottom:10px}
+.hp-csnip{font-size:15px;color:#c8a96e;line-height:1.8;margin-bottom:12px}
+.hp-cfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.07);padding-top:10px;margin-top:6px}
+.hp-date{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;color:#c8a96e;text-transform:uppercase}
+.hp-rmbtn{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;background:none;border:none;cursor:pointer;padding:0;transition:opacity 0.2s}
+.hp-rmbtn:hover{opacity:0.65}
+.hp-full{display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,170,0,0.12)}
+.hp-full.open{display:block}
+.hp-full p{font-size:15px;color:#c8a96e;line-height:1.85;margin-bottom:14px}
+.hp-full strong{color:#f0ddb8}
+.hp-quote{border-left:3px solid var(--accent);padding:11px 17px;margin:14px 0;background:rgba(255,170,0,0.05);border-radius:0 7px 7px 0;font-style:italic;color:#c8a96e;font-size:15px;line-height:1.75}
+.hp-sclist{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.hp-scrow{display:flex;align-items:center;gap:9px;padding:7px 11px;background:rgba(255,255,255,0.04);border-radius:6px}
+.hp-scimg{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:top;border:1.5px solid;background:#1a0e00;flex-shrink:0}
+.hp-scname{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;flex:1;cursor:pointer;color:#f0ddb8}
+.hp-scpts{font-family:'Bebas Neue',sans-serif;font-size:18px}
+.hp-navlink{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:9px 16px;border:1px solid rgba(255,170,0,0.32);border-radius:7px;color:var(--accent);background:rgba(255,170,0,0.06);cursor:pointer;transition:all 0.2s;text-decoration:none}
+.hp-navlink:hover{background:rgba(255,170,0,0.14)}
+.hp-sm{background:var(--card);border:1px solid var(--card-b);border-radius:11px;padding:14px 16px;backdrop-filter:blur(8px);margin-bottom:11px}
+.hp-sm:last-child{margin-bottom:0}
+.hp-smtag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.hp-smhl{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#f0ddb8;line-height:1.3;margin-bottom:4px}
+.hp-smsc{font-family:'Bebas Neue',sans-serif;font-size:18px;margin-bottom:3px}
+.hp-smdate{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;color:#c8a96e}
+.hp-smfull{display:none;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)}
+.hp-smfull.open{display:block}
+.hp-smfull p{font-size:14px;color:#c8a96e;line-height:1.75;margin-bottom:9px}
+.hp-smfoot{display:flex;justify-content:space-between;align-items:center;margin-top:9px}
+.hp-sl{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;color:#c8a96e;text-transform:uppercase;margin:22px 0 12px;display:flex;align-items:center;gap:10px}
+.hp-sl::after{content:'';flex:1;height:1px;background:rgba(255,170,0,0.12)}
+.hp-stwrap{background:var(--card);border:1px solid var(--card-b);border-radius:12px;overflow:hidden;margin-bottom:6px;backdrop-filter:blur(8px)}
+.hp-strow{display:flex;align-items:center;gap:11px;padding:12px 17px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.2s}
+.hp-strow:last-child{border-bottom:none}
+.hp-strow:hover{background:rgba(255,255,255,0.025)}
+.hp-stn{font-family:'Bebas Neue',sans-serif;font-size:22px;min-width:22px;text-align:center;color:#c8a96e}
+.hp-stn.r1{color:var(--gold)}.hp-stn.r2{color:var(--silver)}.hp-stn.r3{color:var(--bronze)}
+.hp-stlogo{width:44px;height:27px;object-fit:contain}
+.hp-stnm{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;flex:1}
+.hp-strec{font-family:'Barlow Condensed',sans-serif;font-size:15px;color:#c8a96e}
+.hp-stpts{font-family:'Bebas Neue',sans-serif;font-size:24px;min-width:32px;text-align:right}
+.hp-tops{display:flex;gap:10px;flex-wrap:wrap}
+.hp-tsc{background:var(--card);border:1px solid var(--card-b);border-radius:11px;padding:12px 14px;flex:1;min-width:120px;display:flex;gap:10px;align-items:center;cursor:pointer;backdrop-filter:blur(8px);transition:all 0.22s}
+.hp-tsc:hover{transform:translateY(-3px);border-color:var(--tc)}
+.hp-tscph{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--tc);background:#1a0e00;flex-shrink:0}
+.hp-tscst{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--tc);line-height:1}
+.hp-tscnm{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#f0ddb8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hp-tsctm{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--tc);letter-spacing:1px}
+.hp-ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:13px}
+.hp-nc{background:var(--card);border:1px solid var(--card-b);border-radius:12px;overflow:hidden;backdrop-filter:blur(8px)}
+.hp-ncthumb{width:100%;aspect-ratio:16/9;background:#120900;display:flex;align-items:center;justify-content:center;font-size:42px;overflow:hidden;position:relative}
+.hp-ncthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hp-ncbody{padding:14px 16px}
+.hp-nctag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px}
+.hp-nchl{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#f0ddb8;line-height:1.3;margin-bottom:6px}
+.hp-ncsnip{font-size:14px;color:#c8a96e;line-height:1.7;margin-bottom:8px}
+.hp-ncbody .hp-full p{font-size:14px;color:#c8a96e;line-height:1.8;margin-bottom:10px}
+.hp-ncfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);padding-top:8px}
+.hp-po{background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,140,0,0.04));border:2px solid rgba(255,215,0,0.24);border-radius:14px;padding:20px 24px;cursor:pointer;transition:all 0.25s;backdrop-filter:blur(8px)}
+.hp-po:hover{border-color:rgba(255,215,0,0.5);transform:translateY(-3px)}
+.hp-potitle{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--gold);margin-bottom:6px}
+.hp-podesc{font-size:15px;color:#c8a96e;line-height:1.75;margin-bottom:12px}
+.hp-poseeds{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hp-pom{display:flex;align-items:center;gap:7px}
+.hp-posn{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#c8a96e}
+.hp-potl{width:34px;height:20px;object-fit:contain}
+.hp-potn{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800}
+.hp-podiv{font-family:'Bebas Neue',sans-serif;font-size:20px;color:rgba(255,215,0,0.28)}
 </style>
 </head>
 <body>
-
+  
 <!-- COURT BACKGROUND -->
 <div id="court-bg">
   <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -1125,6 +1361,7 @@ footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,1
         </div>
       </div>
       <nav class="nav">
+        <button class="nav-btn active" onclick="showView('home')">🏠 Home</button>
         <button class="nav-btn active" onclick="showView('overview')">Overview</button>
         <button class="nav-btn" onclick="showView('teams')">Team Stats</button>
         <button class="nav-btn" onclick="showView('players')">Player Leaderboard</button>
@@ -1137,6 +1374,11 @@ footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,1
         <button class="nav-btn" onclick="showView('playoffs')">Playoffs</button>
       </nav>
     </header>
+
+    <!-- HOME -->
+    <div id="view-home" class="view active">
+      <div id="home-content"></div>
+    </div>
 
     <!-- OVERVIEW -->
     <div id="view-overview" class="view active">
@@ -1335,6 +1577,7 @@ function showView(name){
   if(name==='gallery') renderGallery();
   if(name==='profiles') renderProfilesView();
   if(name==='playoffs') renderPlayoffs();
+  if(name==='home') renderHome();
 }
 
 // ===========================
@@ -1346,7 +1589,7 @@ function renderAll(){
   renderTabs(); renderTeamDetail(tn[0]);
   renderFilters(); renderPlayerTable();
   renderAnalysisCards(); renderAnalysisCharts();
-  showView('overview');
+  renderHome(); showView('home');
 }
 
 // ===========================
@@ -2671,6 +2914,284 @@ function renderPlayoffs() {
     </div>
     <div class="sl">Grand Final</div>
     ${seriesCard(gf, true)}`;
+}
+
+// ===========================
+// HOME PAGE
+// ===========================
+function hpToggle(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var open = el.classList.toggle('open');
+  var btn = document.getElementById('btn-' + id);
+  if (btn) btn.textContent = open ? 'Show Less ▲' : 'Read More ▼';
+}
+
+function renderHome() {
+  var el = document.getElementById('home-content');
+  if (!el) return;
+
+  function tc(t) { return (TEAMS[t] && TEAMS[t].color) ? TEAMS[t].color : '#ffaa00'; }
+
+  function gimg(n) {
+    return '<img src="./Gallery/' + n + '.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center" '
+      + 'onerror="if(!this._e){this._e=1;this.src=\'./Gallery/' + n + '.jpeg\';}else if(this._e==1){this._e=2;this.src=\'./Gallery/' + n + '.png\';}else{this.style.display=\'none\';}" alt="">';
+  }
+
+  function tlogo(team, w, h) {
+    return '<img src="./team_logo/' + team + '.jpeg" style="width:' + w + 'px;height:' + h + 'px;object-fit:contain" '
+      + 'onerror="if(!this._e){this._e=1;this.src=\'./team_logo/' + team + '.png\';}else{this.style.display=\'none\';}" alt="' + team + '">';
+  }
+
+  function getSum(g) {
+    var key = g.game + '-' + g.home;
+    return (typeof GAME_SUMMARIES !== 'undefined' && GAME_SUMMARIES[key]) ? GAME_SUMMARIES[key] : null;
+  }
+
+  var medals = ['🥇','🥈','🥉'];
+
+  function scorerRows(topArr) {
+    if (!topArr || !topArr.length) return '';
+    var h = '<div class="hp-sclist">';
+    topArr.forEach(function(s, i) {
+      var sc = tc(s.team);
+      h += '<div class="hp-scrow">'
+        + '<span style="font-size:16px">' + (medals[i] || '▸') + '</span>'
+        + '<img src="' + playerImgSrc(s.name) + '" class="hp-scimg" style="border-color:' + sc + '" onerror="this.style.display=\'none\'" alt="">'
+        + '<span class="hp-scname" style="color:' + sc + '" onclick="openProfile(\'' + s.name + '\')">' + s.name + '</span>'
+        + '<span class="hp-scpts" style="color:' + sc + '">' + s.pts + ' PTS</span>'
+        + '</div>';
+    });
+    return h + '</div>';
+  }
+
+  var done = GAME_DATA.filter(function(g){ return g.status === 'done'; })
+                      .sort(function(a,b){ return b.id - a.id; });
+  var latest  = done[0];
+  var sidebar = done.slice(1, 5);
+  var older   = done.slice(5, 11);
+
+  function featCard(g) {
+    if (!g) return '';
+    var hWin = g.homeScore > g.awayScore, aWin = g.awayScore > g.homeScore;
+    var winner = hWin ? g.home : aWin ? g.away : null;
+    var loser  = winner === g.home ? g.away : g.home;
+    var wc = winner ? tc(winner) : '#888';
+    var m  = Math.abs(g.homeScore - g.awayScore);
+    var hc = tc(g.home), ac = tc(g.away);
+    var imgN = (g.id % 10) + 1;
+    var sum  = getSum(g);
+    var topArr = sum ? sum.topScorers : [];
+    var uid = 'feat' + g.id;
+    var intensity = m <= 4 ? 'nail-biting' : m <= 10 ? 'competitive' : 'commanding';
+    var snip = winner
+      ? winner + ' won Game ' + g.game + ' against ' + loser + ' by ' + m + ' points in a ' + intensity + ' contest.'
+      : 'Game ' + g.game + ' finished level — ' + g.home + ' ' + g.homeScore + ' vs ' + g.away + ' ' + g.awayScore + '.';
+    var hl = winner
+      ? winner + ' ' + (m<=4?'Edge':'Beat') + ' ' + loser + ' in Game ' + g.game
+      : g.home + ' and ' + g.away + ' Draw — Game ' + g.game;
+    var body = '<p>' + snip + '</p>';
+    if (winner) body += '<p>' + winner + ' controlled key phases and executed when it mattered most. A result with significant implications for the playoff picture.</p>';
+    body += scorerRows(topArr);
+    body += '<button class="hp-navlink" onclick="showView(\'results\')">→ View All Game Results</button>';
+    return '<div class="hp-card">'
+      + '<div class="hp-feat-img">🏀' + gimg(imgN)
+      + '<div class="hp-feat-sbar">'
+      + '<div class="hp-feat-team">' + tlogo(g.home,52,32) + '<span class="hp-feat-tn" style="color:' + hc + '">' + g.home + '</span></div>'
+      + '<div style="display:flex;align-items:center;gap:9px">'
+      + '<span class="hp-feat-sc ' + (hWin?'win':'') + '" style="color:' + (hWin?hc:'rgba(255,255,255,0.5)') + '">' + g.homeScore + '</span>'
+      + '<span class="hp-feat-dash">—</span>'
+      + '<span class="hp-feat-sc ' + (aWin?'win':'') + '" style="color:' + (aWin?ac:'rgba(255,255,255,0.5)') + '">' + g.awayScore + '</span>'
+      + '</div>'
+      + '<div class="hp-feat-team">' + tlogo(g.away,52,32) + '<span class="hp-feat-tn" style="color:' + ac + '">' + g.away + '</span></div>'
+      + '</div></div>'
+      + '<div class="hp-cbody">'
+      + '<div class="hp-ctag" style="color:' + wc + '">🔴 LATEST RESULT — GAME ' + g.game + '</div>'
+      + '<div class="hp-chl">' + hl + '</div>'
+      + '<div class="hp-csnip">' + snip + '</div>'
+      + '<div class="hp-full" id="' + uid + '">' + body + '</div>'
+      + '<div class="hp-cfoot"><span class="hp-date">' + g.date + '</span>'
+      + '<button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button>'
+      + '</div></div></div>';
+  }
+
+  function smCard(g) {
+    var winner = g.homeScore>g.awayScore ? g.home : g.homeScore<g.awayScore ? g.away : null;
+    var loser  = winner===g.home ? g.away : g.home;
+    var wc = winner ? tc(winner) : '#888';
+    var m  = Math.abs(g.homeScore - g.awayScore);
+    var uid = 'sm' + g.id;
+    var sum = getSum(g);
+    var topArr = sum ? sum.topScorers : [];
+    var detail = '<p>' + (winner
+      ? winner + ' secured a ' + m + '-point win over ' + loser + ' in Game ' + g.game + '. A result with significant playoff implications.'
+      : 'Game ' + g.game + ' ended in a draw between ' + g.home + ' and ' + g.away + '.') + '</p>';
+    if (topArr.length) {
+      topArr.forEach(function(s, i) {
+        var sc = tc(s.team);
+        detail += '<div style="font-size:14px;color:#c8a96e;padding:3px 0">'
+          + medals[i] + ' <span style="color:' + sc + ';font-weight:700;cursor:pointer;font-family:\'Barlow Condensed\';font-size:15px" onclick="openProfile(\'' + s.name + '\')">' + s.name + '</span> — ' + s.pts + ' pts</div>';
+      });
+    }
+    detail += '<button class="hp-navlink" style="font-size:13px;padding:7px 13px;margin-top:7px" onclick="showView(\'results\')">→ Results</button>';
+    return '<div class="hp-sm">'
+      + '<div class="hp-smtag" style="color:' + wc + '">GAME ' + g.game + ' · ' + g.date + '</div>'
+      + '<div class="hp-smhl">' + (winner ? winner + ' beat ' + loser : g.home + ' vs ' + g.away) + '</div>'
+      + '<div class="hp-smsc" style="color:' + wc + '">' + g.homeScore + ' – ' + g.awayScore + '</div>'
+      + '<div class="hp-smfull" id="' + uid + '">' + detail + '</div>'
+      + '<div class="hp-smfoot"><span></span><button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button></div>'
+      + '</div>';
+  }
+
+  function olderCard(g) {
+    var winner = g.homeScore>g.awayScore ? g.home : g.homeScore<g.awayScore ? g.away : null;
+    var loser  = winner===g.home ? g.away : g.home;
+    var wc = winner ? tc(winner) : '#888';
+    var m  = Math.abs(g.homeScore - g.awayScore);
+    var uid = 'oc' + g.id;
+    var imgN = (g.id % 10) + 1;
+    var sum = getSum(g);
+    var topArr = sum ? sum.topScorers : [];
+    var snip = winner ? winner + ' won by ' + m + ' in Game ' + g.game + '.' : 'Draw in Game ' + g.game + '.';
+    var body = '<p>' + (winner
+      ? winner + ' claimed victory over ' + loser + ' ' + g.homeScore + '–' + g.awayScore + ' in Game ' + g.game + ' on ' + g.date + '. The ' + m + '-point margin reflected a ' + (m<=5?'tight':m<=12?'competitive':'decisive') + ' performance.'
+      : 'A well-contested draw between ' + g.home + ' and ' + g.away + ' in Game ' + g.game + ' on ' + g.date + '.') + '</p>';
+    body += scorerRows(topArr);
+    body += '<button class="hp-navlink" style="font-size:13px;padding:7px 13px;margin-top:7px" onclick="showView(\'results\')">→ Full Results</button>';
+    return '<div class="hp-nc">'
+      + '<div class="hp-ncthumb"><span>' + (winner?'🏆':'🏀') + '</span>' + gimg(imgN) + '</div>'
+      + '<div class="hp-ncbody">'
+      + '<div class="hp-nctag" style="color:' + wc + '">📋 GAME ' + g.game + ' RECAP</div>'
+      + '<div class="hp-nchl">' + (winner ? winner+' '+(m<=5?'edge':'beat')+' '+loser+' '+g.homeScore+'–'+g.awayScore : g.home+' '+g.homeScore+'–'+g.awayScore+' '+g.away) + '</div>'
+      + '<div class="hp-ncsnip">' + snip + '</div>'
+      + '<div class="hp-full" id="' + uid + '">' + body + '</div>'
+      + '<div class="hp-ncfoot"><span class="hp-date">' + g.date + '</span>'
+      + '<button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button>'
+      + '</div></div></div>';
+  }
+
+  var NEWS = [
+    { id:'po', img:1, color:'#ffd700', icon:'📣', tag:'LEAGUE ANNOUNCEMENT', date:'Apr 20, 2026',
+      hl:'Playoffs Confirmed — NBA-Style Bracket Set',
+      snip:'Top 4 teams advance. #1 &amp; #2 seeds are twice to beat. Grand Final is one winner-take-all game.',
+      body:'<p>The Canberra Hoops 2026 Summer Cup Playoffs are officially confirmed. Two Semi-Finals are played as Best-of-3 series. The #1 and #2 seeds hold a <strong>twice-to-beat advantage</strong> — they only need one win while opponents need two.</p>'
+        + '<div class="hp-quote">"This format rewards regular season excellence while giving every team a genuine shot at glory." — Canberra Hoops Committee</div>'
+        + '<p><strong>SF1:</strong> #1 Titans (★ Twice to Beat) vs #4 The Guardians</p>'
+        + '<p><strong>SF2:</strong> #2 Phantoms (★ Twice to Beat) vs #3 Panthers</p>'
+        + '<p>The Grand Final is a single winner-take-all game. No seed advantage. Pure basketball decides the champion.</p>',
+      link:'playoffs', linkTxt:'View Full Bracket' },
+    { id:'mvp', img:2, color:'#ffaa00', icon:'🏆', tag:'AWARD WATCH', date:'Apr 19, 2026',
+      hl:'Leo vs Medel — The MVP Race Nobody Can Settle',
+      snip:'Leo leads all scorers all season. Medel\'s explosiveness is unmatched. The debate is too close to call.',
+      body:'<p><strong>Leo of the Phantoms</strong> has been the most consistent performer in the competition — his season-leading points total and ability to deliver in big moments make him the standout candidate.</p>'
+        + '<div class="hp-quote">"Every time we needed a basket, Leo found a way. That\'s what separates great players." — Phantoms</div>'
+        + '<p><strong>Medel of the Panthers</strong> counters with sheer explosiveness. His 18-point display against Titans in a near-comeback is one of the great individual performances of the season.</p>'
+        + '<p>The MVP is announced after the playoffs. Both players intend to make the decision impossible.</p>',
+      link:'players', linkTxt:'View Leaderboard' },
+    { id:'nelson', img:3, color:'#39ff14', icon:'🛡️', tag:'DEFENSIVE EXCELLENCE', date:'Apr 18, 2026',
+      hl:'Nelson Is the Steal King — Panthers\' Defensive Force',
+      snip:'Nelson\'s steal total leads the entire competition. His impact goes far beyond what the stat sheet shows.',
+      body:'<p><strong>Nelson of the Panthers</strong> has assembled one of the great defensive seasons in Canberra Hoops history. His steal numbers lead the competition — but statistics only tell part of the story.</p>'
+        + '<p>What makes Nelson remarkable is his anticipation. He reads passing lanes before they open, rotates into positions nobody expects, and converts turnovers into fast breaks at devastating speed.</p>'
+        + '<div class="hp-quote">"You cannot relax for a single second with Nelson on the floor. He is always watching, always waiting." — Opposing player</div>'
+        + '<p>As the playoffs begin, opposing teams will spend serious preparation time trying to neutralise him. Whether they succeed will be one of the key sub-plots of the post-season.</p>',
+      link:'profiles', linkTxt:'View Player Profiles' },
+    { id:'fletcher', img:4, color:'#39ff14', icon:'🔥', tag:'PLAYER SPOTLIGHT', date:'Apr 15, 2026',
+      hl:'Fletcher\'s 14 PPG in 3 Games Stuns the League',
+      snip:'The Guardians\' forward has the highest per-game average in the competition in just three appearances. A true playoff wildcard.',
+      body:'<p><strong>Fletcher of The Guardians</strong> holds the highest per-game average in the entire 2026 Summer Cup. When he is on the court, The Guardians become a completely different team.</p>'
+        + '<p>His most memorable performance — 20 points against Phantoms in a near-impossible comeback — showed a player who is simply unguardable when fully switched on.</p>'
+        + '<div class="hp-quote">"Fletcher is the wildcard nobody can prepare for. When he is on, he is on a completely different level." — League observer</div>'
+        + '<p>If he is fit for the playoffs against #1 seed Titans, the bracket could be turned on its head entirely.</p>',
+      link:'profiles', linkTxt:'View Player Profiles' },
+    { id:'titans', img:5, color:'#00d4ff', icon:'📈', tag:'SEASON REVIEW', date:'Apr 18, 2026',
+      hl:'Titans Finish #1 — How Early Dominance Secured the Top Seed',
+      snip:'Six wins from their first nine games. A record that survived a difficult final stretch to lock in the #1 seeding.',
+      body:'<p><strong>Titans</strong> sit atop the final standings as the #1 seed — built on an exceptional early-season run that no other team in the competition could match.</p>'
+        + '<p><strong>Arvin</strong> was devastating in the paint. <strong>Christian</strong> controlled the tempo brilliantly from point guard. <strong>Noel</strong> emerged as a scoring weapon off the bench. Together they dominated the first half of the season.</p>'
+        + '<div class="hp-quote">"We competed hard every night and stayed disciplined. That is why we are where we are now." — Titans</div>'
+        + '<p>A late-season wobble raised doubts — but the twice-to-beat advantage is secured. Now they must deliver in the playoffs after a dominant regular season performance.</p>',
+      link:'standings', linkTxt:'View Standings' },
+    { id:'upset', img:6, color:'#39ff14', icon:'💪', tag:'GIANT KILLING', date:'Apr 18, 2026',
+      hl:'Guardians Shock Titans — The Biggest Upset of the Season',
+      snip:'Bottom of the table. Seven losses from their last nine games. Nobody gave The Guardians a chance — and they won by 6.',
+      body:'<p>It was the result that sent shockwaves through the entire competition. <strong>The Guardians</strong> — sitting last in the table — defeated league-leading Titans by 6 points in one of the great upsets of the season.</p>'
+        + '<p><strong>Anton</strong> was exceptional throughout, providing the energy and key baskets that built the platform. <strong>Alvin</strong> managed the game intelligently under intense pressure. The defensive performance was extraordinary.</p>'
+        + '<div class="hp-quote">"We had nothing to lose and everything to gain. We played with that freedom and it worked perfectly." — The Guardians</div>'
+        + '<p>For The Guardians, this defines their season. As they face Titans again in the semi-finals, they carry the belief that absolutely anything is possible.</p>',
+      link:'results', linkTxt:'View Game Results' },
+  ];
+
+  function newsCard(n) {
+    var uid = 'nc' + n.id;
+    return '<div class="hp-nc">'
+      + '<div class="hp-ncthumb"><span>' + n.icon + '</span>' + gimg(n.img) + '</div>'
+      + '<div class="hp-ncbody">'
+      + '<div class="hp-nctag" style="color:' + n.color + '">' + n.tag + '</div>'
+      + '<div class="hp-nchl">' + n.hl + '</div>'
+      + '<div class="hp-ncsnip">' + n.snip + '</div>'
+      + '<div class="hp-full" id="' + uid + '">' + n.body
+      + (n.link ? '<button class="hp-navlink" onclick="showView(\'' + n.link + '\')" style="margin-top:10px">→ ' + n.linkTxt + '</button>' : '')
+      + '</div>'
+      + '<div class="hp-ncfoot"><span class="hp-date">' + n.date + '</span>'
+      + '<button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button>'
+      + '</div></div></div>';
+  }
+
+  function poSeed(seed, team) {
+    return '<div class="hp-pom">'
+      + '<span class="hp-posn" style="color:' + tc(team) + '">#' + seed + '</span>'
+      + tlogo(team, 34, 20)
+      + '<span class="hp-potn" style="color:' + tc(team) + '">' + team + '</span>'
+      + (seed<=2 ? '<span style="font-size:11px;color:var(--accent);font-family:\'Barlow Condensed\';letter-spacing:1px;font-weight:700">★</span>' : '')
+      + '</div>';
+  }
+
+  var tItems = [
+    '<div class="hp-ti">#1 <b>Titans</b> — 6W-3L · 12 pts</div>',
+    '<div class="hp-ti">#2 <b>Phantoms</b> — 5W-4L · 10 pts</div>',
+    '<div class="hp-ti">#3 <b>Panthers</b> — 5W-4L · 10 pts</div>',
+    '<div class="hp-ti">#4 <b>The Guardians</b> — 2W-7L · 4 pts</div>',
+    '<div class="hp-ti">🏆 <b>Playoffs!</b>  SF1: Titans vs Guardians  ·  SF2: Phantoms vs Panthers</div>',
+    '<div class="hp-ti">⭐ <b>Leo (Phantoms)</b> leads all scorers this season</div>',
+    '<div class="hp-ti">🔥 <b>Medel (Panthers)</b> — most explosive scorer in the league</div>',
+    '<div class="hp-ti">🛡 <b>Nelson (Panthers)</b> leads the league in steals</div>',
+    '<div class="hp-ti">🏀 <b>18 regular season games</b> completed · playoffs bracket live now</div>',
+  ];
+  var tickHTML = tItems.join('') + tItems.join('');
+
+  var h = '';
+  h += '<div class="hp-ticker"><div class="hp-tlbl">🔴 LIVE</div><div class="hp-ttrack"><div class="hp-tinner">' + tickHTML + '</div></div></div>';
+  h += '<div class="hp-hero"><div>' + featCard(latest) + '</div><div>' + sidebar.map(smCard).join('') + '</div></div>';
+  h += '<div class="hp-po" onclick="showView(\'playoffs\')" style="margin-bottom:22px">';
+  h += '<div class="hp-potitle">🏆 Playoffs Are Coming!</div>';
+  h += '<div class="hp-podesc">#1 Titans &amp; #2 Phantoms hold the <strong style="color:var(--accent)">twice-to-beat advantage</strong>. Grand Final is a single winner-take-all game. Click to view the full bracket.</div>';
+  h += '<div class="hp-poseeds">' + poSeed(1,'Titans') + '<span class="hp-podiv">vs</span>' + poSeed(4,'The Guardians') + '<span class="hp-podiv"> | </span>' + poSeed(2,'Phantoms') + '<span class="hp-podiv">vs</span>' + poSeed(3,'Panthers') + '</div></div>';
+  h += '<div class="hp-sl">📊 Final Standings</div><div class="hp-stwrap">';
+  var rcls=['r1','r2','r3','r4'];
+  PO_SEEDS.slice().sort(function(a,b){return a.seed-b.seed;}).forEach(function(r,i){
+    h += '<div class="hp-strow" onclick="showView(\'standings\')">'
+      + '<div class="hp-stn ' + (rcls[i]||'') + '">' + r.seed + '</div>'
+      + tlogo(r.team,44,27)
+      + '<div class="hp-stnm" style="color:' + tc(r.team) + '">' + r.team + '</div>'
+      + '<div class="hp-strec">' + r.w + 'W – ' + r.l + 'L</div>'
+      + '<div class="hp-stpts" style="color:' + tc(r.team) + '">' + r.pts + '</div>'
+      + '</div>';
+  });
+  h += '</div>';
+  h += '<div class="hp-sl">⭐ Season Scoring Leaders</div><div class="hp-tops">';
+  ALL_PLAYERS.slice().sort(function(a,b){return b.total_pts-a.total_pts;}).slice(0,5).forEach(function(p){
+    h += '<div class="hp-tsc" style="--tc:' + p.teamColor + '" onclick="openProfile(\'' + p.name + '\')">'
+      + '<img src="' + playerImgSrc(p.name) + '" class="hp-tscph" onerror="this.style.display=\'none\'" alt="">'
+      + '<div><div class="hp-tscst">' + p.total_pts + '</div><div class="hp-tscnm">' + p.name + '</div><div class="hp-tsctm">' + p.team + '</div></div>'
+      + '</div>';
+  });
+  h += '</div>';
+  if (older.length) {
+    h += '<div class="hp-sl">📰 Previous Game Reports</div><div class="hp-ngrid">' + older.map(olderCard).join('') + '</div>';
+  }
+  h += '<div class="hp-sl">🗞 League News &amp; Features</div><div class="hp-ngrid">' + NEWS.map(newsCard).join('') + '</div>';
+  el.innerHTML = h;
 }
 
   
