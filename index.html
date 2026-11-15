@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canberra Hoops Summer Cup 2026 Season 3</title>
+<title>Canberra Hoops Summer Cup 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
@@ -17,8 +17,8 @@
   --guardians: #39ff14;
   --panthers: #ffaa00;
   --gold: #ffd700; --silver: #c0c0c0; --bronze: #cd7f32;
-  --text: #f5e6cc;
-  --muted: #9a7a50;
+  --text: #f0ddb8;
+  --muted: #c8a96e;
   --accent: #ffaa00;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -418,98 +418,430 @@ tr:nth-child(3) .rk { color:var(--bronze); }
 /* FOOTER */
 footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,170,0,0.1); margin-top:10px; color:var(--muted); font-size:15px; letter-spacing:2px; font-family:'Barlow Condensed',sans-serif; }
 
-/* GAME RESULTS — side-by-side layout */
-.gr-row {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:13px; margin-bottom:16px; align-items:stretch;
+/* GAME RESULTS */
+.results-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:14px; margin-bottom:22px; }
+.result-card {
+  background:var(--card); border:1px solid var(--card-b); border-radius:14px;
+  padding:18px 20px; backdrop-filter:blur(8px); transition:transform 0.25s;
 }
-@media(max-width:760px){ .gr-row { grid-template-columns:1fr; } }
+.result-card:hover { transform:translateY(-3px); }
+.result-game-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:3px; color:var(--muted); text-transform:uppercase; margin-bottom:14px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.result-matchup { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.result-team { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; min-width:0; }
+.result-team-logo { width:72px; height:40px; object-fit:contain; filter:drop-shadow(0 0 6px rgba(255,170,0,0.3)); }
+.result-team-name { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:800; color:var(--text); text-align:center; }
+.result-score-box { display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; }
+.result-score { font-family:'Bebas Neue',sans-serif; font-size:42px; line-height:1; }
+.result-score.win  { color:#39ff14; text-shadow:0 0 16px rgba(57,255,20,0.5); }
+.result-score.loss { color:var(--muted); }
+.result-vs { font-family:'Barlow Condensed',sans-serif; font-size:13px; color:var(--muted); letter-spacing:2px; }
+.result-divider { width:2px; height:50px; background:rgba(255,170,0,0.15); flex-shrink:0; border-radius:2px; }
+.result-winner-banner {
+  margin-top:12px; padding:6px 12px; border-radius:6px;
+  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px;
+  text-align:center; text-transform:uppercase;
+  background:rgba(57,255,20,0.08); border:1px solid rgba(57,255,20,0.2); color:#39ff14;
+}
 
-.gr-score-card {
-  background:var(--card); border:1px solid var(--card-b);
-  border-radius:14px; padding:18px; backdrop-filter:blur(8px);
-  display:flex; flex-direction:column; gap:14px;
+/* SCHEDULE */
+.schedule-legend { display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+.sleg-item { display:flex; align-items:center; gap:7px; font-family:'Barlow Condensed',sans-serif; font-size:14px; color:var(--muted); }
+.sleg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.schedule-table-wrap { background:var(--card); border:1px solid var(--card-b); border-radius:14px; overflow:hidden; margin-bottom:18px; backdrop-filter:blur(8px); }
+.sch-row {
+  display:grid; grid-template-columns:60px 1fr 80px 1fr 110px;
+  align-items:center; gap:10px; padding:14px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s;
 }
-.gr-header {
-  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+.sch-row:last-child { border-bottom:none; }
+.sch-row:hover { background:rgba(255,255,255,0.025); }
+.sch-row.header { background:rgba(255,170,0,0.05); border-bottom:1px solid rgba(255,170,0,0.12); padding:10px 20px; }
+.sch-game { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--accent); text-align:center; }
+.sch-team { display:flex; align-items:center; gap:8px; }
+.sch-team-name { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; }
+.sch-vs { font-family:'Barlow Condensed',sans-serif; font-size:13px; color:var(--muted); letter-spacing:2px; text-align:center; }
+.sch-status {
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:2px; text-align:center; padding:4px 10px; border-radius:20px;
+  text-transform:uppercase;
 }
-.gr-game-num {
-  font-family:'Bebas Neue',sans-serif; font-size:19px;
-  letter-spacing:2px; color:var(--accent);
-}
-.gr-date {
-  font-family:'Barlow Condensed',sans-serif; font-size:13px;
-  color:var(--muted); letter-spacing:1px; margin-right:auto;
-}
-.gr-winner-pill {
-  font-family:'Barlow Condensed',sans-serif; font-size:11px;
-  font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
-  padding:3px 10px; border-radius:20px; border:1px solid transparent;
-  flex-shrink:0;
-}
-.gr-matchup {
-  display:flex; align-items:center; justify-content:space-between; gap:6px;
-  flex:1;
-}
-.gr-team {
-  display:flex; align-items:center; gap:7px; flex:1;
-  transition:opacity 0.25s;
-}
-.gr-team-right { flex-direction:row-reverse; }
-.gr-loss { opacity:0.42; }
-.gr-logo {
-  width:52px; height:32px; object-fit:contain; flex-shrink:0;
-}
-.gr-tname {
-  font-family:'Barlow Condensed',sans-serif; font-size:14px;
-  font-weight:800; line-height:1.2;
-}
-.gr-scores {
-  display:flex; align-items:center; gap:6px; flex-shrink:0; padding:0 4px;
-}
-.gr-score {
-  font-family:'Bebas Neue',sans-serif; font-size:36px; line-height:1;
-  color:var(--muted); min-width:32px; text-align:center;
-}
-.gr-score-win { text-shadow:0 0 14px currentColor; }
-.gr-dash { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--muted); }
+.sch-status.done { background:rgba(57,255,20,0.1); color:#39ff14; border:1px solid rgba(57,255,20,0.25); }
+.sch-status.upcoming { background:rgba(255,170,0,0.1); color:var(--accent); border:1px solid rgba(255,170,0,0.25); }
+.sch-hdr-cell { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:var(--muted); text-transform:uppercase; }
 
-.gr-summary-card {
-  background:var(--card); border:1px solid var(--card-b);
-  border-radius:14px; padding:18px; backdrop-filter:blur(8px);
-  display:flex; flex-direction:column; gap:12px;
+/* STANDINGS */
+.standings-wrap { background:var(--card); border:1px solid var(--card-b); border-radius:14px; overflow:hidden; margin-bottom:18px; backdrop-filter:blur(8px); }
+.st-row {
+  display:grid; grid-template-columns:44px 1fr 60px 60px 60px 60px 80px;
+  align-items:center; gap:8px; padding:13px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s;
 }
-.gr-sum-title {
-  font-family:'Barlow Condensed',sans-serif; font-size:13px;
-  font-weight:700; letter-spacing:3px; text-transform:uppercase;
-  color:var(--accent); flex-shrink:0;
+.st-row:last-child { border-bottom:none; }
+.st-row:hover { background:rgba(255,255,255,0.025); }
+.st-row.header { background:rgba(255,170,0,0.06); border-bottom:1px solid rgba(255,170,0,0.12); padding:10px 20px; }
+.st-rank { font-family:'Bebas Neue',sans-serif; font-size:22px; text-align:center; }
+.st-rank.r1 { color:var(--gold); text-shadow:0 0 12px rgba(255,215,0,0.5); }
+.st-rank.r2 { color:var(--silver); }
+.st-rank.r3 { color:var(--bronze); }
+.st-rank.r4 { color:var(--muted); }
+.st-team { display:flex; align-items:center; gap:10px; }
+.st-team-name { font-family:'Barlow Condensed',sans-serif; font-size:17px; font-weight:800; }
+.st-val { font-family:'Bebas Neue',sans-serif; font-size:18px; text-align:center; color:var(--text); }
+.st-pct { font-family:'Bebas Neue',sans-serif; font-size:18px; text-align:center; color:var(--accent); }
+.st-hdr { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; color:var(--muted); text-transform:uppercase; text-align:center; }
+.st-hdr.left { text-align:left; }
+.gb-bar-wrap { width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; }
+.gb-bar { height:6px; border-radius:3px; transition:width 0.8s ease; }
+
+/* GALLERY */
+.gallery-controls {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:12px; margin-bottom:18px;
 }
-.gr-sum-note {
-  font-size:14px; color:var(--muted); line-height:1.75; margin:0;
-  font-style:italic; flex:1;
+.gallery-search {
+  font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:600;
+  padding:9px 16px; border-radius:8px; border:1px solid rgba(255,170,0,0.2);
+  background:rgba(255,170,0,0.04); color:var(--text); width:220px; transition:border-color 0.2s;
 }
-.gr-sum-scorers {
-  display:flex; flex-direction:column; gap:6px; flex-shrink:0;
+.gallery-search:focus { outline:none; border-color:var(--accent); }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:10px;
+  margin-bottom:20px;
 }
-.gr-scorer {
-  display:flex; align-items:center; gap:8px; padding:6px 9px;
-  background:rgba(255,255,255,0.03); border-radius:7px;
-  border:1px solid rgba(255,255,255,0.05);
+.gallery-item {
+  position:relative; overflow:hidden; border-radius:10px;
+  border:1px solid var(--card-b); cursor:pointer;
+  aspect-ratio:4/3;
+  background:#1a0e00;
+  transition:transform 0.28s, border-color 0.28s, box-shadow 0.28s;
 }
-.gr-medal { font-size:14px; flex-shrink:0; }
-.gr-scorer-img {
-  width:27px; height:27px; border-radius:50%;
-  object-fit:cover; object-position:top;
-  border:1.5px solid; flex-shrink:0; background:#1a0e00;
+.gallery-item:hover {
+  transform:scale(1.03);
+  border-color:rgba(255,170,0,0.5);
+  box-shadow:0 8px 28px rgba(0,0,0,0.6), 0 0 18px rgba(255,170,0,0.15);
+  z-index:2;
 }
-.gr-scorer-name {
-  font-family:'Barlow Condensed',sans-serif; font-size:15px;
-  font-weight:700; flex:1; cursor:pointer; transition:opacity 0.2s;
+.gallery-img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform 0.4s;
 }
-.gr-scorer-name:hover { opacity:0.7; }
-.gr-scorer-pts {
-  font-family:'Bebas Neue',sans-serif; font-size:17px; flex-shrink:0;
+.gallery-item:hover .gallery-img { transform:scale(1.07); }
+.gallery-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+  opacity:0; transition:opacity 0.28s;
+  display:flex; align-items:flex-end; padding:10px 12px;
 }
+.gallery-item:hover .gallery-overlay { opacity:1; }
+.gallery-num {
+  font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--accent);
+  letter-spacing:1px;
+}
+
+/* LIGHTBOX */
+#gallery-lightbox {
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(0,0,0,0.96); backdrop-filter:blur(8px);
+  align-items:center; justify-content:center; flex-direction:column;
+}
+#gallery-lightbox.open { display:flex; }
+.lb-img-wrap { position:relative; max-width:92vw; max-height:82vh; display:flex; align-items:center; justify-content:center; }
+.lb-img { max-width:92vw; max-height:82vh; object-fit:contain; border-radius:8px; display:block; box-shadow:0 20px 60px rgba(0,0,0,0.8); }
+.lb-caption { font-family:'Barlow Condensed',sans-serif; font-size:16px; color:var(--muted); letter-spacing:2px; margin-top:14px; text-align:center; }
+.lb-nav {
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:44px; height:44px; border-radius:50%;
+  border:1px solid rgba(255,170,0,0.35); background:rgba(0,0,0,0.7);
+  color:var(--accent); font-size:20px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s; backdrop-filter:blur(4px);
+}
+.lb-nav:hover { background:rgba(255,170,0,0.2); border-color:var(--accent); }
+.lb-prev { left:-56px; }
+.lb-next { right:-56px; }
+@media(max-width:700px){ .lb-prev{left:-2px} .lb-next{right:-2px} }
+.lb-close {
+  position:fixed; top:18px; right:22px;
+  width:40px; height:40px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.6);
+  color:#fff; font-size:20px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s; z-index:10;
+}
+.lb-close:hover { background:rgba(255,50,50,0.3); border-color:rgba(255,50,50,0.6); }
+.lb-counter { position:fixed; top:22px; left:22px; font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--muted); letter-spacing:2px; }
+
+/* PLAYER PROFILES LIST */
+/* PLAYER PROFILES LIST */
+.prof-filter-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px; }
+.prof-fbtn {
+  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; padding:6px 16px;
+  border-radius:20px; border:1px solid rgba(255,255,255,0.1);
+  background:transparent; color:var(--muted); cursor:pointer; transition:all 0.2s;
+}
+.prof-fbtn:hover { color:var(--text); }
+.prof-fbtn.active { background:rgba(255,170,0,0.12); border-color:var(--accent); color:var(--accent); }
+.prof-fbtn[data-pft="Titans"].active       { background:rgba(0,212,255,0.1);  border-color:var(--titans);    color:var(--titans); }
+.prof-fbtn[data-pft="Phantoms"].active     { background:rgba(255,45,107,0.1); border-color:var(--phantoms);  color:var(--phantoms); }
+.prof-fbtn[data-pft="The Guardians"].active{ background:rgba(57,255,20,0.1);  border-color:var(--guardians); color:var(--guardians); }
+.prof-fbtn[data-pft="Panthers"].active     { background:rgba(255,170,0,0.1);  border-color:var(--panthers);  color:var(--panthers); }
+
+.prof-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:16px; }
+.prof-card {
+  background:var(--card); border:1px solid var(--card-b); border-radius:16px;
+  overflow:hidden; cursor:pointer; transition:all 0.3s; position:relative;
+  backdrop-filter:blur(8px);
+}
+.prof-card:hover { transform:translateY(-6px); border-color:var(--tc); box-shadow:0 12px 32px rgba(0,0,0,0.5), 0 0 20px color-mix(in srgb,var(--tc) 20%,transparent); }
+.prof-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--tc); box-shadow:0 0 10px var(--tc); }
+.prof-card-img { width:100%; aspect-ratio:1; object-fit:cover; object-position:top center; display:block; background:#1a0e00; transition:transform 0.4s; }
+.prof-card:hover .prof-card-img { transform:scale(1.05); }
+.prof-card-img-ph { width:100%; aspect-ratio:1; background:linear-gradient(160deg,#1a0e00,#0a0500); display:flex; align-items:center; justify-content:center; font-size:48px; }
+.prof-card-body { padding:12px 14px 14px; }
+.prof-card-name { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--tc); letter-spacing:1px; line-height:1; margin-bottom:3px; }
+.prof-card-meta { font-family:'Barlow Condensed',sans-serif; font-size:13px; color:var(--muted); letter-spacing:1px; display:flex; justify-content:space-between; }
+.prof-card-overlay {
+  position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 30%, transparent 70%);
+  display:flex; flex-direction:column; justify-content:flex-end; padding:12px;
+  opacity:0; transition:opacity 0.3s;
+}
+.prof-card:hover .prof-card-overlay { opacity:1; }
+.prof-card-overlay-txt { font-family:'Barlow Condensed',sans-serif; font-size:13px; color:rgba(255,255,255,0.8); letter-spacing:1px; }
+
+/* PLAYER DETAIL PAGE */
+.pd-back {
+  display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+  font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; color:var(--muted);
+  padding:8px 0; margin-bottom:20px; transition:color 0.2s; border:none; background:none;
+}
+.pd-back:hover { color:var(--accent); }
+
+.pd-hero {
+  background:var(--card); border:1px solid var(--card-b); border-radius:18px;
+  overflow:hidden; margin-bottom:18px; backdrop-filter:blur(8px);
+  display:grid; grid-template-columns:280px 1fr; min-height:320px;
+}
+@media(max-width:700px){ .pd-hero { grid-template-columns:1fr; } }
+
+.pd-hero-img-wrap { position:relative; overflow:hidden; background:#1a0e00; }
+.pd-hero-img {
+  width:100%; height:100%; object-fit:cover; object-position:top center;
+  display:block; min-height:280px;
+}
+.pd-hero-img-ph { width:100%; min-height:280px; display:flex; align-items:center; justify-content:center; font-size:80px; background:linear-gradient(160deg,#1a0e00,#0a0500); }
+.pd-hero-img-overlay { position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--card)); pointer-events:none; }
+
+.pd-hero-info { padding:28px 30px; display:flex; flex-direction:column; gap:16px; }
+.pd-hero-team-logo { height:44px; width:auto; max-width:130px; object-fit:contain; filter:drop-shadow(0 0 8px var(--tc)); }
+.pd-hero-name { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,58px); letter-spacing:3px; color:var(--tc); line-height:1; text-shadow:0 0 24px color-mix(in srgb,var(--tc) 40%,transparent); }
+.pd-hero-sub { font-family:'Barlow Condensed',sans-serif; font-size:18px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; }
+
+.pd-badges { display:flex; gap:8px; flex-wrap:wrap; }
+.pd-badge {
+  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; padding:5px 14px;
+  border-radius:20px; border:1px solid var(--tc); color:var(--tc);
+  background:color-mix(in srgb,var(--tc) 10%,transparent);
+}
+
+.pd-stats-row { display:flex; gap:10px; flex-wrap:wrap; }
+.pd-stat-box { flex:1; min-width:70px; text-align:center; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:10px 8px; }
+.pd-stat-v { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--tc); display:block; line-height:1; }
+.pd-stat-l { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; margin-top:3px; }
+
+.pd-section { background:var(--card); border:1px solid var(--card-b); border-radius:14px; padding:22px 24px; margin-bottom:16px; backdrop-filter:blur(8px); }
+.pd-section-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.pd-section-title::after { content:''; flex:1; height:1px; background:rgba(255,170,0,0.12); }
+.pd-scouting { font-size:16px; color:var(--text); line-height:1.85; }
+.pd-scouting .sent { display:block; padding:8px 0 8px 16px; border-left:2px solid rgba(255,170,0,0.2); margin-bottom:6px; transition:border-color 0.2s; }
+.pd-scouting .sent:hover { border-left-color:var(--accent); }
+
+.pd-game-log { width:100%; border-collapse:collapse; }
+.pd-game-log th { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; color:var(--muted); text-transform:uppercase; padding:10px 12px; border-bottom:1px solid rgba(255,170,0,0.1); text-align:center; }
+.pd-game-log td { font-family:'Bebas Neue',sans-serif; font-size:17px; padding:11px 12px; text-align:center; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text); }
+.pd-game-log tr:last-child td { border-bottom:none; }
+.pd-game-log tr:hover td { background:rgba(255,255,255,0.025); }
+.pd-game-log td.gl-pts { color:var(--tc); font-size:20px; }
+.pd-game-log td.gl-opp { font-family:'Barlow Condensed',sans-serif; font-size:14px; color:var(--muted); }
+
+.pd-highlights-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+.pd-hl-add-form { background:rgba(255,170,0,0.04); border:1px dashed rgba(255,170,0,0.25); border-radius:12px; padding:16px; margin-bottom:14px; }
+.pd-hl-add-title { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:700; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:10px; }
+.pd-hl-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.pd-hl-input { flex:1; min-width:180px; }
+.pd-hl-save { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:9px 20px; background:rgba(255,170,0,0.12); color:var(--accent); border:1px solid rgba(255,170,0,0.3); border-radius:8px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.pd-hl-save:hover { background:rgba(255,170,0,0.25); }
+.pd-hl-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; overflow:hidden; transition:transform 0.25s; }
+.pd-hl-card:hover { transform:translateY(-3px); border-color:rgba(255,170,0,0.25); }
+.pd-hl-thumb { width:100%; aspect-ratio:16/9; object-fit:cover; background:#1a0e00; display:block; }
+.pd-hl-thumb-ph { width:100%; aspect-ratio:16/9; background:linear-gradient(135deg,#1a0e00,#0a0500); display:flex; align-items:center; justify-content:center; font-size:36px; }
+.pd-hl-body { padding:12px 14px; }
+.pd-hl-t { font-family:'Barlow Condensed',sans-serif; font-size:17px; font-weight:800; color:var(--text); margin-bottom:4px; }
+.pd-hl-d { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:8px; }
+.pd-hl-link { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:var(--accent); text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
+.pd-hl-link:hover { opacity:0.75; }
+
+/* FOOTER */
+footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,170,0,0.1); margin-top:10px; color:var(--muted); font-size:15px; letter-spacing:2px; font-family:'Barlow Condensed',sans-serif; }
+
+/* GAME RESULTS */
+.results-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:14px; margin-bottom:22px; }
+.result-card {
+  background:var(--card); border:1px solid var(--card-b); border-radius:14px;
+  padding:18px 20px; backdrop-filter:blur(8px); transition:transform 0.25s;
+}
+.result-card:hover { transform:translateY(-3px); }
+.result-game-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:3px; color:var(--muted); text-transform:uppercase; margin-bottom:14px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.result-matchup { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.result-team { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; min-width:0; }
+.result-team-logo { width:72px; height:40px; object-fit:contain; filter:drop-shadow(0 0 6px rgba(255,170,0,0.3)); }
+.result-team-name { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:800; color:var(--text); text-align:center; }
+.result-score-box { display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; }
+.result-score { font-family:'Bebas Neue',sans-serif; font-size:42px; line-height:1; }
+.result-score.win  { color:#39ff14; text-shadow:0 0 16px rgba(57,255,20,0.5); }
+.result-score.loss { color:var(--muted); }
+.result-vs { font-family:'Barlow Condensed',sans-serif; font-size:13px; color:var(--muted); letter-spacing:2px; }
+.result-divider { width:2px; height:50px; background:rgba(255,170,0,0.15); flex-shrink:0; border-radius:2px; }
+.result-winner-banner {
+  margin-top:12px; padding:6px 12px; border-radius:6px;
+  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px;
+  text-align:center; text-transform:uppercase;
+  background:rgba(57,255,20,0.08); border:1px solid rgba(57,255,20,0.2); color:#39ff14;
+}
+
+/* SCHEDULE */
+.schedule-legend { display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+.sleg-item { display:flex; align-items:center; gap:7px; font-family:'Barlow Condensed',sans-serif; font-size:14px; color:var(--muted); }
+.sleg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.schedule-table-wrap { background:var(--card); border:1px solid var(--card-b); border-radius:14px; overflow:hidden; margin-bottom:18px; backdrop-filter:blur(8px); }
+.sch-row {
+  display:grid; grid-template-columns:60px 1fr 80px 1fr 110px;
+  align-items:center; gap:10px; padding:14px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s;
+}
+.sch-row:last-child { border-bottom:none; }
+.sch-row:hover { background:rgba(255,255,255,0.025); }
+.sch-row.header { background:rgba(255,170,0,0.05); border-bottom:1px solid rgba(255,170,0,0.12); padding:10px 20px; }
+.sch-game { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--accent); text-align:center; }
+.sch-team { display:flex; align-items:center; gap:8px; }
+.sch-team-name { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; }
+.sch-vs { font-family:'Barlow Condensed',sans-serif; font-size:13px; color:var(--muted); letter-spacing:2px; text-align:center; }
+.sch-status {
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:2px; text-align:center; padding:4px 10px; border-radius:20px;
+  text-transform:uppercase;
+}
+.sch-status.done { background:rgba(57,255,20,0.1); color:#39ff14; border:1px solid rgba(57,255,20,0.25); }
+.sch-status.upcoming { background:rgba(255,170,0,0.1); color:var(--accent); border:1px solid rgba(255,170,0,0.25); }
+.sch-hdr-cell { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:var(--muted); text-transform:uppercase; }
+
+/* STANDINGS */
+.standings-wrap { background:var(--card); border:1px solid var(--card-b); border-radius:14px; overflow:hidden; margin-bottom:18px; backdrop-filter:blur(8px); }
+.st-row {
+  display:grid; grid-template-columns:44px 1fr 60px 60px 60px 60px 80px;
+  align-items:center; gap:8px; padding:13px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s;
+}
+.st-row:last-child { border-bottom:none; }
+.st-row:hover { background:rgba(255,255,255,0.025); }
+.st-row.header { background:rgba(255,170,0,0.06); border-bottom:1px solid rgba(255,170,0,0.12); padding:10px 20px; }
+.st-rank { font-family:'Bebas Neue',sans-serif; font-size:22px; text-align:center; }
+.st-rank.r1 { color:var(--gold); text-shadow:0 0 12px rgba(255,215,0,0.5); }
+.st-rank.r2 { color:var(--silver); }
+.st-rank.r3 { color:var(--bronze); }
+.st-rank.r4 { color:var(--muted); }
+.st-team { display:flex; align-items:center; gap:10px; }
+.st-team-name { font-family:'Barlow Condensed',sans-serif; font-size:17px; font-weight:800; }
+.st-val { font-family:'Bebas Neue',sans-serif; font-size:18px; text-align:center; color:var(--text); }
+.st-pct { font-family:'Bebas Neue',sans-serif; font-size:18px; text-align:center; color:var(--accent); }
+.st-hdr { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; color:var(--muted); text-transform:uppercase; text-align:center; }
+.st-hdr.left { text-align:left; }
+.gb-bar-wrap { width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; }
+.gb-bar { height:6px; border-radius:3px; transition:width 0.8s ease; }
+
+/* HIGHLIGHTS */
+.highlights-intro {
+  background:var(--card); border:1px solid var(--card-b); border-radius:14px;
+  padding:32px; text-align:center; backdrop-filter:blur(8px); margin-bottom:20px;
+}
+.hl-icon { font-size:56px; margin-bottom:16px; display:block; }
+.hl-title { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--accent); letter-spacing:3px; margin-bottom:10px; }
+.hl-body { font-family:'Barlow Condensed',sans-serif; font-size:17px; color:var(--muted); line-height:1.8; max-width:560px; margin:0 auto 24px; }
+.hl-add-btn {
+  font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:800;
+  letter-spacing:3px; text-transform:uppercase; padding:12px 32px;
+  background:linear-gradient(135deg,#ff8c00,#ffd700); color:#000;
+  border:none; border-radius:9px; cursor:pointer; transition:all 0.25s; display:inline-block;
+}
+.hl-add-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,170,0,0.35); }
+.hl-form-wrap { background:var(--card); border:1px solid rgba(255,170,0,0.2); border-radius:14px; padding:24px; margin-bottom:20px; display:none; backdrop-filter:blur(8px); }
+.hl-form-wrap.open { display:block; }
+.hl-form-title { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--accent); letter-spacing:2px; margin-bottom:16px; }
+.hl-form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.hl-input, .hl-select, .hl-textarea {
+  font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:600;
+  padding:10px 14px; border-radius:8px; border:1px solid rgba(255,170,0,0.2);
+  background:rgba(255,170,0,0.04); color:var(--text); width:100%;
+  transition:border-color 0.2s;
+}
+.hl-input:focus, .hl-select:focus, .hl-textarea:focus { outline:none; border-color:var(--accent); }
+.hl-select option { background:#1a0e00; }
+.hl-textarea { resize:vertical; min-height:80px; }
+.hl-submit {
+  font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:800;
+  letter-spacing:2px; text-transform:uppercase; padding:10px 28px;
+  background:rgba(255,170,0,0.12); color:var(--accent); border:1px solid rgba(255,170,0,0.35);
+  border-radius:8px; cursor:pointer; transition:all 0.25s; margin-top:8px;
+}
+.hl-submit:hover { background:rgba(255,170,0,0.25); }
+.hl-cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+.hl-card {
+  background:var(--card); border:1px solid var(--card-b); border-radius:14px;
+  overflow:hidden; backdrop-filter:blur(8px); transition:transform 0.25s;
+}
+.hl-card:hover { transform:translateY(-4px); border-color:rgba(255,170,0,0.3); }
+.hl-card-thumb {
+  width:100%; aspect-ratio:16/9; object-fit:cover; background:#100800;
+  display:block;
+}
+.hl-card-thumb-ph {
+  width:100%; aspect-ratio:16/9; background:linear-gradient(135deg,#1a0e00,#0a0500);
+  display:flex; align-items:center; justify-content:center; font-size:40px;
+}
+.hl-card-body { padding:14px 16px; }
+.hl-card-game { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:4px; }
+.hl-card-title { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:800; color:var(--text); margin-bottom:6px; line-height:1.3; }
+.hl-card-desc { font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:10px; }
+.hl-card-link {
+  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700;
+  letter-spacing:1px; color:var(--accent); text-decoration:none;
+  display:inline-flex; align-items:center; gap:5px; transition:opacity 0.2s;
+}
+.hl-card-link:hover { opacity:0.75; }
+.hl-card-teams { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+.hl-team-badge {
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:1px; padding:2px 9px; border-radius:20px; border:1px solid;
+}
+.hl-empty { text-align:center; padding:40px; color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:17px; letter-spacing:2px; }
+
+
+::-webkit-scrollbar { width:6px; height:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:rgba(255,170,0,0.22); border-radius:3px; }
+
 
 /* ─── PLAYOFFS ─────────────────────────────────── */
 .po-page { display:flex; flex-direction:column; gap:22px; }
@@ -1037,95 +1369,242 @@ footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,1
 ::-webkit-scrollbar { width:6px; height:6px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:rgba(255,170,0,0.22); border-radius:3px; }
-/* HOME */
-.hp-ticker{overflow:hidden;height:34px;display:flex;align-items:center;background:rgba(255,170,0,0.07);border:1px solid rgba(255,170,0,0.18);border-radius:8px;margin-bottom:18px}
-.hp-tlbl{background:var(--accent);color:#000;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:0 13px;height:100%;display:flex;align-items:center;flex-shrink:0}
+
+/* ═══════════════════════════════════════════════════════
+   READABILITY OVERRIDES — larger fonts, higher contrast
+═══════════════════════════════════════════════════════ */
+
+/* Body base */
+body { font-size:16px; }
+
+/* Nav buttons — already 18px, bump slightly */
+.nav-btn { font-size:17px !important; }
+
+/* Section labels (.sl) — was 14px */
+.sl { font-size:15px !important; color:#c8a96e !important; }
+
+/* Team cards */
+.tc-name { font-size:20px !important; }
+.tc-stat-val { font-size:22px !important; color:#f0ddb8 !important; }
+.tc-stat-lbl { font-size:13px !important; color:#c8a96e !important; }
+
+/* Roster table */
+.roster-no  { font-size:18px !important; }
+.roster-name { font-size:16px !important; color:#f0ddb8 !important; }
+.roster-pos { font-size:14px !important; color:#c8a96e !important; }
+
+/* Player leaderboard table */
+.rk  { font-size:20px !important; color:#c8a96e !important; }
+.tdn { font-size:19px !important; color:#f0ddb8 !important; }
+.tdpos { font-size:15px !important; }
+table th { font-size:14px !important; color:#c8a96e !important; }
+table td { font-size:15px !important; }
+
+/* Game Results — side-by-side cards */
+.gr-game-num  { font-size:20px !important; }
+.gr-date      { font-size:14px !important; color:#c8a96e !important; }
+.gr-tname     { font-size:16px !important; color:#f0ddb8 !important; }
+.gr-score     { font-size:38px !important; }
+.gr-sum-title { font-size:14px !important; letter-spacing:2px; }
+.gr-sum-note  { font-size:15px !important; color:#c8a96e !important; line-height:1.8 !important; }
+.gr-scorer-name { font-size:16px !important; color:#f0ddb8 !important; }
+.gr-scorer-pts  { font-size:19px !important; }
+
+/* Schedule */
+.sched-game  { font-size:17px !important; color:#c8a96e !important; }
+.sched-teams { font-size:16px !important; color:#f0ddb8 !important; }
+.sched-date  { font-size:14px !important; color:#c8a96e !important; }
+.schedule-row td { font-size:15px !important; }
+
+/* Standings */
+.st-team-name { font-size:18px !important; color:#f0ddb8 !important; }
+.st-val       { font-size:18px !important; color:#f0ddb8 !important; }
+.st-lbl       { font-size:13px !important; color:#c8a96e !important; }
+
+/* Analysis section */
+.anbody { font-size:16px !important; color:#c8a96e !important; line-height:1.75 !important; }
+.an-val { font-size:24px !important; color:#f0ddb8 !important; }
+.an-lbl { font-size:14px !important; color:#c8a96e !important; }
+.ct     { font-size:18px !important; color:#c8a96e !important; }
+
+/* Player profile list */
+.prof-card-name { font-size:18px !important; color:#f0ddb8 !important; }
+.prof-card-meta { font-size:14px !important; color:#c8a96e !important; }
+
+/* Player profile detail */
+.pd-hero-name   { font-size:clamp(30px,4vw,48px) !important; color:#f0ddb8 !important; }
+.pd-hero-sub    { font-size:18px !important; color:#c8a96e !important; }
+.pd-stat-v      { font-size:26px !important; color:#f0ddb8 !important; }
+.pd-stat-l      { font-size:13px !important; color:#c8a96e !important; }
+.pd-section-title { font-size:18px !important; color:#f0ddb8 !important; }
+.pd-scouting    { font-size:16px !important; color:#c8a96e !important; line-height:1.9 !important; }
+.pd-game-log th { font-size:14px !important; color:#c8a96e !important; }
+.pd-game-log td { font-size:15px !important; color:#f0ddb8 !important; }
+.pd-game-log td.gl-opp { font-size:15px !important; color:#c8a96e !important; }
+.pd-back        { font-size:15px !important; }
+
+/* Overview stat leaders */
+.lc-name  { font-size:16px !important; color:#f0ddb8 !important; }
+.lc-val   { font-size:22px !important; color:#f0ddb8 !important; }
+.lc-lbl   { font-size:13px !important; color:#c8a96e !important; }
+.lc-tag   { font-size:12px !important; color:#c8a96e !important; }
+
+/* Team detail */
+.team-detail-stat-val { font-size:24px !important; color:#f0ddb8 !important; }
+.team-detail-stat-lbl { font-size:13px !important; color:#c8a96e !important; }
+
+/* Filter / pill buttons */
+.pill-l { font-size:13px !important; color:#c8a96e !important; }
+.filter-btn { font-size:14px !important; }
+
+/* Gallery caption */
+.gallery-num   { font-size:17px !important; }
+.lb-caption    { font-size:17px !important; color:#c8a96e !important; }
+.lb-counter    { font-size:20px !important; color:#c8a96e !important; }
+
+/* Playoffs bracket */
+.po-series-hdr-title { font-size:20px !important; color:#f0ddb8 !important; }
+.po-series-tname     { font-size:15px !important; color:#f0ddb8 !important; }
+.po-adv-note         { font-size:14px !important; }
+.po-game-num         { font-size:16px !important; color:#c8a96e !important; }
+.po-game-result      { font-size:18px !important; }
+.po-game-date        { font-size:13px !important; color:#c8a96e !important; }
+.bt-t-name           { font-size:15px !important; color:#f0ddb8 !important; }
+.po-seed-name        { font-size:17px !important; color:#f0ddb8 !important; }
+.po-seed-record      { font-size:14px !important; color:#c8a96e !important; }
+.playoffs-banner-sub { font-size:16px !important; color:#c8a96e !important; }
+.playoffs-seed-rule  { font-size:14px !important; color:#c8a96e !important; }
+
+/* Home page */
+.hp-ti       { font-size:15px !important; color:#f0ddb8 !important; }
+.hp-chl      { font-size:clamp(22px,2.8vw,32px) !important; color:#f0ddb8 !important; }
+.hp-csnip    { font-size:15px !important; color:#c8a96e !important; line-height:1.8 !important; }
+.hp-ctag     { font-size:12px !important; }
+.hp-full p   { font-size:15px !important; color:#c8a96e !important; line-height:1.85 !important; }
+.hp-smhl     { font-size:16px !important; color:#f0ddb8 !important; }
+.hp-smtag    { font-size:12px !important; }
+.hp-smdate   { font-size:13px !important; color:#c8a96e !important; }
+.hp-smfull p { font-size:14px !important; color:#c8a96e !important; }
+.hp-stnm     { font-size:17px !important; color:#f0ddb8 !important; }
+.hp-strec    { font-size:14px !important; color:#c8a96e !important; }
+.hp-stpts    { font-size:22px !important; }
+.hp-tscnm    { font-size:13px !important; color:#f0ddb8 !important; }
+.hp-tsctm    { font-size:12px !important; }
+.hp-nchl     { font-size:17px !important; color:#f0ddb8 !important; }
+.hp-ncsnip   { font-size:14px !important; color:#c8a96e !important; line-height:1.7 !important; }
+.hp-nctag    { font-size:11px !important; }
+.hp-ncbody p { font-size:14px !important; color:#c8a96e !important; line-height:1.8 !important; }
+.hp-date     { font-size:13px !important; color:#c8a96e !important; }
+.hp-rmbtn    { font-size:14px !important; }
+.hp-potitle  { font-size:26px !important; color:#ffd700 !important; }
+.hp-podesc   { font-size:15px !important; color:#c8a96e !important; line-height:1.75 !important; }
+.hp-potn     { font-size:15px !important; color:#f0ddb8 !important; }
+.hp-sl       { font-size:13px !important; color:#c8a96e !important; }
+.hp-feat-tn  { font-size:14px !important; }
+.hp-quote    { font-size:15px !important; color:#c8a96e !important; line-height:1.75 !important; }
+
+/* Inline JS-rendered text that uses var(--muted) — boost via body inherit */
+.result-winner-banner { font-size:15px !important; letter-spacing:2px; }
+.gr-winner-pill       { font-size:12px !important; }
+.series-game-chip     { font-size:14px !important; }
+
+/* General table improvements */
+th, td { font-size:15px; }
+
+/* Footer */
+footer { font-size:14px !important; color:#c8a96e !important; }
+
+/* ═══ HOME PAGE STYLES ═══════════════════════════════════ */
+.hp-ticker{overflow:hidden;height:36px;display:flex;align-items:center;background:rgba(255,170,0,0.07);border:1px solid rgba(255,170,0,0.18);border-radius:8px;margin-bottom:20px}
+.hp-tlbl{background:var(--accent);color:#000;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;padding:0 14px;height:100%;display:flex;align-items:center;flex-shrink:0}
 .hp-ttrack{overflow:hidden;flex:1}
-.hp-tinner{display:flex;white-space:nowrap;animation:hpTick 38s linear infinite}
+.hp-tinner{display:flex;white-space:nowrap;animation:hpTick 40s linear infinite}
 .hp-tinner:hover{animation-play-state:paused}
 @keyframes hpTick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.hp-ti{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;padding:0 18px;color:var(--text);border-right:1px solid rgba(255,170,0,0.13);flex-shrink:0}
+.hp-ti{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;padding:0 20px;color:#f0ddb8;border-right:1px solid rgba(255,170,0,0.13);flex-shrink:0}
 .hp-ti b{color:var(--accent)}
-.hp-hero{display:grid;grid-template-columns:1fr 290px;gap:13px;margin-bottom:18px}
-@media(max-width:760px){.hp-hero{grid-template-columns:1fr}}
+.hp-hero{display:grid;grid-template-columns:1fr 300px;gap:14px;margin-bottom:20px}
+@media(max-width:780px){.hp-hero{grid-template-columns:1fr}}
 .hp-card{background:var(--card);border:1px solid var(--card-b);border-radius:13px;overflow:hidden;backdrop-filter:blur(8px)}
-.hp-feat-img{width:100%;aspect-ratio:16/7;background:#120900;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:56px;color:rgba(255,170,0,0.15)}
+.hp-feat-img{width:100%;aspect-ratio:16/7;background:#120900;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:64px;color:rgba(255,170,0,0.12)}
 .hp-feat-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
-.hp-feat-sbar{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px}
-.hp-feat-sc{font-family:'Bebas Neue',sans-serif;font-size:50px;line-height:1;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.5);min-width:46px;text-align:center}
-.hp-feat-sc.win{text-shadow:0 0 16px currentColor}
-.hp-feat-dash{font-family:'Bebas Neue',sans-serif;font-size:22px;color:rgba(255,255,255,0.38)}
-.hp-feat-team{display:flex;flex-direction:column;align-items:center;gap:4px}
-.hp-feat-logo{width:48px;height:30px;object-fit:contain}
-.hp-feat-tn{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1.5px;color:rgba(255,255,255,0.88);text-shadow:0 1px 4px rgba(0,0,0,0.7)}
-.hp-cbody{padding:16px 18px}
-.hp-ctag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
-.hp-chl{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,2.6vw,30px);letter-spacing:2px;color:var(--text);line-height:1.2;margin-bottom:8px}
-.hp-csnip{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:10px}
-.hp-cfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:9px;margin-top:4px}
-.hp-date{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
-.hp-rmbtn{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;background:none;border:none;cursor:pointer;padding:0;transition:opacity 0.2s}
+.hp-feat-sbar{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.88),transparent);display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 18px}
+.hp-feat-sc{font-family:'Bebas Neue',sans-serif;font-size:54px;line-height:1;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.5);min-width:50px;text-align:center}
+.hp-feat-sc.win{text-shadow:0 0 18px currentColor}
+.hp-feat-dash{font-family:'Bebas Neue',sans-serif;font-size:24px;color:rgba(255,255,255,0.38)}
+.hp-feat-team{display:flex;flex-direction:column;align-items:center;gap:5px}
+.hp-feat-logo{width:52px;height:32px;object-fit:contain}
+.hp-feat-tn{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:rgba(255,255,255,0.9);text-shadow:0 1px 5px rgba(0,0,0,0.8)}
+.hp-cbody{padding:18px 20px}
+.hp-ctag{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:7px}
+.hp-chl{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.8vw,34px);letter-spacing:2px;color:#f0ddb8;line-height:1.2;margin-bottom:10px}
+.hp-csnip{font-size:15px;color:#c8a96e;line-height:1.8;margin-bottom:12px}
+.hp-cfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.07);padding-top:10px;margin-top:6px}
+.hp-date{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;color:#c8a96e;text-transform:uppercase}
+.hp-rmbtn{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;background:none;border:none;cursor:pointer;padding:0;transition:opacity 0.2s}
 .hp-rmbtn:hover{opacity:0.65}
-.hp-full{display:none;margin-top:13px;padding-top:13px;border-top:1px solid rgba(255,170,0,0.12)}
+.hp-full{display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,170,0,0.12)}
 .hp-full.open{display:block}
-.hp-full p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px}
-.hp-full strong{color:var(--text)}
-.hp-quote{border-left:3px solid var(--accent);padding:10px 16px;margin:14px 0;background:rgba(255,170,0,0.04);border-radius:0 7px 7px 0;font-style:italic;color:var(--muted);font-size:14px;line-height:1.7}
-.hp-sclist{display:flex;flex-direction:column;gap:5px;margin:10px 0}
-.hp-scrow{display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,0.03);border-radius:6px}
-.hp-scimg{width:26px;height:26px;border-radius:50%;object-fit:cover;object-position:top;border:1.5px solid;background:#1a0e00;flex-shrink:0}
-.hp-scname{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;flex:1;cursor:pointer}
-.hp-scpts{font-family:'Bebas Neue',sans-serif;font-size:17px}
-.hp-navlink{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 15px;border:1px solid rgba(255,170,0,0.32);border-radius:7px;color:var(--accent);background:rgba(255,170,0,0.06);cursor:pointer;transition:all 0.2s;text-decoration:none}
+.hp-full p{font-size:15px;color:#c8a96e;line-height:1.85;margin-bottom:14px}
+.hp-full strong{color:#f0ddb8}
+.hp-quote{border-left:3px solid var(--accent);padding:11px 17px;margin:14px 0;background:rgba(255,170,0,0.05);border-radius:0 7px 7px 0;font-style:italic;color:#c8a96e;font-size:15px;line-height:1.75}
+.hp-sclist{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.hp-scrow{display:flex;align-items:center;gap:9px;padding:7px 11px;background:rgba(255,255,255,0.04);border-radius:6px}
+.hp-scimg{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:top;border:1.5px solid;background:#1a0e00;flex-shrink:0}
+.hp-scname{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;flex:1;cursor:pointer;color:#f0ddb8}
+.hp-scpts{font-family:'Bebas Neue',sans-serif;font-size:18px}
+.hp-navlink{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:9px 16px;border:1px solid rgba(255,170,0,0.32);border-radius:7px;color:var(--accent);background:rgba(255,170,0,0.06);cursor:pointer;transition:all 0.2s;text-decoration:none}
 .hp-navlink:hover{background:rgba(255,170,0,0.14)}
-.hp-sm{background:var(--card);border:1px solid var(--card-b);border-radius:11px;padding:13px 15px;backdrop-filter:blur(8px);margin-bottom:10px}
+.hp-sm{background:var(--card);border:1px solid var(--card-b);border-radius:11px;padding:14px 16px;backdrop-filter:blur(8px);margin-bottom:11px}
 .hp-sm:last-child{margin-bottom:0}
-.hp-smtag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px}
-.hp-smhl{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:3px}
-.hp-smsc{font-family:'Bebas Neue',sans-serif;font-size:17px;margin-bottom:2px}
-.hp-smdate{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;color:var(--muted)}
-.hp-smfull{display:none;margin-top:9px;padding-top:9px;border-top:1px solid rgba(255,255,255,0.06)}
+.hp-smtag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.hp-smhl{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#f0ddb8;line-height:1.3;margin-bottom:4px}
+.hp-smsc{font-family:'Bebas Neue',sans-serif;font-size:18px;margin-bottom:3px}
+.hp-smdate{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;color:#c8a96e}
+.hp-smfull{display:none;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)}
 .hp-smfull.open{display:block}
-.hp-smfull p{font-size:13px;color:var(--muted);line-height:1.72;margin-bottom:8px}
-.hp-smfoot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-.hp-sl{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin:20px 0 11px;display:flex;align-items:center;gap:10px}
+.hp-smfull p{font-size:14px;color:#c8a96e;line-height:1.75;margin-bottom:9px}
+.hp-smfoot{display:flex;justify-content:space-between;align-items:center;margin-top:9px}
+.hp-sl{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;color:#c8a96e;text-transform:uppercase;margin:22px 0 12px;display:flex;align-items:center;gap:10px}
 .hp-sl::after{content:'';flex:1;height:1px;background:rgba(255,170,0,0.12)}
-.hp-stwrap{background:var(--card);border:1px solid var(--card-b);border-radius:12px;overflow:hidden;margin-bottom:4px;backdrop-filter:blur(8px)}
-.hp-strow{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.2s}
+.hp-stwrap{background:var(--card);border:1px solid var(--card-b);border-radius:12px;overflow:hidden;margin-bottom:6px;backdrop-filter:blur(8px)}
+.hp-strow{display:flex;align-items:center;gap:11px;padding:12px 17px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.2s}
 .hp-strow:last-child{border-bottom:none}
-.hp-strow:hover{background:rgba(255,255,255,0.022)}
-.hp-stn{font-family:'Bebas Neue',sans-serif;font-size:20px;min-width:20px;text-align:center;color:var(--muted)}
+.hp-strow:hover{background:rgba(255,255,255,0.025)}
+.hp-stn{font-family:'Bebas Neue',sans-serif;font-size:22px;min-width:22px;text-align:center;color:#c8a96e}
 .hp-stn.r1{color:var(--gold)}.hp-stn.r2{color:var(--silver)}.hp-stn.r3{color:var(--bronze)}
-.hp-stlogo{width:42px;height:26px;object-fit:contain}
-.hp-stnm{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;flex:1}
-.hp-strec{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--muted)}
-.hp-stpts{font-family:'Bebas Neue',sans-serif;font-size:21px;min-width:28px;text-align:right}
-.hp-tops{display:flex;gap:9px;flex-wrap:wrap}
-.hp-tsc{background:var(--card);border:1px solid var(--card-b);border-radius:10px;padding:11px 13px;flex:1;min-width:115px;display:flex;gap:9px;align-items:center;cursor:pointer;backdrop-filter:blur(8px);transition:all 0.2s}
+.hp-stlogo{width:44px;height:27px;object-fit:contain}
+.hp-stnm{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;flex:1}
+.hp-strec{font-family:'Barlow Condensed',sans-serif;font-size:15px;color:#c8a96e}
+.hp-stpts{font-family:'Bebas Neue',sans-serif;font-size:24px;min-width:32px;text-align:right}
+.hp-tops{display:flex;gap:10px;flex-wrap:wrap}
+.hp-tsc{background:var(--card);border:1px solid var(--card-b);border-radius:11px;padding:12px 14px;flex:1;min-width:120px;display:flex;gap:10px;align-items:center;cursor:pointer;backdrop-filter:blur(8px);transition:all 0.22s}
 .hp-tsc:hover{transform:translateY(-3px);border-color:var(--tc)}
-.hp-tscph{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--tc);background:#1a0e00;flex-shrink:0}
-.hp-tscst{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--tc);line-height:1}
-.hp-tscnm{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hp-tsctm{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--tc);letter-spacing:1px}
-.hp-ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+.hp-tscph{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--tc);background:#1a0e00;flex-shrink:0}
+.hp-tscst{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--tc);line-height:1}
+.hp-tscnm{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#f0ddb8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hp-tsctm{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--tc);letter-spacing:1px}
+.hp-ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:13px}
 .hp-nc{background:var(--card);border:1px solid var(--card-b);border-radius:12px;overflow:hidden;backdrop-filter:blur(8px)}
-.hp-ncthumb{width:100%;aspect-ratio:16/9;background:#120900;display:flex;align-items:center;justify-content:center;font-size:40px;overflow:hidden;position:relative}
+.hp-ncthumb{width:100%;aspect-ratio:16/9;background:#120900;display:flex;align-items:center;justify-content:center;font-size:42px;overflow:hidden;position:relative}
 .hp-ncthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hp-ncbody{padding:12px 14px}
-.hp-nctag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:4px}
-.hp-nchl{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
-.hp-ncsnip{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:7px}
-.hp-ncfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);padding-top:7px}
-.hp-po{background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,140,0,0.04));border:2px solid rgba(255,215,0,0.24);border-radius:14px;padding:18px 22px;cursor:pointer;transition:all 0.25s;backdrop-filter:blur(8px)}
-.hp-po:hover{border-color:rgba(255,215,0,0.48);transform:translateY(-3px)}
-.hp-potitle{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);margin-bottom:5px}
-.hp-podesc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:10px}
-.hp-poseeds{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.hp-pom{display:flex;align-items:center;gap:6px}
-.hp-posn{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--muted)}
-.hp-potl{width:32px;height:20px;object-fit:contain}
-.hp-potn{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800}
+.hp-ncbody{padding:14px 16px}
+.hp-nctag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px}
+.hp-nchl{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#f0ddb8;line-height:1.3;margin-bottom:6px}
+.hp-ncsnip{font-size:14px;color:#c8a96e;line-height:1.7;margin-bottom:8px}
+.hp-ncbody .hp-full p{font-size:14px;color:#c8a96e;line-height:1.8;margin-bottom:10px}
+.hp-ncfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);padding-top:8px}
+.hp-po{background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,140,0,0.04));border:2px solid rgba(255,215,0,0.24);border-radius:14px;padding:20px 24px;cursor:pointer;transition:all 0.25s;backdrop-filter:blur(8px)}
+.hp-po:hover{border-color:rgba(255,215,0,0.5);transform:translateY(-3px)}
+.hp-potitle{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--gold);margin-bottom:6px}
+.hp-podesc{font-size:15px;color:#c8a96e;line-height:1.75;margin-bottom:12px}
+.hp-poseeds{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hp-pom{display:flex;align-items:center;gap:7px}
+.hp-posn{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#c8a96e}
+.hp-potl{width:34px;height:20px;object-fit:contain}
+.hp-potn{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800}
 .hp-podiv{font-family:'Bebas Neue',sans-serif;font-size:20px;color:rgba(255,215,0,0.28)}
+
 </style>
 </head>
 <body>
@@ -1214,7 +1693,7 @@ footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,1
         </div>
       </div>
       <nav class="nav">
-        <button class="nav-btn active" onclick="showView('home')">🏠 Home</button>
+        <button class="nav-btn" onclick="showView('home')">🏠 Home</button>
         <button class="nav-btn" onclick="showView('overview')">Overview</button>
         <button class="nav-btn" onclick="showView('teams')">Team Stats</button>
         <button class="nav-btn" onclick="showView('players')">Player Leaderboard</button>
@@ -1335,12 +1814,11 @@ footer { text-align:center; padding:22px 0 32px; border-top:1px solid rgba(255,1
       <div id="profile-detail" style="display:none"></div>
     </div>
 
-     <!-- PLAYOFFS -->
+    <!-- PLAYOFFS -->
     <div id="view-playoffs" class="view">
       <div class="sl">Summer Cup 2026 Season Playoffs</div>
       <div id="playoffs-content" class="po-page"></div>
     </div>
-
 
     <footer>CANBERRA HOOPS SUMMER CUP 2026 &nbsp;·&nbsp; STATS DASHBOARD &nbsp;·&nbsp; ALL RIGHTS RESERVED</footer>
   </div>
@@ -1358,47 +1836,50 @@ const TEAM_NAMES_LIST = Object.keys(TEAM_COLORS);
 // ── TEAMS data baked in from Canberra_Hoops_Summer_Cup_2026_Stats_Sheet.xlsx ──
 const TEAMS = {
   "Titans": { color:"#00d4ff", players:[
-    {number:"13",name:"Rowell",    pos:"F", gp:9, total_pts:39,  total_reb:22,   total_stl:7,  total_ast:6,   total_blk:0,   avg_pts:4.3,   avg_reb:2.4,   avg_stl:0.8,   avg_ast:0.6,   avg_blk:0,     game_pts:[2,6,0,4,6,4,8,7,2]},
-    {number:"8", name:"Ninoy",     pos:"C", gp:8, total_pts:39,  total_reb:42,   total_stl:14, total_ast:16,  total_blk:6,   avg_pts:4.9,   avg_reb:5.3,   avg_stl:1.8,   avg_ast:2.0,   avg_blk:0.8,   game_pts:[5,0,12,7,4,0,0,6,5]},
-    {number:"2", name:"Noel",      pos:"SG",gp:6, total_pts:55,  total_reb:5,    total_stl:2,  total_ast:5,   total_blk:0,   avg_pts:9.2,   avg_reb:0.8,   avg_stl:0.3,   avg_ast:0.8,   avg_blk:0,     game_pts:[0,0,0,2,7,16,9,8,13]},
-    {number:"0", name:"JuliusR",   pos:"SG",gp:5, total_pts:20,  total_reb:4,    total_stl:0,  total_ast:1,   total_blk:0,   avg_pts:4.0,   avg_reb:0.8,   avg_stl:0,     avg_ast:0.2,   avg_blk:0,     game_pts:[0,0,0,5,5,0,6,2,2]},
-    {number:"11",name:"Arvin",     pos:"PF",gp:4, total_pts:48,  total_reb:24,   total_stl:5,  total_ast:8,   total_blk:3,   avg_pts:12.0,  avg_reb:6.0,   avg_stl:1.3,   avg_ast:2.0,   avg_blk:0.8,   game_pts:[0,0,15,11,7,15,0,0,0]},
-    {number:"47",name:"Christian", pos:"PG",gp:6, total_pts:35,  total_reb:12,   total_stl:7,  total_ast:9,   total_blk:0,   avg_pts:5.8,   avg_reb:2.0,   avg_stl:1.2,   avg_ast:1.5,   avg_blk:0,     game_pts:[7,10,9,2,2,5,0,0,0]},
-    {number:"4", name:"Jaime",     pos:"SG",gp:8, total_pts:29,  total_reb:21,   total_stl:4,  total_ast:1,   total_blk:0,   avg_pts:3.6,   avg_reb:2.6,   avg_stl:0.5,   avg_ast:0.1,   avg_blk:0,     game_pts:[9,3,3,3,3,0,3,0,5]},
-    {number:"29",name:"Jojo",      pos:"PG",gp:9, total_pts:17,  total_reb:18,   total_stl:6,  total_ast:10,  total_blk:1,   avg_pts:1.9,   avg_reb:2.0,   avg_stl:0.7,   avg_ast:1.1,   avg_blk:0.1,   game_pts:[0,6,3,2,2,2,0,2,0]},
+    {number:"13",name:"Rowell",pos:"F",gp:9,total_pts:39,total_reb:22.0,total_stl:7,total_ast:5.0,total_blk:0.0,avg_pts:4.3,avg_reb:2.4,avg_stl:0.8,avg_ast:0.6,avg_blk:0.0,game_pts:[2, 6, 0, 4, 6, 4, 8, 7, 2, 0]},
+    {number:"8",name:"Ninoy",pos:"C",gp:8,total_pts:39,total_reb:42.0,total_stl:14,total_ast:16.0,total_blk:6.0,avg_pts:4.9,avg_reb:5.2,avg_stl:1.8,avg_ast:2.0,avg_blk:0.8,game_pts:[5, 0, 12, 7, 4, 0, 0, 6, 5, 0]},
+    {number:"2",name:"Noel",pos:"SG",gp:7,total_pts:82,total_reb:13.0,total_stl:2,total_ast:8.0,total_blk:0.0,avg_pts:11.7,avg_reb:1.9,avg_stl:0.3,avg_ast:1.1,avg_blk:0.0,game_pts:[0, 0, 0, 2, 7, 16, 9, 8, 13, 27]},
+    {number:"",name:"JuliusR",pos:"SG",gp:6,total_pts:37,total_reb:9.0,total_stl:2,total_ast:2.0,total_blk:0.0,avg_pts:6.2,avg_reb:1.5,avg_stl:0.3,avg_ast:0.3,avg_blk:0.0,game_pts:[0, 0, 0, 5, 5, 0, 6, 2, 2, 17]},
+    {number:"11",name:"Arvin",pos:"PF",gp:5,total_pts:55,total_reb:29.0,total_stl:6,total_ast:9.0,total_blk:5.0,avg_pts:11.0,avg_reb:5.8,avg_stl:1.2,avg_ast:1.8,avg_blk:1.0,game_pts:[0, 0, 15, 11, 7, 15, 0, 0, 0, 7]},
+    {number:"47",name:"Christian",pos:"PG",gp:7,total_pts:37,total_reb:18.0,total_stl:7,total_ast:13.0,total_blk:0.0,avg_pts:5.3,avg_reb:2.6,avg_stl:1.0,avg_ast:1.9,avg_blk:0.0,game_pts:[7, 10, 9, 2, 2, 5, 0, 0, 0, 2]},
+    {number:"4",name:"Jaime",pos:"SG",gp:9,total_pts:34,total_reb:29.0,total_stl:5,total_ast:4.0,total_blk:0.0,avg_pts:3.8,avg_reb:3.2,avg_stl:0.6,avg_ast:0.4,avg_blk:0.0,game_pts:[9, 3, 3, 3, 3, 0, 3, 0, 5, 5]},
+    {number:"29",name:"Jojo",pos:"PG",gp:10,total_pts:23,total_reb:21.0,total_stl:10,total_ast:11.0,total_blk:2.0,avg_pts:2.3,avg_reb:2.1,avg_stl:1.0,avg_ast:1.1,avg_blk:0.2,game_pts:[0, 6, 3, 2, 2, 2, 0, 2, 0, 6]},
   ]},
   "Phantoms": { color:"#ff2d6b", players:[
-    {number:"9", name:"Richard",   pos:"C", gp:6, total_pts:42,  total_reb:36,   total_stl:3,  total_ast:6,   total_blk:2,   avg_pts:7.0,   avg_reb:6.0,   avg_stl:0.5,   avg_ast:1.0,   avg_blk:0.3,   game_pts:[0,0,10,6,8,8,4,0,6]},
-    {number:"4", name:"Leo",       pos:"F", gp:9, total_pts:110, total_reb:44,   total_stl:8,  total_ast:9,   total_blk:0,   avg_pts:12.2,  avg_reb:4.9,   avg_stl:0.9,   avg_ast:1.0,   avg_blk:0,     game_pts:[4,8,17,13,12,14,16,6,20]},
-    {number:"15",name:"Ferdinand", pos:"PF",gp:7, total_pts:14,  total_reb:13,   total_stl:3,  total_ast:10,   total_blk:1,  avg_pts:2.0,   avg_reb:1.9,   avg_stl:0.4,   avg_ast:1.4,   avg_blk:0.1,   game_pts:[0,0,2,0,0,2,2,8,0]},
-    {number:"6", name:"JuliusA",   pos:"SG",gp:7, total_pts:36,  total_reb:6,    total_stl:7,  total_ast:9,   total_blk:0,   avg_pts:5.1,   avg_reb:0.9,   avg_stl:1.0,   avg_ast:1.3,   avg_blk:0,     game_pts:[2,6,2,0,0,0,0,15,11]},
-    {number:"20",name:"Enrique",   pos:"F", gp:4, total_pts:21,  total_reb:19,   total_stl:0,  total_ast:4,   total_blk:0,   avg_pts:5.3,   avg_reb:4.8,   avg_stl:0,     avg_ast:1.0,   avg_blk:0,     game_pts:[3,3,0,0,0,7,8,0,0]},
-    {number:"19",name:"Sherwin",   pos:"PG",gp:6, total_pts:34,  total_reb:21,   total_stl:4,  total_ast:10,  total_blk:1,   avg_pts:5.7,   avg_reb:3.5,   avg_stl:0.7,   avg_ast:1.7,   avg_blk:0.2,   game_pts:[4,2,0,10,8,4,6,0,0]},
-    {number:"9", name:"Fred",      pos:"F", gp:6, total_pts:56,  total_reb:29,   total_stl:10, total_ast:7,   total_blk:1,   avg_pts:9.3,   avg_reb:4.8,   avg_stl:1.7,   avg_ast:1.2,   avg_blk:0.2,   game_pts:[8,7,12,2,14,0,0,13,0]},
-    {number:"55",name:"Lawrence",  pos:"F", gp:5, total_pts:5,   total_reb:10,   total_stl:0,  total_ast:0,   total_blk:1,   avg_pts:1.0,   avg_reb:2.0,   avg_stl:0,     avg_ast:0,     avg_blk:0.2,   game_pts:[0,0,0,0,0,0,0,0,5]},
+    {number:"9",name:"Richard",pos:"C",gp:6,total_pts:42,total_reb:36.0,total_stl:3,total_ast:6.0,total_blk:2.0,avg_pts:7.0,avg_reb:6.0,avg_stl:0.5,avg_ast:1.0,avg_blk:0.3,game_pts:[0, 0, 10, 6, 8, 8, 4, 0, 6, 0]},
+    {number:"4",name:"Leo",pos:"F",gp:10,total_pts:139,total_reb:53.0,total_stl:8,total_ast:11.0,total_blk:0.0,avg_pts:13.9,avg_reb:5.3,avg_stl:0.8,avg_ast:1.1,avg_blk:0.0,game_pts:[4, 8, 17, 13, 12, 14, 16, 6, 20, 29]},
+    {number:"15",name:"Ferdinand",pos:"PF",gp:8,total_pts:28,total_reb:19.0,total_stl:3,total_ast:12.0,total_blk:1.0,avg_pts:3.5,avg_reb:2.4,avg_stl:0.4,avg_ast:1.5,avg_blk:0.1,game_pts:[0, 0, 2, 0, 0, 2, 2, 8, 0, 14]},
+    {number:"6",name:"JuliusA",pos:"SG",gp:8,total_pts:54,total_reb:8.0,total_stl:7,total_ast:9.0,total_blk:0.0,avg_pts:6.8,avg_reb:1.0,avg_stl:0.9,avg_ast:1.1,avg_blk:0.0,game_pts:[2, 6, 2, 0, 0, 0, 0, 15, 11, 18]},
+    {number:"20",name:"Enrique",pos:"F",gp:4,total_pts:21,total_reb:19.0,total_stl:0,total_ast:4.0,total_blk:0.0,avg_pts:5.2,avg_reb:4.8,avg_stl:0.0,avg_ast:1.0,avg_blk:0.0,game_pts:[3, 3, 0, 0, 0, 7, 8, 0, 0, 0]},
+    {number:"19",name:"Sherwin",pos:"PG",gp:6,total_pts:34,total_reb:21.0,total_stl:4,total_ast:10.0,total_blk:1.0,avg_pts:5.7,avg_reb:3.5,avg_stl:0.7,avg_ast:1.7,avg_blk:0.2,game_pts:[4, 2, 0, 10, 8, 4, 6, 0, 0, 0]},
+    {number:"9",name:"Fred",pos:"F",gp:6,total_pts:56,total_reb:29.0,total_stl:10,total_ast:7.0,total_blk:1.0,avg_pts:9.3,avg_reb:4.8,avg_stl:1.7,avg_ast:1.2,avg_blk:0.2,game_pts:[8, 7, 12, 2, 14, 0, 0, 13, 0, 0]},
+    {number:"55",name:"Lawrence",pos:"F",gp:5,total_pts:5,total_reb:10.0,total_stl:0,total_ast:0.0,total_blk:1.0,avg_pts:1.0,avg_reb:2.0,avg_stl:0.0,avg_ast:0.0,avg_blk:0.2,game_pts:[0, 0, 0, 0, 0, 0, 0, 0, 5, 0]},
+    {number:"",name:"Richard B.",pos:"F",gp:1,total_pts:0,total_reb:2.0,total_stl:0,total_ast:0.0,total_blk:0.0,avg_pts:0.0,avg_reb:2.0,avg_stl:0.0,avg_ast:0.0,avg_blk:0.0,game_pts:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+    {number:"10",name:"Marlon",pos:"SG",gp:1,total_pts:0,total_reb:0.0,total_stl:0,total_ast:0.0,total_blk:0.0,avg_pts:0.0,avg_reb:0.0,avg_stl:0.0,avg_ast:0.0,avg_blk:0.0,game_pts:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+    {number:"30",name:"Renz",pos:"F",gp:1,total_pts:2,total_reb:3.0,total_stl:0,total_ast:0.0,total_blk:0.0,avg_pts:2.0,avg_reb:3.0,avg_stl:0.0,avg_ast:0.0,avg_blk:0.0,game_pts:[0, 0, 0, 0, 0, 0, 0, 0, 0, 2]},
   ]},
   "The Guardians": { color:"#39ff14", players:[
-    {number:"26",name:"Carlo",     pos:"C", gp:5, total_pts:44,  total_reb:21,   total_stl:8,  total_ast:5,   total_blk:0,   avg_pts:8.8,   avg_reb:4.2,   avg_stl:1.6,   avg_ast:1.0,   avg_blk:0,     game_pts:[8,9,10,13,4,0,0,0,0]},
-    {number:"17",name:"Bart",      pos:"PG",gp:8, total_pts:29,  total_reb:7,    total_stl:4,  total_ast:9,   total_blk:1,   avg_pts:3.6,   avg_reb:0.9,   avg_stl:0.5,   avg_ast:1.1,   avg_blk:0.1,   game_pts:[4,6,0,2,6,3,8,0,0]},
-    {number:"1", name:"Alvin",     pos:"PG",gp:7, total_pts:42,  total_reb:0,    total_stl:1,  total_ast:5,   total_blk:0,   avg_pts:6.0,   avg_reb:0,     avg_stl:0.1,   avg_ast:0.7,   avg_blk:0,     game_pts:[13,0,5,0,0,0,3,9,12]},
-    {number:"22",name:"Anton",     pos:"F", gp:9, total_pts:63,  total_reb:39,   total_stl:0,  total_ast:5,   total_blk:1,   avg_pts:7.0,   avg_reb:4.3,   avg_stl:0,     avg_ast:0.6,   avg_blk:0.1,   game_pts:[4,2,2,6,10,10,14,7,8]},
-    {number:"20",name:"Alexis",    pos:"PF",gp:9, total_pts:5,   total_reb:30,   total_stl:5,  total_ast:4,   total_blk:1,   avg_pts:0.6,   avg_reb:3.3,   avg_stl:0.6,   avg_ast:0.4,   avg_blk:0.1,   game_pts:[0,0,0,0,0,0,0,2,3]},
-    {number:"16",name:"Fletcher",  pos:"PF",gp:3, total_pts:42,  total_reb:13,   total_stl:3,  total_ast:8,   total_blk:0,   avg_pts:14.0,  avg_reb:4.3,   avg_stl:1.0,   avg_ast:2.7,   avg_blk:0,     game_pts:[0,0,20,13,9,0,0,0,0]},
-    {number:"89",name:"Raffy",     pos:"F", gp:9, total_pts:28,  total_reb:25,   total_stl:4,  total_ast:3,   total_blk:0,   avg_pts:3.1,   avg_reb:2.8,   avg_stl:0.4,   avg_ast:0.3,   avg_blk:0,     game_pts:[6,2,3,6,0,0,2,5,4]},
-    {number:"14",name:"Michael",   pos:"PF",gp:9, total_pts:8,   total_reb:14,   total_stl:1,  total_ast:2,   total_blk:0,   avg_pts:0.9,   avg_reb:1.6,   avg_stl:0.1,   avg_ast:0.2,   avg_blk:0,     game_pts:[0,0,0,0,0,2,2,2,2]},
-    {number:"0", name:"Bryan",     pos:"SG",gp:3, total_pts:12,  total_reb:7,    total_stl:3,  total_ast:4,   total_blk:0,   avg_pts:4.0,   avg_reb:2.3,   avg_stl:1.0,   avg_ast:1.3,   avg_blk:0,     game_pts:[0,0,0,0,0,7,3,0,2]},
+    {number:"26",name:"Carlo",pos:"C",gp:5,total_pts:44,total_reb:21.0,total_stl:8,total_ast:5.0,total_blk:0.0,avg_pts:8.8,avg_reb:4.2,avg_stl:1.6,avg_ast:1.0,avg_blk:0.0,game_pts:[8, 9, 10, 13, 4, 0, 0, 0, 0, 0]},
+    {number:"17",name:"Bart",pos:"PG",gp:8,total_pts:29,total_reb:7.0,total_stl:4,total_ast:9.0,total_blk:1.0,avg_pts:3.6,avg_reb:0.9,avg_stl:0.5,avg_ast:1.1,avg_blk:0.1,game_pts:[4, 6, 0, 2, 6, 3, 8, 0, 0, 0]},
+    {number:"1",name:"Alvin",pos:"PG",gp:7,total_pts:46,total_reb:1.0,total_stl:2,total_ast:7.0,total_blk:0.0,avg_pts:6.6,avg_reb:0.1,avg_stl:0.3,avg_ast:1.0,avg_blk:0.0,game_pts:[13, 0, 5, 0, 0, 0, 3, 9, 12, 4]},
+    {number:"22",name:"Anton",pos:"F",gp:9,total_pts:73,total_reb:49.0,total_stl:3,total_ast:6.0,total_blk:1.0,avg_pts:8.1,avg_reb:5.4,avg_stl:0.3,avg_ast:0.7,avg_blk:0.1,game_pts:[4, 2, 2, 6, 10, 10, 14, 7, 8, 10]},
+    {number:"20",name:"Alexis",pos:"PF",gp:9,total_pts:5,total_reb:30.0,total_stl:5,total_ast:4.0,total_blk:1.0,avg_pts:0.6,avg_reb:3.3,avg_stl:0.6,avg_ast:0.4,avg_blk:0.1,game_pts:[0, 0, 0, 0, 0, 0, 0, 2, 3, 0]},
+    {number:"16",name:"Fletcher",pos:"PF",gp:3,total_pts:60,total_reb:18.0,total_stl:4,total_ast:11.0,total_blk:0.0,avg_pts:20.0,avg_reb:6.0,avg_stl:1.3,avg_ast:3.7,avg_blk:0.0,game_pts:[0, 0, 20, 13, 9, 0, 0, 0, 0, 18]},
+    {number:"89",name:"Raffy",pos:"F",gp:9,total_pts:35,total_reb:30.0,total_stl:7,total_ast:4.0,total_blk:0.0,avg_pts:3.9,avg_reb:3.3,avg_stl:0.8,avg_ast:0.4,avg_blk:0.0,game_pts:[6, 2, 3, 6, 0, 0, 2, 5, 4, 7]},
+    {number:"14",name:"Michael",pos:"PF",gp:9,total_pts:12,total_reb:20.0,total_stl:1,total_ast:2.0,total_blk:0.0,avg_pts:1.3,avg_reb:2.2,avg_stl:0.1,avg_ast:0.2,avg_blk:0.0,game_pts:[0, 0, 0, 0, 0, 2, 2, 2, 2, 4]},
+    {number:"",name:"Bryan",pos:"SG",gp:3,total_pts:21,total_reb:11.0,total_stl:4,total_ast:6.0,total_blk:0.0,avg_pts:7.0,avg_reb:3.7,avg_stl:1.3,avg_ast:2.0,avg_blk:0.0,game_pts:[0, 0, 0, 0, 0, 7, 3, 0, 2, 9]},
   ]},
   "Panthers": { color:"#ffaa00", players:[
-    {number:"29",name:"Eric",      pos:"C", gp:7, total_pts:24,   total_reb:36,   total_stl:3,  total_ast:7,   total_blk:5,   avg_pts:3.4,   avg_reb:5.1,   avg_stl:0.4,  avg_ast:1.0,   avg_blk:0.6,   game_pts:[8,0,4,0,0,2,6,2,2]},
-    {number:"27",name:"EdG",       pos:"SG",gp:9, total_pts:47,   total_reb:48,   total_stl:6,  total_ast:26,  total_blk:0,   avg_pts:5.2,   avg_reb:5.3,   avg_stl:0.7,  avg_ast:3.0,   avg_blk:0,     game_pts:[2,11,4,4,5,2,2,8,9]},
-    {number:"5", name:"Medel",     pos:"PG",gp:9, total_pts:104,  total_reb:17,   total_stl:5,  total_ast:8,   total_blk:0,   avg_pts:11.6,  avg_reb:1.9,   avg_stl:0.6,  avg_ast:0.8,   avg_blk:0,     game_pts:[8,10,12,8,17,18,4,11,16]},
-    {number:"24",name:"Edmar",     pos:"SG",gp:7, total_pts:12,   total_reb:8,    total_stl:1,  total_ast:9,   total_blk:0,   avg_pts:1.7,   avg_reb:1.1,   avg_stl:0.1,  avg_ast:1.2,   avg_blk:0,     game_pts:[0,0,0,0,0,4,6,0,2]},
-    {number:"7", name:"Nelson",    pos:"F", gp:8, total_pts:61,   total_reb:30,   total_stl:13, total_ast:10,  total_blk:0,   avg_pts:7.6,   avg_reb:3.8,   avg_stl:1.6,  avg_ast:1.3,   avg_blk:0,     game_pts:[9,8,0,9,4,7,12,6,6]},
-    {number:"3", name:"Ryan",      pos:"PF",gp:4, total_pts:12,   total_reb:15,   total_stl:0,  total_ast:3,   total_blk:0,   avg_pts:3.0,   avg_reb:3.8,   avg_stl:0,    avg_ast:0.8,   avg_blk:0,     game_pts:[4,0,0,0,0,0,0,4,4]},
-    {number:"18",name:"Clarence",  pos:"PF",gp:6, total_pts:23,   total_reb:24,   total_stl:3,  total_ast:9,   total_blk:0,   avg_pts:3.8,   avg_reb:4.0,   avg_stl:0.5,  avg_ast:1.5,   avg_blk:0,     game_pts:[8,4,0,2,3,0,6,0,0]},
-    {number:"21",name:"Louis",     pos:"PF",gp:4, total_pts:21,  total_reb:9,     total_stl:3,  total_ast:4,   total_blk:0,   avg_pts:5.3,   avg_reb:2.3,  avg_stl:0.8,  avg_ast:1.0,   avg_blk:0,     game_pts:[0,0,2,0,0,6,6,7,0]},
+    {number:"29",name:"Eric",pos:"C",gp:7,total_pts:30,total_reb:43.5,total_stl:4,total_ast:9.0,total_blk:4.5,avg_pts:4.3,avg_reb:6.2,avg_stl:0.6,avg_ast:1.3,avg_blk:0.6,game_pts:[8, 0, 4, 0, 0, 2, 6, 2, 2, 6]},
+    {number:"27",name:"EdG",pos:"SG",gp:9,total_pts:60,total_reb:58.0,total_stl:7,total_ast:31.0,total_blk:0.0,avg_pts:6.7,avg_reb:6.4,avg_stl:0.8,avg_ast:3.4,avg_blk:0.0,game_pts:[2, 11, 4, 4, 5, 2, 2, 8, 9, 13]},
+    {number:"5",name:"Medel",pos:"PG",gp:9,total_pts:128,total_reb:19.0,total_stl:5,total_ast:10.5,total_blk:0.0,avg_pts:14.2,avg_reb:2.1,avg_stl:0.6,avg_ast:1.2,avg_blk:0.0,game_pts:[8, 10, 12, 8, 17, 18, 4, 11, 16, 24]},
+    {number:"24",name:"Edmar",pos:"SG",gp:7,total_pts:16,total_reb:8.5,total_stl:1,total_ast:8.5,total_blk:0.0,avg_pts:2.3,avg_reb:1.2,avg_stl:0.1,avg_ast:1.2,avg_blk:0.0,game_pts:[0, 0, 0, 0, 0, 4, 6, 0, 2, 4]},
+    {number:"7",name:"Nelson",pos:"F",gp:8,total_pts:61,total_reb:30.0,total_stl:13,total_ast:10.0,total_blk:0.0,avg_pts:7.6,avg_reb:3.8,avg_stl:1.6,avg_ast:1.2,avg_blk:0.0,game_pts:[9, 8, 0, 9, 4, 7, 12, 6, 6, 0]},
+    {number:"3",name:"Ryan",pos:"PF",gp:4,total_pts:20,total_reb:22.0,total_stl:0,total_ast:3.0,total_blk:1.0,avg_pts:5.0,avg_reb:5.5,avg_stl:0.0,avg_ast:0.8,avg_blk:0.2,game_pts:[4, 0, 0, 0, 0, 0, 0, 4, 4, 8]},
+    {number:"18",name:"Clarence",pos:"PF",gp:6,total_pts:23,total_reb:24.0,total_stl:3,total_ast:9.0,total_blk:0.0,avg_pts:3.8,avg_reb:4.0,avg_stl:0.5,avg_ast:1.5,avg_blk:0.0,game_pts:[8, 4, 0, 2, 3, 0, 6, 0, 0, 0]},
+    {number:"21",name:"Louis",pos:"PF",gp:4,total_pts:40,total_reb:13.0,total_stl:3,total_ast:6.0,total_blk:0.0,avg_pts:10.0,avg_reb:3.2,avg_stl:0.8,avg_ast:1.5,avg_blk:0.0,game_pts:[0, 0, 2, 0, 0, 6, 6, 7, 0, 19]},
   ]},
-};
+  };
 
 // Build ALL_PLAYERS flat array from baked-in TEAMS
 const ALL_PLAYERS = Object.keys(TEAMS).flatMap(t =>
@@ -1442,8 +1923,7 @@ function renderAll(){
   renderTabs(); renderTeamDetail(tn[0]);
   renderFilters(); renderPlayerTable();
   renderAnalysisCards(); renderAnalysisCharts();
-  renderHome();
-  showView('home');
+  renderHome(); showView('home');
 }
 
 // ===========================
@@ -1810,148 +2290,52 @@ const GAME_DATA = [
 function renderResults() {
   const played = GAME_DATA.filter(g => g.status === 'done');
   const el = document.getElementById('results-content');
-  if (!played.length) {
-    el.innerHTML = '<div style="padding:40px;text-align:center;color:var(--muted);font-family:\'Barlow Condensed\';font-size:17px;letter-spacing:2px">No results yet.</div>';
-    return;
-  }
+  if (!played.length) { el.innerHTML = '<div class="hl-empty">No results yet.</div>'; return; }
 
-  // ── LONG GAME SUMMARIES (6–7 sentences each) ──
-  const SUMMARIES = {
-    1:  {
-      note: "The Titans and Phantoms served up a tense season opener that came down to the final possessions. Jaime led all scorers with 9 points, providing the spark Titans needed from the perimeter early in the contest. Christian added 7 and controlled the tempo in the back court, dictating the pace and limiting Phantoms' transition opportunities throughout. Fred was the standout for the Phantoms with 8 points, fighting hard to keep his side in the game when it mattered most. The Titans' defensive intensity proved to be the decisive factor, forcing key turnovers in the final quarter. Phantoms were unable to convert their chances in the clutch moments despite a spirited second-half push. Titans held their nerve to secure a hard-fought 2-point win and set the tone for their season.",
-      top:[{n:"Jaime",t:"Titans",p:9},{n:"Fred",t:"Phantoms",p:8},{n:"Christian",t:"Titans",p:7}]
-    },
-    2:  {
-      note: "Panthers registered a statement victory over The Guardians in a game full of momentum swings and high-intensity defence. Alvin was the standout performer for Guardians, exploding for 13 points and refusing to let his team capitulate without a fight. Nelson responded brilliantly for Panthers with 9 points of his own, combining energy and efficiency to keep the scoreboard ticking. Medel controlled the point guard duties superbly, adding 8 while orchestrating the Panthers' offence with precision and vision. The Guardians found it difficult to contain Panthers' three-pronged attacking threat across all four quarters. Panthers' superior physicality in the paint and relentless second-chance scoring ultimately proved the difference. The final margin of 4 points belied just how fiercely contested this match was from tip-off to buzzer.",
-      top:[{n:"Alvin",t:"The Guardians",p:13},{n:"Nelson",t:"Panthers",p:9},{n:"Medel",t:"Panthers",p:8}]
-    },
-    3:  {
-      note: "Titans delivered a composed and authoritative performance to take down The Guardians by 6 points. Christian was the architect of the win, posting 10 points and distributing the ball with exceptional court vision across all four quarters. Rowell provided reliable support with 6 points, fulfilling his role as a two-way forward who impacted the game on both ends of the floor. Carlo kept The Guardians in contention with 9 points, showing his ability to create offence from the centre position against disciplined Titans defence. The Titans' ability to limit Guardians' transition opportunities was a key tactical win for their coaching staff. Guardians battled hard and maintained competitiveness, but Titans proved too consistent across the full game. It was another demonstration of Titans' growing chemistry and depth as a cohesive unit.",
-      top:[{n:"Christian",t:"Titans",p:10},{n:"Carlo",t:"The Guardians",p:9},{n:"Rowell",t:"Titans",p:6}]
-    },
-    4:  {
-      note: "Panthers' backcourt was simply too hot to handle as they overwhelmed Phantoms by 7 points in a dominant display. EdG set the tone early with 11 points, using his athleticism and court awareness to find gaps in the Phantoms' defensive structure. Medel was equally impressive with 10 points, showing his lethal efficiency from mid-range and operating as a constant threat in pick-and-roll actions. Nelson rounded out Panthers' triple threat with 8 points, providing energy, rebounding, and crucial baskets when the game demanded them. Phantoms struggled to respond, unable to match Panthers' hunger and sharpness in a one-sided encounter. Sherwin tried to lift Phantoms offensively but found little support from his teammates on a difficult night. It was a clinical Panthers performance that signalled real intent for the rest of the season.",
-      top:[{n:"EdG",t:"Panthers",p:11},{n:"Medel",t:"Panthers",p:10},{n:"Nelson",t:"Panthers",p:8}]
-    },
-    5:  {
-      note: "Titans put together their most complete performance of the season, blowing Panthers away by 20 points in a statement game. Arvin was utterly dominant in the paint, finishing with 15 points and controlling both backboards with physicality and timing that Panthers simply couldn't match. Ninoy complemented him brilliantly with 12 points of his own, proving Titans' frontcourt is as dangerous as any in the competition. Medel scored 12 in a losing effort to provide some respectability for Panthers who were otherwise outclassed in virtually every aspect of the game. Titans' ball movement was fluid and purposeful, consistently finding open looks through patient offence and smart decision-making. Panthers were unable to establish any rhythm defensively or offensively as Titans pressed the accelerator from the opening tip. The 20-point margin told the full story of a Titans team operating at a completely different level on the night.",
-      top:[{n:"Arvin",t:"Titans",p:15},{n:"Ninoy",t:"Titans",p:12},{n:"Medel",t:"Panthers",p:12}]
-    },
-    6:  {
-      note: "Titans survived a fierce Phantoms challenge to edge out a gripping 5-point victory in what was the game of the night. Leo was exceptional for Phantoms with 13 points, constantly probing the Titans' defence and creating problems that few players in the competition can replicate. Arvin delivered a powerful 11-point response for Titans, doing the tough work inside and providing the physical edge his team needed in the fourth quarter. Sherwin added 10 in a high-quality Phantoms offensive display that had Titans scrambling for answers at multiple points. Titans' composure under pressure was the defining quality that separated the two sides when the game was on the line. Phantoms had plenty of opportunities to level proceedings but failed to capitalise during a critical stretch in the second half. Titans' resilience and character ultimately prevailed in a match that genuinely could have gone either way.",
-      top:[{n:"Leo",t:"Phantoms",p:13},{n:"Arvin",t:"Titans",p:11},{n:"Sherwin",t:"Phantoms",p:10}]
-    },
-    7:  {
-      note: "The Guardians delivered one of the most impressive team performances of the season, dismantling Panthers by a convincing 17-point margin. Fletcher was in career-best form, posting 13 points in a display that showcased his full offensive arsenal from the power forward position. Carlo matched him stride for stride with 13 of his own, the pair combining for an incredible 26-point haul that Panthers had no answer for. Nelson fought gamely for Panthers with 9 points but received insufficient support from his teammates on what was a thoroughly tough afternoon. The Guardians' inside-outside balance was exceptional, stretching Panthers' defence in ways they had not been tested previously in the season. Panthers' lack of cohesion defensively was brutally exposed as Guardians found seams and mismatches at will. It was a landmark win for The Guardians who announced themselves as a genuine threat to anyone in the competition.",
-      top:[{n:"Fletcher",t:"The Guardians",p:13},{n:"Carlo",t:"The Guardians",p:13},{n:"Nelson",t:"Panthers",p:9}]
-    },
-    8:  {
-      note: "Titans claimed a steady 7-point victory over The Guardians in a game that was far more competitive than the final margin suggests. Anton was the standout performer for Guardians, posting 10 points and pulling down crucial rebounds that kept his side alive in the contest well into the second half. Fletcher added 9 points and provided the kind of forward presence that makes Guardians dangerous, threatening to turn the game with every possession. Noel delivered 7 important points off the bench for Titans, injecting energy and providing the scoring impetus needed to open up a gap. Titans' experience in tight games proved decisive as they managed the game intelligently in the second half. Guardians showed genuine quality and threatened multiple times to swing the momentum, but Titans' defensive organisation held firm. The result keeps Titans on track at the top of the table with a valuable 7-point road win.",
-      top:[{n:"Anton",t:"The Guardians",p:10},{n:"Fletcher",t:"The Guardians",p:9},{n:"Noel",t:"Titans",p:7}]
-    },
-    9:  {
-      note: "Phantoms delivered a dominant 13-point victory over Panthers in a polished, professional performance from start to finish. Medel was the star in a losing effort, top-scoring with 17 points as he refused to let Panthers go quietly despite the mounting scoreboard pressure. Fred was Phantoms' standout operator, contributing 14 points and providing relentless two-way effort that set the standard for his teammates. Leo added 12 points in another clinical contribution, reinforcing his status as one of the most consistent scorers in the competition. Phantoms' defence was equally impressive, successfully limiting Panthers' transition game and forcing difficult shots throughout. Panthers never found the rhythm needed to threaten seriously despite Medel's heroics at the top of the key. It was a complete Phantoms performance that left no doubt as to who was the superior team on the day.",
-      top:[{n:"Medel",t:"Panthers",p:17},{n:"Fred",t:"Phantoms",p:14},{n:"Leo",t:"Phantoms",p:12}]
-    },
-    10: {
-      note: "Phantoms survived one of the great individual performances of the season to edge The Guardians in a breathtaking 3-point contest. Fletcher was in sensational touch, exploding for 20 points in a display that had the opposition shaking their heads in disbelief and teammates rallying around him. Leo matched the occasion magnificently for Phantoms with 17 points, producing the defining plays when his team needed them most to hold off a relentless Guardians charge. Fred added 12 points and never allowed Phantoms' intensity to drop even when Guardians threatened to overhaul the deficit. The match twisted and turned through four electrifying quarters with multiple lead changes and a pulsating atmosphere. Guardians gave absolutely everything and deserved far more from their efforts but ultimately came up 3 points short. It will be remembered as one of the finest contests of the season and a testament to both teams' competitive spirit.",
-      top:[{n:"Fletcher",t:"The Guardians",p:20},{n:"Leo",t:"Phantoms",p:17},{n:"Fred",t:"Phantoms",p:12}]
-    },
-    11: {
-      note: "Phantoms were methodical and authoritative as they put The Guardians to the sword by 13 points in a composed team performance. Leo continued his remarkable scoring run with 14 points, moving the ball beautifully and creating high-percentage opportunities for himself and teammates throughout. Anton was The Guardians' best with 10 points, battling courageously against a Phantoms side that seemed to have an answer for everything thrown at them. Richard contributed 8 points for Phantoms, controlling the interior and providing a reliable outlet in the half-court offence. Phantoms' ball movement and spacing were exemplary, creating open looks through patient offence and punishing any defensive lapses without mercy. Guardians showed fighting spirit but lacked the firepower to mount a sustained challenge against Phantoms' well-structured defensive scheme. The 13-point winning margin was a fair reflection of Phantoms' superiority on a day when they executed their game plan to near perfection.",
-      top:[{n:"Leo",t:"Phantoms",p:14},{n:"Anton",t:"The Guardians",p:10},{n:"Richard",t:"Phantoms",p:8}]
-    },
-    12: {
-      note: "Panthers produced a gritty comeback performance to overpower The Guardians by 10 points in an entertaining and physical encounter. Nelson was the catalyst for Panthers' win with 9 points and an impressive defensive display that swung the momentum decisively in Panthers' favour. Medel added 8 points and controlled the game's tempo expertly, ensuring Panthers maintained their advantage once they wrestled control from Guardians. Anton battled tirelessly for The Guardians with 7 points and refused to yield despite the mounting pressure from an in-form Panthers side. Panthers' second-half intensity was a significant step up from the first, clearly a product of half-time tactical adjustments and renewed defensive commitment. Guardians struggled to handle Panthers' physicality in the paint, giving up too many second-chance opportunities that eventually proved costly. A solid Panthers win that keeps their playoff ambitions firmly alive heading into the business end of the regular season.",
-      top:[{n:"Nelson",t:"Panthers",p:9},{n:"Medel",t:"Panthers",p:8},{n:"Anton",t:"The Guardians",p:7}]
-    },
-    13: {
-      note: "Panthers pulled off a remarkable upset victory over Phantoms, winning by 3 points in one of the most dramatic finishes of the season. Medel was exceptional throughout for Phantoms with 18 points, producing one of his finest individual performances only to end up on the losing side in heartbreaking fashion. Nelson responded with a big game for Panthers, providing scoring and defensive intensity to ensure his team never relinquished their belief when Phantoms pushed hard. Leo scored 8 for Phantoms and was influential at key stretches but couldn't quite replicate his usual scoring dominance against a Panthers side playing above themselves. Panthers' defensive effort in the final minutes was nothing short of heroic, refusing to allow Phantoms back into the contest despite enormous pressure. Phantoms will rue a series of missed opportunities in the second half that ultimately cost them a winnable game. Panthers' victory was fully deserved as they demonstrated both resilience and tactical discipline in equal measure.",
-      top:[{n:"Medel",t:"Phantoms",p:18},{n:"Nelson",t:"Panthers",p:10},{n:"Leo",t:"Phantoms",p:8}]
-    },
-    14: {
-      note: "Titans and Panthers produced an absolutely riveting encounter with Titans ultimately claiming victory by just 4 points in a pulsating finish. Medel was in unstoppable form for Panthers with 18 points, single-handedly keeping his side in the contest and pushing Titans to their absolute limits. Noel responded heroically for Titans with 16 points off the bench, delivering his best performance of the season at the most critical moment. Arvin added 15 crucial points and provided the physical presence that ultimately tipped the balance in Titans' favour when the game was at its most intense. The match was a genuine heavyweight contest that neither team deserved to lose, played at an incredible tempo with both defences giving everything. Panthers' inability to stop Titans' interior game despite multiple tactical adjustments proved to be the decisive factor in the closing stages. Titans' experience and mental fortitude came to the fore again as they closed out another fiercely contested win against high-quality opposition.",
-      top:[{n:"Medel",t:"Panthers",p:18},{n:"Noel",t:"Titans",p:16},{n:"Arvin",t:"Titans",p:15}]
-    },
-    15: {
-      note: "Phantoms were brilliantly efficient in dismantling The Guardians by 17 points, delivering one of their most polished performances of the season. Leo was the standout with 20 points, playing with a fluency and confidence that made him virtually impossible to stop over four quarters. JuliusA contributed a vital 11 points in a supporting role, his scoring from the perimeter providing additional dimensions to the Phantoms' attack that stretched Guardians to the limit. Alvin fought admirably for Guardians with 12 points, providing the kind of spirited resistance that at least gave his teammates something to rally around. Phantoms' execution on offence was near flawless, converting a high percentage of their attempts and consistently finding the right man in the right place. The Guardians struggled to build any scoring momentum against a Phantoms defence that was sharp, well-organised and utterly committed throughout. Phantoms' dominant display further cemented their position as serious contenders for the championship.",
-      top:[{n:"Leo",t:"Phantoms",p:20},{n:"JuliusA",t:"Phantoms",p:11},{n:"Alvin",t:"The Guardians",p:12}]
-    },
-    16: {
-      note: "The Guardians produced one of the biggest upsets of the regular season, defeating the table-topping Titans by 6 points in a memorable performance. Alvin was outstanding in leading the charge with 9 points, playing with a fearlessness and sharpness that repeatedly troubled the Titans' defensive setup. Anton was equally effective with 8 points, combining relentless energy with smart decision-making to ensure Guardians maintained their advantage through the tense closing stages. Noel scored 8 for Titans in a spirited but ultimately unsuccessful attempt to drag his team back into a game they looked to be losing control of. The Guardians' defensive organisation was remarkably disciplined, successfully disrupting Titans' usual flow and forcing them into lower-percentage scoring options throughout. Titans' uncharacteristic sloppiness in the third quarter gave Guardians the foothold they needed and they never looked back from that point. A historic win for The Guardians that demonstrated exactly why on any given night, any team in this competition can claim victory.",
-      top:[{n:"Alvin",t:"The Guardians",p:9},{n:"Anton",t:"The Guardians",p:8},{n:"Noel",t:"Titans",p:8}]
-    },
-    17: {
-      note: "Phantoms delivered their most emphatic win of the season, crushing Titans by 16 points in a commanding display that left no doubts about their quality. Leo was sensational, dropping 16 points and producing a masterclass in how to control a game as a forward, reading the defence superbly at every turn. JuliusA was equally lethal with 15 points, his perimeter scoring opening up driving lanes and creating chaos in a Titans defence that had no answer for the dual threat. Noel scored 9 for Titans in a game that must have been deeply frustrating, as his team's usual composure and structure simply failed to materialise. Phantoms' defensive pressure was relentless from the opening tip, forcing Titans into rushed decisions and uncharacteristic turnovers that allowed Phantoms to build an unassailable lead. Titans looked disjointed and out of sorts, their usual confidence visibly shaken by a Phantoms team playing with tremendous freedom and collective belief. It was a significant statement from Phantoms as the regular season entered its final stages and playoff places came into sharp focus.",
-      top:[{n:"Leo",t:"Phantoms",p:16},{n:"JuliusA",t:"Phantoms",p:15},{n:"Noel",t:"Titans",p:9}]
-    },
-    18: {
-      note: "Panthers closed the regular season in emphatic fashion, defeating Titans by 12 points in a dominant final-round display that sent a powerful message ahead of the playoffs. Medel was at his brilliant best with 16 points, driving the Panthers' offence with a precision and confidence that Titans simply could not contain no matter what defensive scheme they deployed. Nelson contributed significantly with 6 points and a relentless defensive performance that set the physical tone for Panthers throughout the contest. Noel top-scored for Titans with 13 points in a fighting individual display, showing why he remains one of the most dangerous scoring threats in the competition. Titans appeared to lack the intensity and urgency that has defined their best performances, seemingly affected by the weight of recent results and a heavy schedule. Panthers were the polar opposite — sharp, motivated and tactically excellent — producing exactly the performance needed to carry momentum into the post-season. The result confirmed the final playoff standings and set up a fascinating bracket that promises spectacular basketball in the weeks ahead.",
-      top:[{n:"Medel",t:"Panthers",p:16},{n:"Nelson",t:"Panthers",p:6},{n:"Noel",t:"Titans",p:13}]
-    },
-  };
+  // Group by game number
+  const byGame = {};
+  played.forEach(g => { if(!byGame[g.game]) byGame[g.game]=[]; byGame[g.game].push(g); });
 
-  const medals = ['🥇','🥈','🥉'];
-
-  el.innerHTML = played.map(g => {
-    const homeWin = g.homeScore > g.awayScore;
-    const awayWin = g.awayScore > g.homeScore;
-    const tie     = g.homeScore === g.awayScore;
-    const winner  = tie ? null : (homeWin ? g.home : g.away);
-    const wc      = winner ? (TEAMS[winner]?.color || '#39ff14') : '#888';
-    const hc      = TEAMS[g.home]?.color || '#fff';
-    const ac      = TEAMS[g.away]?.color || '#fff';
-    const sum     = SUMMARIES[g.id] || {};
-
-    return `<div class="gr-row">
-      <!-- SCOREBOARD -->
-      <div class="gr-score-card">
-        <div class="gr-header">
-          <span class="gr-game-num">GAME ${g.game}</span>
-          <span class="gr-date">${g.date}</span>
-          ${winner
-            ? `<span class="gr-winner-pill" style="background:${ha(wc,0.15)};color:${wc};border-color:${ha(wc,0.35)}">🏆 ${winner}</span>`
-            : '<span class="gr-winner-pill" style="color:#888">DRAW</span>'}
-        </div>
-        <div class="gr-matchup">
-          <div class="gr-team ${homeWin?'gr-win':awayWin?'gr-loss':''}">
-            <img src="./team_logo/${g.home}.jpeg" class="gr-logo"
-              onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.home}.png';}else{this.style.display='none';}" alt="">
-            <span class="gr-tname" style="color:${hc}">${g.home}</span>
+  el.innerHTML = Object.entries(byGame).map(([gNum, games]) => `
+    <div class="sl">Game ${gNum} — ${games[0].date}</div>
+    <div class="results-grid">
+      ${games.map(g => {
+        const homeWin = g.homeScore > g.awayScore;
+        const awayWin = g.awayScore > g.homeScore;
+        const tie = g.homeScore === g.awayScore;
+        const winner = tie ? 'Draw' : (homeWin ? g.home : g.away);
+        const wc = TEAMS[winner]?.color || '#39ff14';
+        return `<div class="result-card">
+          <div class="result-game-label">
+            <span>Game ${g.game}</span>
+            <span style="color:var(--muted)">${g.date}</span>
           </div>
-          <div class="gr-scores">
-            <span class="gr-score ${homeWin?'gr-score-win':''}" style="${homeWin?'color:'+hc:''}">${g.homeScore}</span>
-            <span class="gr-dash">—</span>
-            <span class="gr-score ${awayWin?'gr-score-win':''}" style="${awayWin?'color:'+ac:''}">${g.awayScore}</span>
+          <div class="result-matchup">
+            <div class="result-team">
+              <img src="./team_logo/${g.home}.jpeg" class="result-team-logo"
+                onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.home}.png';}else{this.style.display='none';}" alt="${g.home}">
+              <span class="result-team-name" style="color:${TEAMS[g.home]?.color||'#fff'}">${g.home}</span>
+            </div>
+            <div class="result-score-box">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="result-score ${homeWin?'win':'loss'}">${g.homeScore}</span>
+                <span class="result-vs">VS</span>
+                <span class="result-score ${awayWin?'win':'loss'}">${g.awayScore}</span>
+              </div>
+            </div>
+            <div class="result-team">
+              <img src="./team_logo/${g.away}.jpeg" class="result-team-logo"
+                onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.away}.png';}else{this.style.display='none';}" alt="${g.away}">
+              <span class="result-team-name" style="color:${TEAMS[g.away]?.color||'#fff'}">${g.away}</span>
+            </div>
           </div>
-          <div class="gr-team gr-team-right ${awayWin?'gr-win':homeWin?'gr-loss':''}">
-            <span class="gr-tname" style="color:${ac}">${g.away}</span>
-            <img src="./team_logo/${g.away}.jpeg" class="gr-logo"
-              onerror="if(!this._t){this._t=1;this.src='./team_logo/${g.away}.png';}else{this.style.display='none';}" alt="">
+          <div class="result-winner-banner" style="background:${ha(wc,0.08)};border-color:${ha(wc,0.25)};color:${wc}">
+            ${tie ? '🤝 DRAW' : `🏆 ${winner} WIN`}
           </div>
-        </div>
-      </div>
-      <!-- SUMMARY -->
-      <div class="gr-summary-card">
-        <div class="gr-sum-title">📋 Game Summary</div>
-        <p class="gr-sum-note">${sum.note || 'Summary coming soon.'}</p>
-        ${sum.top ? `<div class="gr-sum-scorers">
-          ${sum.top.map((s,i) => {
-            const sc = TEAMS[s.t]?.color || '#ffaa00';
-            return `<div class="gr-scorer">
-              <span class="gr-medal">${medals[i]}</span>
-              <img src="${playerImgSrc(s.n)}" class="gr-scorer-img" style="border-color:${sc}"
-                onerror="this.style.display='none'" alt="">
-              <span class="gr-scorer-name" style="color:${sc}" onclick="openProfile('${s.n}')">${s.n}</span>
-              <span class="gr-scorer-pts" style="color:${sc}">${s.p} PTS</span>
-            </div>`;
-          }).join('')}
-        </div>` : ''}
-      </div>
-    </div>`;
-  }).join('');
+        </div>`;
+      }).join('')}
+    </div>`).join('');
 }
-
 
 // ===========================
 // SCHEDULE VIEW
@@ -2157,17 +2541,23 @@ document.addEventListener('keydown', e=>{
 const GAME_SUMMARIES = {
   // Key: "gameNum-homeTeam" -> summary details (derived from baked player stats)
   "1-Titans":        { homeScore:23, awayScore:21, topScorers:[{name:"Jaime",team:"Titans",pts:9},{name:"Fred",team:"Phantoms",pts:8},{name:"Christian",team:"Titans",pts:7}]},
-  "1-The Guardians": { homeScore:35, awayScore:39, topScorers:[{name:"Alvin",team:"The Guardians",pts:13},{name:"Nelson",team:"Panthers",pts:9},{name:"Medel",team:"Panthers",pts:8}]},
+  "1-The Guardians": { homeScore:35, awayScore:39, topScorers:[{name:"Alvin",team:"The Guardians",pts:13},{name:"Nelson",team:"Panthers",pts:9},{name:"Eric",team:"Panthers",pts:8}]},
   "2-Titans":        { homeScore:25, awayScore:19, topScorers:[{name:"Christian",team:"Titans",pts:10},{name:"Carlo",team:"The Guardians",pts:9},{name:"Rowell",team:"Titans",pts:6}]},
   "2-Phantoms":      { homeScore:26, awayScore:33, topScorers:[{name:"EdG",team:"Panthers",pts:11},{name:"Medel",team:"Panthers",pts:10},{name:"Nelson",team:"Panthers",pts:8}]},
   "3-Titans":        { homeScore:42, awayScore:22, topScorers:[{name:"Arvin",team:"Titans",pts:15},{name:"Ninoy",team:"Titans",pts:12},{name:"Medel",team:"Panthers",pts:12}]},
   "3-Phantoms":      { homeScore:43, awayScore:40, topScorers:[{name:"Fletcher",team:"The Guardians",pts:20},{name:"Leo",team:"Phantoms",pts:17},{name:"Fred",team:"Phantoms",pts:12}]},
   "4-Titans":        { homeScore:36, awayScore:31, topScorers:[{name:"Leo",team:"Phantoms",pts:13},{name:"Arvin",team:"Titans",pts:11},{name:"Sherwin",team:"Phantoms",pts:10}]},
-  "4-The Guardians": { homeScore:40, awayScore:23, topScorers:[{name:"Fletcher",team:"The Guardians",pts:13},{name:"Carlo",team:"The Guardians",pts:13},{name:"Nelson",team:"Panthers",pts:9}]},
-  "5-Titans":        { homeScore:36, awayScore:29, topScorers:[{name:"Anton",team:"The Guardians",pts:10},{name:"Fletcher",team:"The Guardians",pts:9},{name:"Noel",team:"Titans",pts:7}]},
+  "4-The Guardians": { homeScore:40, awayScore:23, topScorers:[{name:"Carlo",team:"The Guardians",pts:13},{name:"Anton",team:"The Guardians",pts:6},{name:"Eric",team:"Panthers",pts:0}]},
+  "5-Titans":        { homeScore:36, awayScore:29, topScorers:[{name:"Anton",team:"The Guardians",pts:10},{name:"Carlo",team:"The Guardians",pts:4},{name:"Noel",team:"Titans",pts:7}]},
   "5-Phantoms":      { homeScore:42, awayScore:29, topScorers:[{name:"Medel",team:"Panthers",pts:17},{name:"Fred",team:"Phantoms",pts:14},{name:"Leo",team:"Phantoms",pts:12}]},
-  "6-Titans":        { homeScore:42, awayScore:39, topScorers:[{name:"Medel",team:"Panthers",pts:18},{name:"Noel",team:"Titans",pts:16},{name:"Arvin",team:"Titans",pts:15}]},
+  "6-Titans":        { homeScore:42, awayScore:38, topScorers:[{name:"Noel",team:"Titans",pts:16},{name:"Arvin",team:"Titans",pts:15},{name:"Medel",team:"Panthers",pts:11}]},
   "6-Phantoms":      { homeScore:35, awayScore:22, topScorers:[{name:"Leo",team:"Phantoms",pts:14},{name:"Anton",team:"The Guardians",pts:10},{name:"Richard",team:"Phantoms",pts:8}]},
+  "7-Titans":        { homeScore:26, awayScore:42, topScorers:[{name:"JuliusA",team:"Phantoms",pts:15},{name:"Leo",team:"Phantoms",pts:6},{name:"Rowell",team:"Titans",pts:8}]},
+  "7-The Guardians": { homeScore:25, awayScore:31, topScorers:[{name:"Alvin",team:"The Guardians",pts:12},{name:"Anton",team:"The Guardians",pts:8},{name:"Raffy",team:"The Guardians",pts:4}]},
+  "8-Titans":        { homeScore:27, awayScore:39, topScorers:[{name:"Medel",team:"Panthers",pts:16},{name:"EdG",team:"Panthers",pts:9},{name:"Noel",team:"Titans",pts:13}]},
+  "8-Phantoms":      { homeScore:42, awayScore:25, topScorers:[{name:"Leo",team:"Phantoms",pts:20},{name:"JuliusA",team:"Phantoms",pts:11},{name:"Alvin",team:"The Guardians",pts:9}]},
+  "9-Phantoms":      { homeScore:36, awayScore:39, topScorers:[{name:"Medel",team:"Panthers",pts:18},{name:"Nelson",team:"Panthers",pts:6},{name:"Leo",team:"Phantoms",pts:14}]},
+  "9-The Guardians": { homeScore:32, awayScore:42, topScorers:[{name:"Louis",team:"Panthers",pts:6},{name:"Anton",team:"The Guardians",pts:14},{name:"EdG",team:"Panthers",pts:2}]},
 };
 
 // ===========================
@@ -2287,6 +2677,14 @@ function getPlayerStats(profName) {
   return ALL_PLAYERS.find(p => p.name === profName) || null;
 }
 
+// Slot-to-global game ID mapping for each team (slot index 0-based -> GAME_DATA id)
+const TEAM_SLOT_MAP = {
+  "Titans":        [1,3,5,6,8,14,17,16,18,'sf1'],
+  "Phantoms":      [1,4,10,6,9,11,13,17,15,'sf2'],
+  "The Guardians": [2,3,10,7,8,11,12,15,16,'sf1'],
+  "Panthers":      [2,4,5,7,9,13,12,14,18,'sf2'],
+};
+
 // Build game log from GAME_DATA for the player's team
 function getGameLog(profName) {
   const profile = PLAYER_PROFILES.find(p => p.name === profName);
@@ -2294,12 +2692,16 @@ function getGameLog(profName) {
   const teamName = profile.team;
   const player = TEAMS[teamName]?.players.find(p => p.name === profName);
   if (!player) return [];
+  const slotMap = TEAM_SLOT_MAP[teamName] || [];
+  // Build reverse: global game id -> slot index
+  const gidToSlot = {};
+  slotMap.forEach((gid,idx) => { if(typeof gid==='number') gidToSlot[gid]=idx; });
   return GAME_DATA
     .filter(g => (g.home === teamName || g.away === teamName) && g.status === 'done')
     .map(g => {
       const isHome = g.home === teamName;
-      const gi = g.game - 1;
-      const myPts = player.game_pts[gi] || 0;
+      const slotIdx = gidToSlot[g.id];
+      const myPts = (slotIdx !== undefined) ? (player.game_pts[slotIdx] || 0) : 0;
       const myScore = isHome ? g.homeScore : g.awayScore;
       const oppScore = isHome ? g.awayScore : g.homeScore;
       return {
@@ -2540,7 +2942,7 @@ function deletePlayerHL(profName, id) {
 
 
 // ===========================
-// PLAYOFFS
+// PLAYOFF DATA
 // ===========================
 const PO_SEEDS = [
   { seed:1, team:"Titans",         w:6, l:3, d:0, pts:12, adv:true  },
@@ -2549,40 +2951,43 @@ const PO_SEEDS = [
   { seed:4, team:"The Guardians",  w:2, l:7, d:0, pts:4,  adv:false },
 ];
 
-// Edit scores & status here as games are played
-// SF: best of 3 (twice-to-beat: adv team wins series with 1 win vs 0)
-// GF: single game (1 game final, no advantage)
+// Results updated after Game 10 (Semi-Finals)
 const PO_SERIES = [
   {
     id:"sf1", round:"Semi-Final 1",
-    t1:"Titans", s1:1, wins1:0,
+    t1:"Titans", s1:1, wins1:1,
     t2:"The Guardians", s2:4, wins2:0,
-    adv:"Titans", bestOf:3, winner:null,
+    adv:"Titans", bestOf:3, winner:"Titans",
     games:[
-      { n:1, date:"TBD", h:0, a:0, status:"upcoming" },
-      { n:2, date:"TBD", h:0, a:0, status:"if necessary" },
-     ],
+      { n:1, date:"Nov 15, 2026", h:64, a:52, status:"done", winTeam:"Titans",
+        note:"Titans advance to the Grand Final — dominant 64-52 victory seals their spot." },
+    ],
   },
   {
     id:"sf2", round:"Semi-Final 2",
     t1:"Phantoms", s1:2, wins1:0,
-    t2:"Panthers", s2:3, wins2:0,
-    adv:"Phantoms", bestOf:3, winner:null,
+    t2:"Panthers", s2:3, wins2:1,
+    adv:"Phantoms", bestOf:3, winner:"Panthers",
     games:[
-      { n:1, date:"TBD", h:0, a:0, status:"upcoming" },
-      { n:2, date:"TBD", h:0, a:0, status:"if necessary" },
-      ],
+      { n:1, date:"Nov 15, 2026", h:63, a:74, status:"done", winTeam:"Panthers",
+        note:"Panthers advance to the Grand Final with a 74-63 upset win over the Phantoms." },
+    ],
   },
   {
     id:"gf", round:"Grand Final 🏆",
-    t1:null, s1:null, wins1:0,
-    t2:null, s2:null, wins2:0,
+    t1:"Titans", s1:1, wins1:0,
+    t2:"Panthers", s2:3, wins2:0,
     adv:null, bestOf:1, winner:null,
     games:[
       { n:1, date:"TBD", h:0, a:0, status:"tbd" },
     ],
   },
 ];
+
+
+// ===========================
+// PLAYOFF RENDER
+// ===========================
 
 function renderPlayoffs() {
   const el = document.getElementById('playoffs-content');
@@ -2774,6 +3179,10 @@ function renderPlayoffs() {
 // ===========================
 // HOME PAGE
 // ===========================
+// ===========================
+// HOME PAGE
+// ===========================
+
 function hpToggle(id) {
   var el = document.getElementById(id);
   if (!el) return;
@@ -2788,34 +3197,30 @@ function renderHome() {
 
   function tc(t) { return (TEAMS[t] && TEAMS[t].color) ? TEAMS[t].color : '#ffaa00'; }
 
-  // Gallery image — simple numbered files
-  function gimg(n, w, h, r) {
-    var s = 'width:' + (w||'100%') + ';height:' + (h||'100%') + ';object-fit:cover;object-position:center;' + (r ? 'border-radius:' + r + ';' : '');
-    return '<img src="./Gallery/' + n + '.jpg" style="' + s + '" '
+  function gimg(n) {
+    return '<img src="./Gallery/' + n + '.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center" '
       + 'onerror="if(!this._e){this._e=1;this.src=\'./Gallery/' + n + '.jpeg\';}else if(this._e==1){this._e=2;this.src=\'./Gallery/' + n + '.png\';}else{this.style.display=\'none\';}" alt="">';
   }
 
-  // Team logo
   function tlogo(team, w, h) {
     return '<img src="./team_logo/' + team + '.jpeg" style="width:' + w + 'px;height:' + h + 'px;object-fit:contain" '
       + 'onerror="if(!this._e){this._e=1;this.src=\'./team_logo/' + team + '.png\';}else{this.style.display=\'none\';}" alt="' + team + '">';
   }
 
-  // Scorers from GAME_SUMMARIES — key format is "game-homeTeam"
   function getSum(g) {
     var key = g.game + '-' + g.home;
     return (typeof GAME_SUMMARIES !== 'undefined' && GAME_SUMMARIES[key]) ? GAME_SUMMARIES[key] : null;
   }
 
-  // Build scorer rows HTML
   var medals = ['🥇','🥈','🥉'];
+
   function scorerRows(topArr) {
     if (!topArr || !topArr.length) return '';
     var h = '<div class="hp-sclist">';
     topArr.forEach(function(s, i) {
       var sc = tc(s.team);
       h += '<div class="hp-scrow">'
-        + '<span>' + (medals[i] || '▸') + '</span>'
+        + '<span style="font-size:16px">' + (medals[i] || '▸') + '</span>'
         + '<img src="' + playerImgSrc(s.name) + '" class="hp-scimg" style="border-color:' + sc + '" onerror="this.style.display=\'none\'" alt="">'
         + '<span class="hp-scname" style="color:' + sc + '" onclick="openProfile(\'' + s.name + '\')">' + s.name + '</span>'
         + '<span class="hp-scpts" style="color:' + sc + '">' + s.pts + ' PTS</span>'
@@ -2824,89 +3229,75 @@ function renderHome() {
     return h + '</div>';
   }
 
-  // Games sorted newest first
   var done = GAME_DATA.filter(function(g){ return g.status === 'done'; })
                       .sort(function(a,b){ return b.id - a.id; });
-
   var latest  = done[0];
   var sidebar = done.slice(1, 5);
   var older   = done.slice(5, 11);
 
-  // ── Feature card (latest game) ────────────────────
   function featCard(g) {
     if (!g) return '';
-    var hWin = g.homeScore > g.awayScore;
-    var aWin = g.awayScore > g.homeScore;
+    var hWin = g.homeScore > g.awayScore, aWin = g.awayScore > g.homeScore;
     var winner = hWin ? g.home : aWin ? g.away : null;
     var loser  = winner === g.home ? g.away : g.home;
-    var wc     = winner ? tc(winner) : '#888';
-    var m      = Math.abs(g.homeScore - g.awayScore);
+    var wc = winner ? tc(winner) : '#888';
+    var m  = Math.abs(g.homeScore - g.awayScore);
     var hc = tc(g.home), ac = tc(g.away);
-    var imgN   = (g.id % 10) + 1;
-    var sum    = getSum(g);
+    var imgN = (g.id % 10) + 1;
+    var sum  = getSum(g);
     var topArr = sum ? sum.topScorers : [];
-    var uid    = 'feat' + g.id;
-
+    var uid = 'feat' + g.id;
+    var intensity = m <= 4 ? 'nail-biting' : m <= 10 ? 'competitive' : 'commanding';
     var snip = winner
-      ? winner + ' won Game ' + g.game + ' against ' + loser + ' by ' + m + ' points in a ' + (m <= 4 ? 'nail-biting' : m <= 10 ? 'competitive' : 'commanding') + ' contest.'
+      ? winner + ' won Game ' + g.game + ' against ' + loser + ' by ' + m + ' points in a ' + intensity + ' contest.'
       : 'Game ' + g.game + ' finished level — ' + g.home + ' ' + g.homeScore + ' vs ' + g.away + ' ' + g.awayScore + '.';
-
     var hl = winner
-      ? winner + ' ' + (m <= 4 ? 'Edge' : m <= 12 ? 'Beat' : 'Dominate') + ' ' + loser + ' in Game ' + g.game
+      ? winner + ' ' + (m<=4?'Edge':'Beat') + ' ' + loser + ' in Game ' + g.game
       : g.home + ' and ' + g.away + ' Draw — Game ' + g.game;
-
     var body = '<p>' + snip + '</p>';
-    if (winner) {
-      body += '<p>' + winner + ' controlled key phases and executed when it counted most. The result carries significant weight in the playoff standings and momentum heading into the post-season.</p>';
-    }
+    if (winner) body += '<p>' + winner + ' controlled key phases and executed when it mattered most. A result with significant implications for the playoff picture.</p>';
     body += scorerRows(topArr);
     body += '<button class="hp-navlink" onclick="showView(\'results\')">→ View All Game Results</button>';
-
     return '<div class="hp-card">'
-      + '<div class="hp-feat-img">🏀'
-      + gimg(imgN)
+      + '<div class="hp-feat-img">🏀' + gimg(imgN)
       + '<div class="hp-feat-sbar">'
-      + '<div class="hp-feat-team">' + tlogo(g.home, 48, 30) + '<span class="hp-feat-tn" style="color:' + hc + '">' + g.home + '</span></div>'
-      + '<div style="display:flex;align-items:center;gap:8px">'
-      + '<span class="hp-feat-sc ' + (hWin ? 'win' : '') + '" style="color:' + (hWin ? hc : 'rgba(255,255,255,0.5)') + '">' + g.homeScore + '</span>'
+      + '<div class="hp-feat-team">' + tlogo(g.home,52,32) + '<span class="hp-feat-tn" style="color:' + hc + '">' + g.home + '</span></div>'
+      + '<div style="display:flex;align-items:center;gap:9px">'
+      + '<span class="hp-feat-sc ' + (hWin?'win':'') + '" style="color:' + (hWin?hc:'rgba(255,255,255,0.5)') + '">' + g.homeScore + '</span>'
       + '<span class="hp-feat-dash">—</span>'
-      + '<span class="hp-feat-sc ' + (aWin ? 'win' : '') + '" style="color:' + (aWin ? ac : 'rgba(255,255,255,0.5)') + '">' + g.awayScore + '</span>'
+      + '<span class="hp-feat-sc ' + (aWin?'win':'') + '" style="color:' + (aWin?ac:'rgba(255,255,255,0.5)') + '">' + g.awayScore + '</span>'
       + '</div>'
-      + '<div class="hp-feat-team">' + tlogo(g.away, 48, 30) + '<span class="hp-feat-tn" style="color:' + ac + '">' + g.away + '</span></div>'
+      + '<div class="hp-feat-team">' + tlogo(g.away,52,32) + '<span class="hp-feat-tn" style="color:' + ac + '">' + g.away + '</span></div>'
       + '</div></div>'
       + '<div class="hp-cbody">'
       + '<div class="hp-ctag" style="color:' + wc + '">🔴 LATEST RESULT — GAME ' + g.game + '</div>'
       + '<div class="hp-chl">' + hl + '</div>'
       + '<div class="hp-csnip">' + snip + '</div>'
       + '<div class="hp-full" id="' + uid + '">' + body + '</div>'
-      + '<div class="hp-cfoot">'
-      + '<span class="hp-date">' + g.date + '</span>'
+      + '<div class="hp-cfoot"><span class="hp-date">' + g.date + '</span>'
       + '<button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button>'
       + '</div></div></div>';
   }
 
-  // ── Sidebar small card ────────────────────────
   function smCard(g) {
-    var winner = g.homeScore > g.awayScore ? g.home : g.homeScore < g.awayScore ? g.away : null;
-    var loser  = winner === g.home ? g.away : g.home;
-    var wc     = winner ? tc(winner) : '#888';
-    var m      = Math.abs(g.homeScore - g.awayScore);
-    var uid    = 'sm' + g.id;
-    var sum    = getSum(g);
+    var winner = g.homeScore>g.awayScore ? g.home : g.homeScore<g.awayScore ? g.away : null;
+    var loser  = winner===g.home ? g.away : g.home;
+    var wc = winner ? tc(winner) : '#888';
+    var m  = Math.abs(g.homeScore - g.awayScore);
+    var uid = 'sm' + g.id;
+    var sum = getSum(g);
     var topArr = sum ? sum.topScorers : [];
-
     var detail = '<p>' + (winner
-      ? winner + ' secured a ' + m + '-point win over ' + loser + ' in Game ' + g.game + '. A hard-fought result with significant playoff implications.'
+      ? winner + ' secured a ' + m + '-point win over ' + loser + ' in Game ' + g.game + '. A result with significant playoff implications.'
       : 'Game ' + g.game + ' ended in a draw between ' + g.home + ' and ' + g.away + '.') + '</p>';
     if (topArr.length) {
       topArr.forEach(function(s, i) {
         var sc = tc(s.team);
-        detail += '<div style="font-size:13px;color:var(--muted);padding:2px 0">'
-          + medals[i] + ' <span style="color:' + sc + ';font-weight:700;cursor:pointer" onclick="openProfile(\'' + s.name + '\')">' + s.name + '</span> — ' + s.pts + ' pts</div>';
+        detail += '<div style="font-size:14px;color:#c8a96e;padding:3px 0">'
+          + medals[i] + ' <span style="color:' + sc + ';font-weight:700;cursor:pointer;font-family:\'Barlow Condensed\';font-size:15px" onclick="openProfile(\'' + s.name + '\')">' + s.name + '</span> — ' + s.pts + ' pts</div>';
       });
     }
-    detail += '<button class="hp-navlink" style="font-size:12px;padding:6px 12px;margin-top:6px" onclick="showView(\'results\')">→ Results</button>';
-
+    detail += '<button class="hp-navlink" style="font-size:13px;padding:7px 13px;margin-top:7px" onclick="showView(\'results\')">→ Results</button>';
     return '<div class="hp-sm">'
       + '<div class="hp-smtag" style="color:' + wc + '">GAME ' + g.game + ' · ' + g.date + '</div>'
       + '<div class="hp-smhl">' + (winner ? winner + ' beat ' + loser : g.home + ' vs ' + g.away) + '</div>'
@@ -2916,86 +3307,83 @@ function renderHome() {
       + '</div>';
   }
 
-  // ── Older game recap card ─────────────────────
   function olderCard(g) {
-    var winner = g.homeScore > g.awayScore ? g.home : g.homeScore < g.awayScore ? g.away : null;
-    var loser  = winner === g.home ? g.away : g.home;
-    var wc     = winner ? tc(winner) : '#888';
-    var m      = Math.abs(g.homeScore - g.awayScore);
-    var uid    = 'oc' + g.id;
-    var imgN   = (g.id % 10) + 1;
-    var sum    = getSum(g);
+    var winner = g.homeScore>g.awayScore ? g.home : g.homeScore<g.awayScore ? g.away : null;
+    var loser  = winner===g.home ? g.away : g.home;
+    var wc = winner ? tc(winner) : '#888';
+    var m  = Math.abs(g.homeScore - g.awayScore);
+    var uid = 'oc' + g.id;
+    var imgN = (g.id % 10) + 1;
+    var sum = getSum(g);
     var topArr = sum ? sum.topScorers : [];
-
     var snip = winner ? winner + ' won by ' + m + ' in Game ' + g.game + '.' : 'Draw in Game ' + g.game + '.';
     var body = '<p>' + (winner
-      ? winner + ' claimed victory over ' + loser + ' ' + g.homeScore + '–' + g.awayScore + ' in Game ' + g.game + ' on ' + g.date + '. The ' + m + '-point margin reflected a ' + (m <= 5 ? 'tight' : m <= 12 ? 'competitive' : 'decisive') + ' performance.'
+      ? winner + ' claimed victory over ' + loser + ' ' + g.homeScore + '–' + g.awayScore + ' in Game ' + g.game + ' on ' + g.date + '. The ' + m + '-point margin reflected a ' + (m<=5?'tight':m<=12?'competitive':'decisive') + ' performance.'
       : 'A well-contested draw between ' + g.home + ' and ' + g.away + ' in Game ' + g.game + ' on ' + g.date + '.') + '</p>';
     body += scorerRows(topArr);
-    body += '<button class="hp-navlink" style="font-size:12px;padding:6px 12px;margin-top:6px" onclick="showView(\'results\')">→ Full Results</button>';
-
+    body += '<button class="hp-navlink" style="font-size:13px;padding:7px 13px;margin-top:7px" onclick="showView(\'results\')">→ Full Results</button>';
     return '<div class="hp-nc">'
-      + '<div class="hp-ncthumb"><span>' + (winner ? '🏆' : '🏀') + '</span>' + gimg(imgN) + '</div>'
+      + '<div class="hp-ncthumb"><span>' + (winner?'🏆':'🏀') + '</span>' + gimg(imgN) + '</div>'
       + '<div class="hp-ncbody">'
       + '<div class="hp-nctag" style="color:' + wc + '">📋 GAME ' + g.game + ' RECAP</div>'
-      + '<div class="hp-nchl">' + (winner ? winner + ' ' + (m <= 5 ? 'edge' : 'beat') + ' ' + loser + ' ' + g.homeScore + '–' + g.awayScore : g.home + ' ' + g.homeScore + '–' + g.awayScore + ' ' + g.away) + '</div>'
+      + '<div class="hp-nchl">' + (winner ? winner+' '+(m<=5?'edge':'beat')+' '+loser+' '+g.homeScore+'–'+g.awayScore : g.home+' '+g.homeScore+'–'+g.awayScore+' '+g.away) + '</div>'
       + '<div class="hp-ncsnip">' + snip + '</div>'
       + '<div class="hp-full" id="' + uid + '">' + body + '</div>'
-      + '<div class="hp-ncfoot"><span class="hp-date">' + g.date + '</span><button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button></div>'
-      + '</div></div>';
+      + '<div class="hp-ncfoot"><span class="hp-date">' + g.date + '</span>'
+      + '<button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button>'
+      + '</div></div></div>';
   }
 
-  // ── League news (static) ──────────────────────
   var NEWS = [
-    { id:'po',      img:1,  color:'#ffd700', icon:'📣', tag:'LEAGUE ANNOUNCEMENT',   date:'Apr 20, 2026',
+    { id:'po', img:1, color:'#ffd700', icon:'📣', tag:'LEAGUE ANNOUNCEMENT', date:'Apr 20, 2026',
       hl:'Playoffs Confirmed — NBA-Style Bracket Set',
-      snip:'Top 4 teams advance. #1 &amp; #2 seeds hold the twice-to-beat advantage. Grand Final is one game.',
-      body:'<p>The Canberra Hoops 2026 Summer Cup Playoffs are officially set. Two Semi-Finals are played as Best-of-3 series. The #1 and #2 seeds hold a <strong>twice-to-beat advantage</strong> — they only need one win while opponents need two.</p>'
-        + '<div class="hp-quote">"This format rewards regular season excellence while keeping every team\'s dream alive." — Canberra Hoops Committee</div>'
-        + '<p><strong>Semi-Final 1:</strong> #1 Titans (★ Twice to Beat) vs #4 The Guardians</p>'
-        + '<p><strong>Semi-Final 2:</strong> #2 Phantoms (★ Twice to Beat) vs #3 Panthers</p>'
-        + '<p>The Grand Final is a single winner-take-all game. No seed advantage. Pure basketball.</p>',
-      link:'playoffs', linkTxt:'View Bracket' },
-    { id:'mvp',     img:2,  color:'#ffaa00', icon:'🏆', tag:'AWARD WATCH',           date:'Apr 19, 2026',
+      snip:'Top 4 teams advance. #1 &amp; #2 seeds are twice to beat. Grand Final is one winner-take-all game.',
+      body:'<p>The Canberra Hoops 2026 Summer Cup Playoffs are officially confirmed. Two Semi-Finals are played as Best-of-3 series. The #1 and #2 seeds hold a <strong>twice-to-beat advantage</strong> — they only need one win while opponents need two.</p>'
+        + '<div class="hp-quote">"This format rewards regular season excellence while giving every team a genuine shot at glory." — Canberra Hoops Committee</div>'
+        + '<p><strong>SF1:</strong> #1 Titans (★ Twice to Beat) vs #4 The Guardians</p>'
+        + '<p><strong>SF2:</strong> #2 Phantoms (★ Twice to Beat) vs #3 Panthers</p>'
+        + '<p>The Grand Final is a single winner-take-all game. No seed advantage. Pure basketball decides the champion.</p>',
+      link:'playoffs', linkTxt:'View Full Bracket' },
+    { id:'mvp', img:2, color:'#ffaa00', icon:'🏆', tag:'AWARD WATCH', date:'Apr 19, 2026',
       hl:'Leo vs Medel — The MVP Race Nobody Can Settle',
-      snip:'Leo leads all scorers. Medel\'s explosiveness has been unmatched. The debate is too close to call.',
-      body:'<p><strong>Leo of the Phantoms</strong> has been the most consistent performer all season — his scoring total leads the entire competition and he has produced in every big moment.</p>'
-        + '<div class="hp-quote">"Every time we needed a basket, Leo found a way." — Phantoms</div>'
-        + '<p><strong>Medel of the Panthers</strong> counters with sheer explosiveness. His 18-point blitz against Titans in a near-comeback is one of the great individual performances of the season.</p>'
-        + '<p>The MVP announcement comes after the playoffs. Both players intend to make the decision as hard as possible.</p>',
-      link:'players', linkTxt:'Player Leaderboard' },
-    { id:'nelson',  img:3,  color:'#39ff14', icon:'🛡️', tag:'DEFENSIVE EXCELLENCE',  date:'Apr 18, 2026',
+      snip:'Leo leads all scorers all season. Medel\'s explosiveness is unmatched. The debate is too close to call.',
+      body:'<p><strong>Leo of the Phantoms</strong> has been the most consistent performer in the competition — his season-leading points total and ability to deliver in big moments make him the standout candidate.</p>'
+        + '<div class="hp-quote">"Every time we needed a basket, Leo found a way. That\'s what separates great players." — Phantoms</div>'
+        + '<p><strong>Medel of the Panthers</strong> counters with sheer explosiveness. His 18-point display against Titans in a near-comeback is one of the great individual performances of the season.</p>'
+        + '<p>The MVP is announced after the playoffs. Both players intend to make the decision impossible.</p>',
+      link:'players', linkTxt:'View Leaderboard' },
+    { id:'nelson', img:3, color:'#39ff14', icon:'🛡️', tag:'DEFENSIVE EXCELLENCE', date:'Apr 18, 2026',
       hl:'Nelson Is the Steal King — Panthers\' Defensive Force',
-      snip:'Nelson\'s steal total leads the entire competition. His impact goes far beyond what shows on the stat sheet.',
-      body:'<p><strong>Nelson of the Panthers</strong> has assembled one of the great defensive seasons in Canberra Hoops history. His steal numbers lead the competition — but the statistics only tell part of the story.</p>'
-        + '<p>What makes Nelson remarkable is his anticipation. He reads passing lanes before they open and converts turnovers into fast breaks with devastating speed.</p>'
-        + '<div class="hp-quote">"You can\'t relax for a second with Nelson on the floor. Always watching. Always waiting." — Opposing player</div>'
-        + '<p>As the playoffs begin, opposing teams will spend serious preparation time trying to neutralise him.</p>',
-      link:'profiles', linkTxt:'View Profiles' },
-    { id:'fletcher',img:4,  color:'#39ff14', icon:'🔥', tag:'PLAYER SPOTLIGHT',      date:'Apr 15, 2026',
-      hl:'Fletcher\'s 14 PPG in 3 Games — The Season\'s Most Jaw-Dropping Stat',
-      snip:'The Guardians\' forward has averaged 14 points per game — the highest in the competition — in just three appearances.',
-      body:'<p>The numbers don\'t lie: <strong>Fletcher of The Guardians</strong> has the highest per-game average in the entire 2026 Summer Cup. When he is on the court, The Guardians become a different team entirely.</p>'
-        + '<p>His most memorable performance — 20 points against Phantoms in a near-impossible comeback — showcased a player who is simply unguardable when fully switched on.</p>'
-        + '<div class="hp-quote">"Fletcher is the wildcard nobody can prepare for. When he\'s on, he\'s on a completely different level." — League observer</div>'
-        + '<p>If he is fit for the playoffs, the bracket could be turned on its head.</p>',
-      link:'profiles', linkTxt:'View Profiles' },
-    { id:'titans',  img:5,  color:'#00d4ff', icon:'📈', tag:'SEASON REVIEW',         date:'Apr 18, 2026',
+      snip:'Nelson\'s steal total leads the entire competition. His impact goes far beyond what the stat sheet shows.',
+      body:'<p><strong>Nelson of the Panthers</strong> has assembled one of the great defensive seasons in Canberra Hoops history. His steal numbers lead the competition — but statistics only tell part of the story.</p>'
+        + '<p>What makes Nelson remarkable is his anticipation. He reads passing lanes before they open, rotates into positions nobody expects, and converts turnovers into fast breaks at devastating speed.</p>'
+        + '<div class="hp-quote">"You cannot relax for a single second with Nelson on the floor. He is always watching, always waiting." — Opposing player</div>'
+        + '<p>As the playoffs begin, opposing teams will spend serious preparation time trying to neutralise him. Whether they succeed will be one of the key sub-plots of the post-season.</p>',
+      link:'profiles', linkTxt:'View Player Profiles' },
+    { id:'fletcher', img:4, color:'#39ff14', icon:'🔥', tag:'PLAYER SPOTLIGHT', date:'Apr 15, 2026',
+      hl:'Fletcher\'s 14 PPG in 3 Games Stuns the League',
+      snip:'The Guardians\' forward has the highest per-game average in the competition in just three appearances. A true playoff wildcard.',
+      body:'<p><strong>Fletcher of The Guardians</strong> holds the highest per-game average in the entire 2026 Summer Cup. When he is on the court, The Guardians become a completely different team.</p>'
+        + '<p>His most memorable performance — 20 points against Phantoms in a near-impossible comeback — showed a player who is simply unguardable when fully switched on.</p>'
+        + '<div class="hp-quote">"Fletcher is the wildcard nobody can prepare for. When he is on, he is on a completely different level." — League observer</div>'
+        + '<p>If he is fit for the playoffs against #1 seed Titans, the bracket could be turned on its head entirely.</p>',
+      link:'profiles', linkTxt:'View Player Profiles' },
+    { id:'titans', img:5, color:'#00d4ff', icon:'📈', tag:'SEASON REVIEW', date:'Apr 18, 2026',
       hl:'Titans Finish #1 — How Early Dominance Secured the Top Seed',
       snip:'Six wins from their first nine games. A record that survived a difficult final stretch to lock in the #1 seeding.',
-      body:'<p><strong>Titans</strong> sit atop the final standings as the #1 seed — built on an exceptional early-season run that no other team could match.</p>'
-        + '<p><strong>Arvin</strong> was devastating in the paint. <strong>Christian</strong> controlled the tempo. <strong>Noel</strong> provided the scoring punch off the bench. Together they won six of their first nine games, including a 20-point demolition of Panthers.</p>'
-        + '<div class="hp-quote">"We competed every night and stayed disciplined. That\'s why we\'re where we are." — Titans</div>'
-        + '<p>A late-season wobble introduced doubt — but the twice-to-beat advantage is secured. Now they must deliver in the playoffs.</p>',
+      body:'<p><strong>Titans</strong> sit atop the final standings as the #1 seed — built on an exceptional early-season run that no other team in the competition could match.</p>'
+        + '<p><strong>Arvin</strong> was devastating in the paint. <strong>Christian</strong> controlled the tempo brilliantly from point guard. <strong>Noel</strong> emerged as a scoring weapon off the bench. Together they dominated the first half of the season.</p>'
+        + '<div class="hp-quote">"We competed hard every night and stayed disciplined. That is why we are where we are now." — Titans</div>'
+        + '<p>A late-season wobble raised doubts — but the twice-to-beat advantage is secured. Now they must deliver in the playoffs after a dominant regular season performance.</p>',
       link:'standings', linkTxt:'View Standings' },
-    { id:'upset',   img:6,  color:'#39ff14', icon:'💪', tag:'GIANT KILLING',         date:'Apr 18, 2026',
-      hl:'Guardians Shock Titans — The Biggest Upset of the Regular Season',
-      snip:'Bottom of the table. Seven losses from their last nine games. Nobody gave them a chance — and they won by 6.',
-      body:'<p>It was the result that sent shockwaves through the entire competition. <strong>The Guardians</strong>, sitting last in the table, defeated competition-leading Titans by 6 points in one of the great upsets of the season.</p>'
-        + '<p><strong>Anton</strong> was exceptional, providing the energy and key baskets. <strong>Alvin</strong> managed the game intelligently under intense pressure. The defensive performance was extraordinary — disciplined, committed, and relentless.</p>'
-        + '<div class="hp-quote">"We had nothing to lose and everything to gain. We played with that freedom." — The Guardians</div>'
-        + '<p>For The Guardians, this match defines their season. And as they face Titans again in the semi-finals, they carry the belief that anything is possible.</p>',
-      link:'results', linkTxt:'View Results' },
+    { id:'upset', img:6, color:'#39ff14', icon:'💪', tag:'GIANT KILLING', date:'Apr 18, 2026',
+      hl:'Guardians Shock Titans — The Biggest Upset of the Season',
+      snip:'Bottom of the table. Seven losses from their last nine games. Nobody gave The Guardians a chance — and they won by 6.',
+      body:'<p>It was the result that sent shockwaves through the entire competition. <strong>The Guardians</strong> — sitting last in the table — defeated league-leading Titans by 6 points in one of the great upsets of the season.</p>'
+        + '<p><strong>Anton</strong> was exceptional throughout, providing the energy and key baskets that built the platform. <strong>Alvin</strong> managed the game intelligently under intense pressure. The defensive performance was extraordinary.</p>'
+        + '<div class="hp-quote">"We had nothing to lose and everything to gain. We played with that freedom and it worked perfectly." — The Guardians</div>'
+        + '<p>For The Guardians, this defines their season. As they face Titans again in the semi-finals, they carry the belief that absolutely anything is possible.</p>',
+      link:'results', linkTxt:'View Game Results' },
   ];
 
   function newsCard(n) {
@@ -3007,100 +3395,72 @@ function renderHome() {
       + '<div class="hp-nchl">' + n.hl + '</div>'
       + '<div class="hp-ncsnip">' + n.snip + '</div>'
       + '<div class="hp-full" id="' + uid + '">' + n.body
-      + (n.link ? '<button class="hp-navlink" onclick="showView(\'' + n.link + '\')" style="margin-top:8px">→ ' + n.linkTxt + '</button>' : '')
+      + (n.link ? '<button class="hp-navlink" onclick="showView(\'' + n.link + '\')" style="margin-top:10px">→ ' + n.linkTxt + '</button>' : '')
       + '</div>'
       + '<div class="hp-ncfoot"><span class="hp-date">' + n.date + '</span>'
       + '<button class="hp-rmbtn" id="btn-' + uid + '" onclick="hpToggle(\'' + uid + '\')">Read More ▼</button>'
       + '</div></div></div>';
   }
 
-  // ── Playoff teaser ────────────────────────────
   function poSeed(seed, team) {
     return '<div class="hp-pom">'
       + '<span class="hp-posn" style="color:' + tc(team) + '">#' + seed + '</span>'
-      + tlogo(team, 32, 20)
+      + tlogo(team, 34, 20)
       + '<span class="hp-potn" style="color:' + tc(team) + '">' + team + '</span>'
-      + (seed <= 2 ? '<span style="font-size:10px;color:var(--accent);font-family:\'Barlow Condensed\';letter-spacing:1px">★</span>' : '')
+      + (seed<=2 ? '<span style="font-size:11px;color:var(--accent);font-family:\'Barlow Condensed\';letter-spacing:1px;font-weight:700">★</span>' : '')
       + '</div>';
   }
 
-  // ── Ticker items ──────────────────────────────
   var tItems = [
-    '<div class="hp-ti">#1 <b>Titans</b> 6W-3L · 12 pts</div>',
-    '<div class="hp-ti">#2 <b>Phantoms</b> 5W-4L · 10 pts</div>',
-    '<div class="hp-ti">#3 <b>Panthers</b> 5W-4L · 10 pts</div>',
-    '<div class="hp-ti">#4 <b>The Guardians</b> 2W-7L · 4 pts</div>',
-    '<div class="hp-ti">🏆 <b>Playoffs!</b> SF1: Titans vs Guardians · SF2: Phantoms vs Panthers</div>',
-    '<div class="hp-ti">⭐ <b>Leo</b> leads all scorers this season</div>',
-    '<div class="hp-ti">🔥 <b>Medel</b> — most explosive scorer in the league</div>',
-    '<div class="hp-ti">🛡 <b>Nelson</b> leads the league in steals</div>',
-    '<div class="hp-ti">🏀 <b>18 games complete</b> — playoffs bracket now live</div>',
+    '<div class="hp-ti">#1 <b>Titans</b> — 6W-3L · 12 pts</div>',
+    '<div class="hp-ti">#2 <b>Phantoms</b> — 5W-4L · 10 pts</div>',
+    '<div class="hp-ti">#3 <b>Panthers</b> — 5W-4L · 10 pts</div>',
+    '<div class="hp-ti">#4 <b>The Guardians</b> — 2W-7L · 4 pts</div>',
+    '<div class="hp-ti">🏆 <b>Playoffs!</b>  SF1: Titans vs Guardians  ·  SF2: Phantoms vs Panthers</div>',
+    '<div class="hp-ti">⭐ <b>Leo (Phantoms)</b> leads all scorers this season</div>',
+    '<div class="hp-ti">🔥 <b>Medel (Panthers)</b> — most explosive scorer in the league</div>',
+    '<div class="hp-ti">🛡 <b>Nelson (Panthers)</b> leads the league in steals</div>',
+    '<div class="hp-ti">🏀 <b>18 regular season games</b> completed · playoffs bracket live now</div>',
   ];
   var tickHTML = tItems.join('') + tItems.join('');
 
-  // ── ASSEMBLE ──────────────────────────────────
   var h = '';
-
-  // Ticker
   h += '<div class="hp-ticker"><div class="hp-tlbl">🔴 LIVE</div><div class="hp-ttrack"><div class="hp-tinner">' + tickHTML + '</div></div></div>';
-
-  // Hero
-  h += '<div class="hp-hero">';
-  h += '<div>' + featCard(latest) + '</div>';
-  h += '<div>' + sidebar.map(smCard).join('') + '</div>';
-  h += '</div>';
-
-  // Playoff teaser
-  h += '<div class="hp-po" onclick="showView(\'playoffs\')" style="margin-bottom:20px">';
+  h += '<div class="hp-hero"><div>' + featCard(latest) + '</div><div>' + sidebar.map(smCard).join('') + '</div></div>';
+  h += '<div class="hp-po" onclick="showView(\'playoffs\')" style="margin-bottom:22px">';
   h += '<div class="hp-potitle">🏆 Playoffs Are Coming!</div>';
   h += '<div class="hp-podesc">#1 Titans &amp; #2 Phantoms hold the <strong style="color:var(--accent)">twice-to-beat advantage</strong>. Grand Final is a single winner-take-all game. Click to view the full bracket.</div>';
-  h += '<div class="hp-poseeds">';
-  h += poSeed(1, 'Titans') + '<span class="hp-podiv">vs</span>' + poSeed(4, 'The Guardians');
-  h += '<span class="hp-podiv"> | </span>';
-  h += poSeed(2, 'Phantoms') + '<span class="hp-podiv">vs</span>' + poSeed(3, 'Panthers');
-  h += '</div></div>';
-
-  // Standings
-  h += '<div class="hp-sl">📊 Final Standings</div>';
-  h += '<div class="hp-stwrap">';
-  var rcls = ['r1','r2','r3','r4'];
-  PO_SEEDS.slice().sort(function(a,b){return a.seed-b.seed;}).forEach(function(r, i) {
+  h += '<div class="hp-poseeds">' + poSeed(1,'Titans') + '<span class="hp-podiv">vs</span>' + poSeed(4,'The Guardians') + '<span class="hp-podiv"> | </span>' + poSeed(2,'Phantoms') + '<span class="hp-podiv">vs</span>' + poSeed(3,'Panthers') + '</div></div>';
+  h += '<div class="hp-sl">📊 Final Standings</div><div class="hp-stwrap">';
+  var rcls=['r1','r2','r3','r4'];
+  PO_SEEDS.slice().sort(function(a,b){return a.seed-b.seed;}).forEach(function(r,i){
     h += '<div class="hp-strow" onclick="showView(\'standings\')">'
       + '<div class="hp-stn ' + (rcls[i]||'') + '">' + r.seed + '</div>'
-      + tlogo(r.team, 42, 26)
+      + tlogo(r.team,44,27)
       + '<div class="hp-stnm" style="color:' + tc(r.team) + '">' + r.team + '</div>'
-      + '<div class="hp-strec">' + r.w + 'W–' + r.l + 'L</div>'
+      + '<div class="hp-strec">' + r.w + 'W – ' + r.l + 'L</div>'
       + '<div class="hp-stpts" style="color:' + tc(r.team) + '">' + r.pts + '</div>'
       + '</div>';
   });
   h += '</div>';
-
-  // Top scorers
-  h += '<div class="hp-sl">⭐ Season Scoring Leaders</div>';
-  h += '<div class="hp-tops">';
-  var top5 = ALL_PLAYERS.slice().sort(function(a,b){return b.total_pts - a.total_pts;}).slice(0, 5);
-  top5.forEach(function(p) {
+  h += '<div class="hp-sl">⭐ Season Scoring Leaders</div><div class="hp-tops">';
+  ALL_PLAYERS.slice().sort(function(a,b){return b.total_pts-a.total_pts;}).slice(0,5).forEach(function(p){
     h += '<div class="hp-tsc" style="--tc:' + p.teamColor + '" onclick="openProfile(\'' + p.name + '\')">'
       + '<img src="' + playerImgSrc(p.name) + '" class="hp-tscph" onerror="this.style.display=\'none\'" alt="">'
-      + '<div><div class="hp-tscst">' + p.total_pts + '</div>'
-      + '<div class="hp-tscnm">' + p.name + '</div>'
-      + '<div class="hp-tsctm">' + p.team + '</div></div>'
+      + '<div><div class="hp-tscst">' + p.total_pts + '</div><div class="hp-tscnm">' + p.name + '</div><div class="hp-tsctm">' + p.team + '</div></div>'
       + '</div>';
   });
   h += '</div>';
-
-  // Older game reports
   if (older.length) {
-    h += '<div class="hp-sl">📰 Previous Game Reports</div>';
-    h += '<div class="hp-ngrid">' + older.map(olderCard).join('') + '</div>';
+    h += '<div class="hp-sl">📰 Previous Game Reports</div><div class="hp-ngrid">' + older.map(olderCard).join('') + '</div>';
   }
-
-  // League news
-  h += '<div class="hp-sl">🗞 League News &amp; Features</div>';
-  h += '<div class="hp-ngrid">' + NEWS.map(newsCard).join('') + '</div>';
-
+  h += '<div class="hp-sl">🗞 League News &amp; Features</div><div class="hp-ngrid">' + NEWS.map(newsCard).join('') + '</div>';
   el.innerHTML = h;
 }
+
+// Auto-render on page load (data is baked in)
+document.addEventListener('DOMContentLoaded', renderAll);
+
 
 // Auto-render on page load (data is baked in)
 document.addEventListener('DOMContentLoaded', renderAll);
